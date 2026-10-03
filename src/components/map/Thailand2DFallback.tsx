@@ -107,10 +107,11 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
             const isSelectedReg = selectedRegion === prov.region;
             const isHovered = hoveredRegion === prov.region;
 
+            const regConfig = REGION_COLORS[prov.region];
             let fillColor = '#1E293B'; // Inactive slate
-            if (isHovered && isRegActive) fillColor = '#38BDF8';
-            else if (isSelectedReg) fillColor = '#0284C7';
-            else if (selectedRegion === 'all') fillColor = REGION_COLORS[prov.region]?.base || '#64748B';
+            if (isHovered && isRegActive) fillColor = regConfig?.highlight || '#38BDF8';
+            else if (isSelectedReg) fillColor = regConfig?.highlight || '#0284C7';
+            else if (selectedRegion === 'all') fillColor = regConfig?.base || '#64748B';
 
             return (
               <path

@@ -31,11 +31,19 @@
   - เกณฑ์: ความจุระหว่าง 50% – 80%
   - Glow: `rgba(16, 185, 129, 0.4)`
 
-### 2.3. Terrain & Map 3D Shaders (Clay Low-Relief)
+### 2.3. Terrain & Map 3D Shaders (Clay Low-Relief & Regional Pastel Palette)
 - **Base Clay Land:** `#CBD5E1` (Slate 300) ถึง `#94A3B8` (Slate 400)
 - **Highland / Mountain Elevation:** `#64748B` (Slate 500)
-- **Region Active Highlight:** `#38BDF8` (Sky 400) พร้อมขอบเรืองแสงนุ่มนวล
+- **Region Active Highlight:** โทนสีเด่นประจำภูมิภาคนั้นๆ หรือ `#38BDF8` (Sky 400) พร้อมขอบเรืองแสงนุ่มนวล
 - **Coastline / Border Rim:** `#E2E8F0` (Slate 200)
+
+#### 2.3.1. Distinct Regional Pastel Tokens (พาเลตต์สีพาสเทลแยก 6 ภูมิภาค)
+- 🌿 **ภาคเหนือ (North):** Base `#86EFAC` (Green 300 - Mint Pastel) / Highlight `#22C55E`
+- 🍑 **ภาคตะวันออกเฉียงเหนือ (Northeast):** Base `#FDBA74` (Orange 300 - Warm Peach) / Highlight `#F97316`
+- 🌾 **ภาคกลาง (Central):** Base `#FDE68A` (Amber 200 - Butter Yellow) / Highlight `#FACC15`
+- 🪻 **ภาคตะวันตก (West):** Base `#DDD6FE` (Violet 200 - Soft Lavender) / Highlight `#8B5CF6`
+- 🌸 **ภาคตะวันออก (East):** Base `#FDA4AF` (Rose 300 - Rose Pink) / Highlight `#F43F5E`
+- 🌊 **ภาคใต้ (South):** Base `#7DD3FC` (Sky 300 - Sky Aqua) / Highlight `#0EA5E9`
 
 ---
 

@@ -24,12 +24,12 @@ export function geoTo3D(
  */
 export const REGION_COLORS: Record<RegionId, { base: string; highlight: string; elevation: number }> = {
   all: { base: '#94A3B8', highlight: '#38BDF8', elevation: 0.1 },
-  north: { base: '#7DD3FC', highlight: '#0284C7', elevation: 0.22 },      // High mountain plateau
-  northeast: { base: '#BAE6FD', highlight: '#0284C7', elevation: 0.16 },  // Khorat plateau
-  central: { base: '#E2E8F0', highlight: '#0284C7', elevation: 0.1 },    // Lowland river basin
-  west: { base: '#93C5FD', highlight: '#2563EB', elevation: 0.2 },       // Western mountain range
-  east: { base: '#A5F3FC', highlight: '#0891B2', elevation: 0.14 },      // Eastern coastal plains
-  south: { base: '#67E8F9', highlight: '#0E7490', elevation: 0.15 }      // Peninsular hills
+  north: { base: '#86EFAC', highlight: '#22C55E', elevation: 0.22 },      // 🌿 Mint / Sage Green (ภูเขาสูง ป่าไม้)
+  northeast: { base: '#FDBA74', highlight: '#F97316', elevation: 0.16 },  // 🍑 Warm Coral / Peach (ที่ราบสูงโคราช)
+  central: { base: '#FDE68A', highlight: '#FACC15', elevation: 0.1 },    // 🌾 Butter Yellow (ที่ราบลุ่ม อู่ข้าวอู่น้ำ)
+  west: { base: '#DDD6FE', highlight: '#8B5CF6', elevation: 0.2 },       // 🪻 Soft Lavender (เทือกเขาตะนาวศรี)
+  east: { base: '#FDA4AF', highlight: '#F43F5E', elevation: 0.14 },      // 🌸 Rose Pink (พื้นที่ชายฝั่ง EEC)
+  south: { base: '#7DD3FC', highlight: '#0EA5E9', elevation: 0.15 }      // 🌊 Sky Aqua (คาบสมุทร ทะเลใต้)
 };
 
 /**

@@ -110,10 +110,10 @@ const ProvinceMesh: React.FC<{
   // Color calculation matching Design.md
   const color = useMemo(() => {
     if (hovered && isRegionActive) {
-      return '#38BDF8'; // Sky 400
+      return regionConfig.highlight;
     }
     if (isSelectedRegion) {
-      return '#0284C7'; // Deep active water blue
+      return regionConfig.highlight;
     }
     if (selectedRegion === 'all') {
       return regionConfig.base;

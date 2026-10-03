@@ -1,6 +1,7 @@
 import React from 'react';
 import { RegionId, DamTelemetry } from '../../types/dam';
 import { REGIONS } from '../../data/regions';
+import { REGION_COLORS } from '../../utils/geoUtils';
 
 interface RegionFilterBarProps {
   lang: 'th' | 'en';
@@ -30,6 +31,7 @@ export const RegionFilterBar: React.FC<RegionFilterBarProps> = ({
         const info = REGIONS[regId];
         const isSelected = selectedRegion === regId;
         const stats = getStats(regId);
+        const regColor = REGION_COLORS[regId];
 
         return (
           <button
@@ -37,10 +39,30 @@ export const RegionFilterBar: React.FC<RegionFilterBarProps> = ({
             onClick={() => onSelectRegion(regId)}
             className={`group shrink-0 relative flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-200 border ${
               isSelected
-                ? 'bg-gradient-to-r from-sky-600 to-cyan-600 text-white border-cyan-400/80 shadow-lg shadow-sky-600/30 font-semibold'
+                ? 'bg-slate-800/90 text-white shadow-lg font-semibold'
                 : 'bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800/90 border-slate-800'
             }`}
+            style={
+              isSelected
+                ? {
+                    borderColor: regColor?.highlight || '#38BDF8',
+                    boxShadow: `0 4px 14px -2px ${(regColor?.highlight || '#0284C7')}50`
+                  }
+                : undefined
+            }
           >
+            {/* Region pastel dot indicator */}
+            {regId !== 'all' ? (
+              <span
+                className="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-125"
+                style={{ backgroundColor: regColor?.base }}
+              />
+            ) : (
+              <span
+                className="w-2.5 h-2.5 rounded-full shrink-0 bg-gradient-to-tr from-sky-400 via-emerald-300 to-rose-400 shadow-sm"
+              />
+            )}
+
             <span>{lang === 'th' ? info.name_th : info.name_en}</span>
 
             {/* Total Dam Count Badge */}

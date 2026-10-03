@@ -1,6 +1,7 @@
 import React from 'react';
 import { RegionId, DamTelemetry } from '../../types/dam';
 import { REGIONS } from '../../data/regions';
+import { REGION_COLORS } from '../../utils/geoUtils';
 import { Waves, AlertCircle, CheckCircle, ChevronRight, Gauge } from 'lucide-react';
 
 interface RegionalSummaryCardProps {
@@ -46,9 +47,17 @@ export const RegionalSummaryCard: React.FC<RegionalSummaryCardProps> = ({
             {totalDams} {lang === 'th' ? 'เขื่อน' : 'Dams'}
           </span>
         </div>
-        <h3 className="text-lg font-bold text-white mt-0.5">
-          {lang === 'th' ? regionInfo.name_th : regionInfo.name_en}
-        </h3>
+        <div className="flex items-center gap-2 mt-0.5">
+          {selectedRegion !== 'all' && (
+            <span
+              className="w-3 h-3 rounded-full shrink-0 shadow-sm"
+              style={{ backgroundColor: REGION_COLORS[selectedRegion]?.base }}
+            />
+          )}
+          <h3 className="text-lg font-bold text-white">
+            {lang === 'th' ? regionInfo.name_th : regionInfo.name_en}
+          </h3>
+        </div>
         <p className="text-xs text-slate-400 mt-1 line-clamp-2">
           {lang === 'th' ? regionInfo.description_th : regionInfo.description_en}
         </p>
