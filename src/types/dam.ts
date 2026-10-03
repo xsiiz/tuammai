@@ -48,8 +48,20 @@ export interface RegionMeta {
   description_en: string;
 }
 
+export interface ProvinceMeta {
+  code: string;
+  name_th: string;
+  name_en: string;
+  region: RegionId;
+  center: [number, number]; // [lng, lat]
+  centroid: [number, number]; // [lng, lat]
+  bounds: [number, number, number, number]; // [minLng, minLat, maxLng, maxLat]
+  isMajorCity?: boolean;
+}
+
 export interface DrillDownState {
-  currentLevel: 'national' | 'regional' | 'dam';
+  currentLevel: 'national' | 'regional' | 'province' | 'dam';
   selectedRegion: RegionId;
+  selectedProvince: string | null;
   selectedDam: DamTelemetry | null;
 }

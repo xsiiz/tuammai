@@ -4,7 +4,8 @@ import { OrbitControls, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { RegionId, DamTelemetry } from '../../types/dam';
 import { REGIONS } from '../../data/regions';
-import { geoTo3D, REGION_COLORS, createShapesFromMultiPolygon } from '../../utils/geoUtils';
+import { geoTo3D, REGION_COLORS, createShapesFromMultiPolygon, GEO_SCALE, THAILAND_CENTER_LNG, THAILAND_CENTER_LAT } from '../../utils/geoUtils';
+import { PROVINCES_BY_CODE } from '../../data/provinces';
 import provincesGeoData from '../../data/thailand-provinces.json';
 import riversGeoData from '../../data/thailand-rivers.json';
 import { RiverMesh3D } from './RiverMesh3D';
@@ -14,9 +15,11 @@ import { getDamLabelConfig, getShortDamName } from '../../utils/labelUtils';
 interface Thailand3DMapProps {
   lang: 'th' | 'en';
   selectedRegion: RegionId;
+  selectedProvince?: string | null;
   selectedDam: DamTelemetry | null;
   dams: DamTelemetry[];
   onSelectRegion: (region: RegionId) => void;
+  onSelectProvince?: (provinceCode: string | null) => void;
   onSelectDam: (dam: DamTelemetry) => void;
   theme?: 'light' | 'dark';
 }
@@ -26,14 +29,14 @@ interface Thailand3DMapProps {
 // ----------------------------------------------------
 const CameraController: React.FC<{
   selectedRegion: RegionId;
+  selectedProvince?: string | null;
   selectedDam: DamTelemetry | null;
-}> = ({ selectedRegion, selectedDam }) => {
+}> = ({ selectedRegion, selectedProvince, selectedDam }) => {
   const { camera, size } = useThree();
   const controlsRef = useRef<any>(null);
 
   const targetCoords = useMemo(() => {
     // Determine right panel width: only offset camera when selectedDam is active (drawer open)
-    // When no dam drawer is active, panelWidth = 0 so the map is naturally centered in the viewport.
     const isDesktop = size.width >= 768;
     const panelWidth = selectedDam ? (size.width >= 1024 ? 480 : (isDesktop ? 380 : 0)) : 0;
     const aspect = size.width / Math.max(size.height, 1);
@@ -46,6 +49,7 @@ const CameraController: React.FC<{
       return (panelWidth / 2) * (visibleHeight / size.height);
     };
 
+    // 1. Focused Dam Level
     if (selectedDam) {
       const [x, y, z] = geoTo3D(selectedDam.coordinates[0], selectedDam.coordinates[1]);
       const damDist = 3.6;
@@ -56,10 +60,23 @@ const CameraController: React.FC<{
       };
     }
 
+    // 2. Focused Province Level (Drill-Down)
+    if (selectedProvince) {
+      const provMeta = PROVINCES_BY_CODE[selectedProvince];
+      if (provMeta) {
+        const [px, py, pz] = geoTo3D(provMeta.centroid[0], provMeta.centroid[1], 0.2);
+        const provDist = 4.8;
+        const offsetX = getPanelOffsetX(provDist);
+        return {
+          target: new THREE.Vector3(px + offsetX, py, pz),
+          cameraPos: new THREE.Vector3(px + offsetX, py - 0.7, provDist)
+        };
+      }
+    }
+
+    // 3. Regional or National Overview Level
     const reg = REGIONS[selectedRegion] || REGIONS.all;
     if (selectedRegion === 'all') {
-      // Thailand spans latitude ~5.6 to ~20.5 (height ~8.2 units, width ~4.6 units)
-      // Distance adjusted so the entire country fits vertically with comfortable padding
       let baseDist = 11.2;
       if (aspect < 0.65) {
         baseDist = Math.max(baseDist, 5.2 / (2 * aspect * Math.tan(fovRad)));
@@ -80,7 +97,7 @@ const CameraController: React.FC<{
       target: new THREE.Vector3(tx + offsetX, ty, tz),
       cameraPos: new THREE.Vector3(tx + offsetX, ty - 0.8, zoomDist)
     };
-  }, [selectedRegion, selectedDam, size.width, size.height, camera]);
+  }, [selectedRegion, selectedProvince, selectedDam, size.width, size.height, camera]);
 
   useFrame((_, delta) => {
     // Smooth lerp camera position and controls target
@@ -107,28 +124,44 @@ const CameraController: React.FC<{
 };
 
 // ----------------------------------------------------
-// Province 3D Mesh Component (Low-Relief Extruded Clay)
+// Province 3D Mesh Component (Low-Relief Extruded Clay & Crisp Outlines)
 // ----------------------------------------------------
 const ProvinceMesh: React.FC<{
   feature: any;
   selectedRegion: RegionId;
+  selectedProvince?: string | null;
+  selectedDam: DamTelemetry | null;
   onSelectRegion: (reg: RegionId) => void;
+  onSelectProvince?: (provCode: string | null) => void;
+  lang: 'th' | 'en';
   theme?: 'light' | 'dark';
-}> = React.memo(({ feature, selectedRegion, onSelectRegion, theme = 'light' }) => {
+}> = React.memo(({
+  feature,
+  selectedRegion,
+  selectedProvince,
+  selectedDam,
+  onSelectRegion,
+  onSelectProvince,
+  lang,
+  theme = 'light'
+}) => {
   const [hovered, setHovered] = useState(false);
 
+  const provCode = feature.properties?.pro_code;
+  const provMeta = PROVINCES_BY_CODE[provCode];
   const regionNameRaw = (feature.properties?.reg_royin || 'Central').toLowerCase() as RegionId;
   const isRegionActive = selectedRegion === 'all' || selectedRegion === regionNameRaw;
   const isSelectedRegion = selectedRegion === regionNameRaw;
+  const isSelectedProvince = selectedProvince === provCode;
 
   // Shapes cached per feature
   const shapes = useMemo(() => {
     return createShapesFromMultiPolygon(feature.geometry.coordinates);
   }, [feature]);
 
-  // Elevation based on region terrain
+  // Elevation based on region terrain + extra lift if province is selected
   const regionConfig = REGION_COLORS[regionNameRaw] || REGION_COLORS.central;
-  const extrudeDepth = regionConfig.elevation + (isSelectedRegion ? 0.08 : 0);
+  const extrudeDepth = regionConfig.elevation + (isSelectedRegion ? 0.08 : 0) + (isSelectedProvince ? 0.05 : 0);
 
   const extrudeSettings = useMemo(() => ({
     depth: extrudeDepth,
@@ -139,8 +172,29 @@ const ProvinceMesh: React.FC<{
     bevelThickness: 0.015
   }), [extrudeDepth]);
 
+  // Crisp boundary line geometries along the outer rim of each polygon
+  const borderLines = useMemo(() => {
+    const geoms: THREE.BufferGeometry[] = [];
+    for (const polygon of feature.geometry.coordinates) {
+      const ring = polygon[0];
+      if (!ring || ring.length < 3) continue;
+      const points: THREE.Vector3[] = [];
+      for (const [lng, lat] of ring) {
+        const x = (lng - THAILAND_CENTER_LNG) * GEO_SCALE;
+        const y = (lat - THAILAND_CENTER_LAT) * GEO_SCALE;
+        // Float slightly above the extruded top surface to prevent z-fighting
+        points.push(new THREE.Vector3(x, y, extrudeDepth + 0.006));
+      }
+      geoms.push(new THREE.BufferGeometry().setFromPoints(points));
+    }
+    return geoms;
+  }, [feature.geometry.coordinates, extrudeDepth]);
+
   // Color calculation matching Design.md
   const color = useMemo(() => {
+    if (isSelectedProvince) {
+      return '#0284C7'; // Highlight selected province with primary water cyan/sky
+    }
     if (hovered && isRegionActive) {
       return regionConfig.highlight;
     }
@@ -152,10 +206,54 @@ const ProvinceMesh: React.FC<{
     }
     // Dimmed when another region is selected
     return theme === 'dark' ? '#334155' : '#E2E8F0';
-  }, [hovered, isRegionActive, isSelectedRegion, selectedRegion, regionConfig, theme]);
+  }, [hovered, isRegionActive, isSelectedRegion, isSelectedProvince, selectedRegion, regionConfig, theme]);
+
+  // Border outline color & opacity for crisp delineation
+  const borderColor = useMemo(() => {
+    if (isSelectedProvince) return theme === 'dark' ? '#38BDF8' : '#0284C7';
+    if (hovered && isRegionActive) return theme === 'dark' ? '#38BDF8' : '#0369A1';
+    if (isSelectedRegion) return theme === 'dark' ? '#38BDF8' : '#FFFFFF';
+    if (selectedRegion === 'all') return theme === 'dark' ? '#64748B' : '#FFFFFF';
+    return theme === 'dark' ? '#1E293B' : '#CBD5E1';
+  }, [isSelectedProvince, hovered, isRegionActive, isSelectedRegion, selectedRegion, theme]);
+
+  const borderOpacity = useMemo(() => {
+    if (isSelectedProvince || (hovered && isRegionActive)) return 1.0;
+    if (isSelectedRegion) return theme === 'dark' ? 0.85 : 0.95;
+    if (selectedRegion === 'all') return theme === 'dark' ? 0.6 : 0.9;
+    return 0.35;
+  }, [isSelectedProvince, hovered, isRegionActive, isSelectedRegion, selectedRegion, theme]);
+
+  // Label 3D position at centroid
+  const [labelX, labelY, labelZ] = useMemo(() => {
+    const cLng = provMeta ? provMeta.centroid[0] : 100.5;
+    const cLat = provMeta ? provMeta.centroid[1] : 13.5;
+    return geoTo3D(cLng, cLat, extrudeDepth + 0.035);
+  }, [provMeta, extrudeDepth]);
+
+  // Visual hierarchy for province label display:
+  // - Always show if selected or hovered
+  // - Show all in regional view (when no dam drawer is active)
+  // - Show major economic anchors in national view (when no dam drawer is active)
+  const isMajor = provMeta?.isMajorCity;
+  const showLabel =
+    isSelectedProvince ||
+    hovered ||
+    (isSelectedRegion && !selectedDam) ||
+    (selectedRegion === 'all' && isMajor && !selectedDam);
+
+  const handleClick = (e: any) => {
+    e.stopPropagation();
+    if (onSelectProvince) {
+      onSelectProvince(provCode);
+    } else {
+      onSelectRegion(regionNameRaw);
+    }
+  };
 
   return (
     <group>
+      {/* 3D Extruded Province Mesh */}
       {shapes.map((shape, idx) => (
         <mesh
           key={idx}
@@ -171,10 +269,7 @@ const ProvinceMesh: React.FC<{
             setHovered(false);
             document.body.style.cursor = 'auto';
           }}
-          onClick={(e) => {
-            e.stopPropagation();
-            onSelectRegion(regionNameRaw);
-          }}
+          onClick={handleClick}
         >
           <extrudeGeometry args={[shape, extrudeSettings]} />
           <meshStandardMaterial
@@ -187,6 +282,55 @@ const ProvinceMesh: React.FC<{
           />
         </mesh>
       ))}
+
+      {/* Crisp Province Outlines (Line Loops) */}
+      {borderLines.map((geom, idx) => (
+        <lineLoop key={`border-${idx}`} geometry={geom}>
+          <lineBasicMaterial
+            color={borderColor}
+            transparent
+            opacity={borderOpacity}
+            linewidth={isSelectedProvince || hovered ? 2 : 1}
+          />
+        </lineLoop>
+      ))}
+
+      {/* Province Name Tag (Anchored at Centroid) */}
+      {showLabel && (
+        <Html
+          position={[labelX, labelY, labelZ]}
+          center
+          distanceFactor={9.0}
+          style={{
+            zIndex: isSelectedProvince ? 35 : (hovered ? 30 : 12),
+            pointerEvents: 'none'
+          }}
+        >
+          <div
+            className={`whitespace-nowrap transition-all duration-150 select-none pointer-events-auto cursor-pointer font-sans ${
+              isSelectedProvince
+                ? 'text-sky-600 dark:text-cyan-400 font-bold text-[11px] scale-110'
+                : hovered
+                ? 'text-sky-600 dark:text-cyan-400 font-bold text-[10.5px] scale-105'
+                : theme === 'dark'
+                ? 'text-slate-200 font-medium text-[9.5px]'
+                : 'text-slate-800 font-medium text-[9.5px]'
+            }`}
+            style={{
+              textShadow: theme === 'dark'
+                ? (isSelectedProvince || hovered
+                  ? '0 0 8px rgba(56, 189, 248, 0.9), 0 1px 3px rgba(0, 0, 0, 0.95)'
+                  : '0 1px 3px rgba(11, 17, 32, 0.95), 0 0 2px rgba(0, 0, 0, 0.9)')
+                : (isSelectedProvince || hovered
+                  ? '0 0 6px rgba(255, 255, 255, 1), 0 1px 3px rgba(2, 132, 199, 0.4)'
+                  : '0 1px 2px rgba(255, 255, 255, 0.95), 0 0 3px rgba(255, 255, 255, 0.9)')
+            }}
+            onClick={handleClick}
+          >
+            <span>{lang === 'th' ? (provMeta?.name_th || feature.properties.pro_th) : (provMeta?.name_en || feature.properties.pro_en)}</span>
+          </div>
+        </Html>
+      )}
     </group>
   );
 });
@@ -479,9 +623,11 @@ const BasePedestal: React.FC<{ theme?: 'light' | 'dark' }> = ({ theme = 'light' 
 export const Thailand3DMap: React.FC<Thailand3DMapProps> = ({
   lang,
   selectedRegion,
+  selectedProvince,
   selectedDam,
   dams,
   onSelectRegion,
+  onSelectProvince,
   onSelectDam,
   theme = 'light'
 }) => {
@@ -526,17 +672,25 @@ export const Thailand3DMap: React.FC<Thailand3DMapProps> = ({
         <directionalLight position={[0, -8, 4]} intensity={0.3} color="#0EA5E9" />
 
         {/* Camera Lerp Controller */}
-        <CameraController selectedRegion={selectedRegion} selectedDam={selectedDam} />
+        <CameraController
+          selectedRegion={selectedRegion}
+          selectedProvince={selectedProvince}
+          selectedDam={selectedDam}
+        />
 
         {/* 3D Map Group */}
         <group>
-          {/* All 77 Provinces rendered with low-relief extrusion */}
+          {/* All 77 Provinces rendered with low-relief extrusion, crisp boundaries, and name labels */}
           {provincesGeoData.features.map((feature: any) => (
             <ProvinceMesh
               key={feature.properties.pro_code || feature.properties.pro_en}
               feature={feature}
               selectedRegion={selectedRegion}
+              selectedProvince={selectedProvince}
+              selectedDam={selectedDam}
               onSelectRegion={onSelectRegion}
+              onSelectProvince={onSelectProvince}
+              lang={lang}
               theme={theme}
             />
           ))}

@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { RegionId, DamTelemetry } from './types/dam';
 import { ContactCategory } from './types/contact';
 import { DAMS_DATA } from './data/dams';
+import { PROVINCES_DATA, PROVINCES_BY_CODE } from './data/provinces';
 import { Header } from './components/common/Header';
 import { BreadcrumbNav } from './components/drilldown/BreadcrumbNav';
 import { DamDetailDrawer } from './components/drilldown/DamDetailDrawer';
@@ -15,6 +16,7 @@ export function App() {
   const [lang, setLang] = useState<'th' | 'en'>('th');
   const [viewMode, setViewMode] = useState<'3d' | '2d'>('3d');
   const [selectedRegion, setSelectedRegion] = useState<RegionId>('all');
+  const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [selectedDam, setSelectedDam] = useState<DamTelemetry | null>(null);
   const [isContactModalOpen, setIsContactModalOpen] = useState<boolean>(false);
   const [contactCategory, setContactCategory] = useState<ContactCategory>('all');
@@ -48,9 +50,25 @@ export function App() {
 
   const handleSelectRegion = (region: RegionId) => {
     setSelectedRegion(region);
+    setSelectedProvince(null);
     // If selecting region, clear dam selection to show regional overview
     if (selectedDam && selectedDam.region !== region) {
       setSelectedDam(null);
+    }
+  };
+
+  const handleSelectProvince = (provinceCode: string | null) => {
+    setSelectedProvince(provinceCode);
+    if (provinceCode) {
+      const prov = PROVINCES_BY_CODE[provinceCode];
+      if (prov && prov.region !== selectedRegion) {
+        setSelectedRegion(prov.region);
+      }
+      if (selectedDam && selectedDam.province && prov) {
+        if (!selectedDam.province.includes(prov.name_th) && !prov.name_th.includes(selectedDam.province)) {
+          setSelectedDam(null);
+        }
+      }
     }
   };
 
@@ -58,6 +76,14 @@ export function App() {
     setSelectedDam(dam);
     if (dam.region !== selectedRegion) {
       setSelectedRegion(dam.region);
+    }
+    if (dam.province) {
+      const provMatch = PROVINCES_DATA.find(
+        (p) => dam.province === p.name_th || dam.province?.includes(p.name_th)
+      );
+      if (provMatch) {
+        setSelectedProvince(provMatch.code);
+      }
     }
   };
 
@@ -84,9 +110,11 @@ export function App() {
             <Thailand3DMap
               lang={lang}
               selectedRegion={selectedRegion}
+              selectedProvince={selectedProvince}
               selectedDam={selectedDam}
               dams={dams}
               onSelectRegion={handleSelectRegion}
+              onSelectProvince={handleSelectProvince}
               onSelectDam={handleSelectDam}
               theme={theme}
             />
@@ -94,9 +122,11 @@ export function App() {
             <Thailand2DFallback
               lang={lang}
               selectedRegion={selectedRegion}
+              selectedProvince={selectedProvince}
               selectedDam={selectedDam}
               dams={dams}
               onSelectRegion={handleSelectRegion}
+              onSelectProvince={handleSelectProvince}
               onSelectDam={handleSelectDam}
               theme={theme}
             />
@@ -108,8 +138,10 @@ export function App() {
           <BreadcrumbNav
             lang={lang}
             selectedRegion={selectedRegion}
+            selectedProvince={selectedProvince}
             selectedDam={selectedDam}
             onSelectRegion={handleSelectRegion}
+            onClearProvince={() => setSelectedProvince(null)}
             onClearDam={() => setSelectedDam(null)}
           />
         </div>

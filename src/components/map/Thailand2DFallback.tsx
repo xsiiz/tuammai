@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { RegionId, DamTelemetry } from '../../types/dam';
 import { REGIONS } from '../../data/regions';
 import { REGION_COLORS, multiPolygonToSvgPath, lineStringToSvgPath } from '../../utils/geoUtils';
+import { PROVINCES_BY_CODE } from '../../data/provinces';
 import provincesGeoData from '../../data/thailand-provinces.json';
 import riversGeoData from '../../data/thailand-rivers.json';
 import { getRiverTelemetry } from '../../data/riverStations';
@@ -10,9 +11,11 @@ import { getDamLabelConfig, getShortDamName } from '../../utils/labelUtils';
 interface Thailand2DFallbackProps {
   lang: 'th' | 'en';
   selectedRegion: RegionId;
+  selectedProvince?: string | null;
   selectedDam: DamTelemetry | null;
   dams: DamTelemetry[];
   onSelectRegion: (region: RegionId) => void;
+  onSelectProvince?: (provinceCode: string | null) => void;
   onSelectDam: (dam: DamTelemetry) => void;
   theme?: 'light' | 'dark';
 }
@@ -43,19 +46,27 @@ const REGION_VIEWBOXES: Record<RegionId, string> = {
 export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
   lang,
   selectedRegion,
+  selectedProvince,
   selectedDam,
   dams,
   onSelectRegion,
+  onSelectProvince,
   onSelectDam,
   theme = 'light'
 }) => {
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
+  const [hoveredProvId, setHoveredProvId] = useState<string | null>(null);
   const [hoveredDamId, setHoveredDamId] = useState<string | null>(null);
   const [hoveredRiverId, setHoveredRiverId] = useState<string | null>(null);
 
-  // Pre-project all provinces into SVG paths
+  // Pre-project all provinces into SVG paths with centroid coordinates for labels
   const projectedProvinces = useMemo(() => {
+    const lngRange = THAILAND_BOUNDS.maxLng - THAILAND_BOUNDS.minLng;
+    const latRange = THAILAND_BOUNDS.maxLat - THAILAND_BOUNDS.minLat;
+
     return provincesGeoData.features.map((feature: any) => {
+      const code = feature.properties?.pro_code;
+      const provMeta = PROVINCES_BY_CODE[code];
       const regId = (feature.properties?.reg_royin || 'Central').toLowerCase() as RegionId;
       const pathD = multiPolygonToSvgPath(
         feature.geometry.coordinates,
@@ -63,11 +74,20 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
         SVG_HEIGHT,
         THAILAND_BOUNDS
       );
+
+      const cLng = provMeta ? provMeta.centroid[0] : 100.5;
+      const cLat = provMeta ? provMeta.centroid[1] : 13.5;
+      const cx = ((cLng - THAILAND_BOUNDS.minLng) / lngRange) * (SVG_WIDTH * 0.9) + SVG_WIDTH * 0.05;
+      const cy = ((THAILAND_BOUNDS.maxLat - cLat) / latRange) * (SVG_HEIGHT * 0.9) + SVG_HEIGHT * 0.05;
+
       return {
-        id: feature.properties.pro_code,
+        id: code,
         name_th: feature.properties.pro_th,
         name_en: feature.properties.pro_en,
         region: regId,
+        cx,
+        cy,
+        isMajorCity: Boolean(provMeta?.isMajorCity),
         pathD
       };
     });
@@ -141,7 +161,20 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
     return projectedRivers.find((r) => r.id === hoveredRiverId) || null;
   }, [hoveredRiverId, projectedRivers]);
 
-  const currentViewBox = REGION_VIEWBOXES[selectedRegion] || REGION_VIEWBOXES.all;
+  // Dynamic viewBox supporting national, regional, and province drill-down
+  const currentViewBox = useMemo(() => {
+    if (selectedProvince) {
+      const prov = projectedProvinces.find((p) => p.id === selectedProvince);
+      if (prov) {
+        const w = 180;
+        const h = 220;
+        const x = Math.max(0, Math.min(SVG_WIDTH - w, prov.cx - w / 2));
+        const y = Math.max(0, Math.min(SVG_HEIGHT - h, prov.cy - h / 2));
+        return `${x.toFixed(0)} ${y.toFixed(0)} ${w} ${h}`;
+      }
+    }
+    return REGION_VIEWBOXES[selectedRegion] || REGION_VIEWBOXES.all;
+  }, [selectedRegion, selectedProvince, projectedProvinces]);
 
   return (
     <div className={`relative w-full h-full flex items-center justify-center p-2 sm:p-6 md:pr-84 lg:pr-96 overflow-hidden transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0B1120]' : 'bg-[#E2E8F0]/30'}`}>
@@ -159,33 +192,142 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
         {/* Ocean Background */}
         <rect width={SVG_WIDTH} height={SVG_HEIGHT} fill="url(#oceanGlow)" rx={20} />
 
-        {/* Provinces Layer */}
-        <g>
+        {/* Provinces Layer with Crisp Boundaries */}
+        <g id="provinces-layer">
           {projectedProvinces.map((prov) => {
             const isRegActive = selectedRegion === 'all' || selectedRegion === prov.region;
             const isSelectedReg = selectedRegion === prov.region;
-            const isHovered = hoveredRegion === prov.region;
+            const isSelectedProv = selectedProvince === prov.id;
+            const isHoveredProv = hoveredProvId === prov.id;
+            const isHoveredReg = hoveredRegion === prov.region;
 
             const regConfig = REGION_COLORS[prov.region];
             let fillColor = theme === 'dark' ? '#1E293B' : '#E2E8F0'; // Inactive slate
-            if (isHovered && isRegActive) fillColor = regConfig?.highlight || '#38BDF8';
-            else if (isSelectedReg) fillColor = regConfig?.highlight || '#0284C7';
-            else if (selectedRegion === 'all') fillColor = regConfig?.base || (theme === 'dark' ? '#64748B' : '#94A3B8');
+            if (isSelectedProv) {
+              fillColor = '#0284C7';
+            } else if (isHoveredProv && isRegActive) {
+              fillColor = regConfig?.highlight || '#38BDF8';
+            } else if (isSelectedReg) {
+              fillColor = regConfig?.highlight || '#0284C7';
+            } else if (isHoveredReg && isRegActive) {
+              fillColor = regConfig?.highlight || '#38BDF8';
+            } else if (selectedRegion === 'all') {
+              fillColor = regConfig?.base || (theme === 'dark' ? '#64748B' : '#94A3B8');
+            }
+
+            // Crisp Boundary Stroke
+            let strokeColor = theme === 'dark' ? '#0F172A' : '#FFFFFF';
+            let strokeWidth = 1.0;
+
+            if (isSelectedProv) {
+              strokeColor = theme === 'dark' ? '#38BDF8' : '#0284C7';
+              strokeWidth = 2.8;
+            } else if (isHoveredProv) {
+              strokeColor = theme === 'dark' ? '#38BDF8' : '#0369A1';
+              strokeWidth = 2.0;
+            } else if (isSelectedReg) {
+              strokeColor = theme === 'dark' ? '#38BDF8' : '#FFFFFF';
+              strokeWidth = 1.6;
+            } else if (selectedRegion === 'all') {
+              strokeColor = theme === 'dark' ? '#334155' : '#FFFFFF';
+              strokeWidth = 1.2;
+            }
 
             return (
               <path
                 key={prov.id}
                 d={prov.pathD}
                 fill={fillColor}
-                stroke={theme === 'dark' ? '#0F172A' : '#FFFFFF'}
-                strokeWidth={1}
+                stroke={strokeColor}
+                strokeWidth={strokeWidth}
+                strokeLinejoin="round"
+                strokeLinecap="round"
                 className="cursor-pointer transition-colors duration-200"
-                onMouseEnter={() => setHoveredRegion(prov.region)}
-                onMouseLeave={() => setHoveredRegion(null)}
-                onClick={() => onSelectRegion(prov.region)}
+                onMouseEnter={() => {
+                  setHoveredRegion(prov.region);
+                  setHoveredProvId(prov.id);
+                }}
+                onMouseLeave={() => {
+                  setHoveredRegion(null);
+                  setHoveredProvId(null);
+                }}
+                onClick={() => {
+                  if (onSelectProvince) {
+                    onSelectProvince(prov.id);
+                  } else {
+                    onSelectRegion(prov.region);
+                  }
+                }}
               >
                 <title>{`${prov.name_th} (${prov.name_en}) - ${prov.region}`}</title>
               </path>
+            );
+          })}
+        </g>
+
+        {/* Province Name Labels Layer */}
+        <g id="province-labels-layer">
+          {projectedProvinces.map((prov) => {
+            const isSelectedProv = selectedProvince === prov.id;
+            const isHoveredProv = hoveredProvId === prov.id;
+            const isSelectedReg = selectedRegion === prov.region;
+
+            // Visual hierarchy for 2D fallback:
+            // - If province is selected: always show
+            // - If province is hovered: always show
+            // - If regional view is active (and no dam is selected): show all in region
+            // - If national overview (and no dam is selected): show major cities
+            const showLabel =
+              isSelectedProv ||
+              isHoveredProv ||
+              (isSelectedReg && !selectedDam) ||
+              (selectedRegion === 'all' && prov.isMajorCity && !selectedDam);
+
+            if (!showLabel) return null;
+
+            const labelText = lang === 'th' ? prov.name_th : prov.name_en;
+            const boxW = Math.max(labelText.length * (lang === 'th' ? 6.2 : 5.8) + 10, 36);
+
+            return (
+              <g
+                key={`lbl-${prov.id}`}
+                transform={`translate(${prov.cx}, ${prov.cy})`}
+                className="pointer-events-auto cursor-pointer transition-transform duration-150 select-none"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (onSelectProvince) {
+                    onSelectProvince(prov.id);
+                  } else {
+                    onSelectRegion(prov.region);
+                  }
+                }}
+                onMouseEnter={() => setHoveredProvId(prov.id)}
+                onMouseLeave={() => setHoveredProvId(null)}
+              >
+                <text
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontSize={isSelectedProv ? 9.5 : (isHoveredProv ? 8.5 : 7.2)}
+                  fontWeight={isSelectedProv || isHoveredProv ? 700 : 500}
+                  fill={
+                    isSelectedProv
+                      ? (theme === 'dark' ? '#38BDF8' : '#0284C7')
+                      : isHoveredProv
+                      ? (theme === 'dark' ? '#38BDF8' : '#0284C7')
+                      : (theme === 'dark' ? '#F1F5F9' : '#1E293B')
+                  }
+                  stroke={theme === 'dark' ? '#0F172A' : '#FFFFFF'}
+                  strokeWidth={2.4}
+                  strokeLinejoin="round"
+                  paintOrder="stroke fill"
+                  style={{
+                    letterSpacing: '0.01em',
+                    fontFamily: 'Prompt, sans-serif'
+                  }}
+                >
+                  {labelText}
+                </text>
+              </g>
             );
           })}
         </g>
