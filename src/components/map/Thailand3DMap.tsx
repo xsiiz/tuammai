@@ -14,6 +14,7 @@ interface Thailand3DMapProps {
   dams: DamTelemetry[];
   onSelectRegion: (region: RegionId) => void;
   onSelectDam: (dam: DamTelemetry) => void;
+  theme?: 'light' | 'dark';
 }
 
 // ----------------------------------------------------
@@ -82,7 +83,8 @@ const ProvinceMesh: React.FC<{
   feature: any;
   selectedRegion: RegionId;
   onSelectRegion: (reg: RegionId) => void;
-}> = React.memo(({ feature, selectedRegion, onSelectRegion }) => {
+  theme?: 'light' | 'dark';
+}> = React.memo(({ feature, selectedRegion, onSelectRegion, theme = 'light' }) => {
   const [hovered, setHovered] = useState(false);
 
   const regionNameRaw = (feature.properties?.reg_royin || 'Central').toLowerCase() as RegionId;
@@ -119,8 +121,8 @@ const ProvinceMesh: React.FC<{
       return regionConfig.base;
     }
     // Dimmed when another region is selected
-    return '#334155'; // Slate 700
-  }, [hovered, isRegionActive, isSelectedRegion, selectedRegion, regionConfig]);
+    return theme === 'dark' ? '#334155' : '#E2E8F0';
+  }, [hovered, isRegionActive, isSelectedRegion, selectedRegion, regionConfig, theme]);
 
   return (
     <group>
@@ -168,7 +170,8 @@ const DamMarker3D: React.FC<{
   isSelected: boolean;
   onSelectDam: (dam: DamTelemetry) => void;
   lang: 'th' | 'en';
-}> = React.memo(({ dam, selectedRegion, isSelected, onSelectDam, lang }) => {
+  theme?: 'light' | 'dark';
+}> = React.memo(({ dam, selectedRegion, isSelected, onSelectDam, lang, theme = 'light' }) => {
   const [hovered, setHovered] = useState(false);
   const ringRef = useRef<THREE.Mesh>(null);
 
@@ -221,7 +224,7 @@ const DamMarker3D: React.FC<{
       >
         <cylinderGeometry args={[0.015, 0.01, 0.16, 8]} />
         <meshStandardMaterial
-          color="#E2E8F0"
+          color={theme === 'dark' ? '#E2E8F0' : '#64748B'}
           metalness={0.8}
           roughness={0.2}
         />
@@ -265,9 +268,11 @@ const DamMarker3D: React.FC<{
         >
           <div className="flex flex-col items-center animate-fadeIn select-none">
             <div 
-              className="px-2 py-1 rounded-lg text-[10px] font-bold text-white whitespace-nowrap shadow-xl border flex items-center gap-1 backdrop-blur-md"
+              className={`px-2 py-1 rounded-lg text-[10px] font-bold whitespace-nowrap shadow-xl border flex items-center gap-1 backdrop-blur-md ${
+                theme === 'dark' ? 'text-white' : 'text-slate-900'
+              }`}
               style={{
-                backgroundColor: 'rgba(15, 23, 42, 0.92)',
+                backgroundColor: theme === 'dark' ? 'rgba(15, 23, 42, 0.92)' : 'rgba(255, 255, 255, 0.95)',
                 borderColor: `${dam.status_color}80`
               }}
             >
@@ -275,12 +280,16 @@ const DamMarker3D: React.FC<{
               <span>{lang === 'th' ? dam.name_th : dam.name_en}</span>
               <span
                 className="font-mono text-[9px] px-1 py-0.2 rounded"
-                style={{ backgroundColor: `${dam.status_color}30`, color: dam.status_color }}
+                style={{ backgroundColor: `${dam.status_color}25`, color: dam.status_color }}
               >
                 {dam.storage_percent.toFixed(0)}%
               </span>
             </div>
-            <div className="w-1 h-1 bg-slate-900 rotate-45 -mt-0.5 border-r border-b border-slate-700"></div>
+            <div 
+              className={`w-1 h-1 rotate-45 -mt-0.5 border-r border-b ${
+                theme === 'dark' ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-300'
+              }`}
+            />
           </div>
         </Html>
       )}
@@ -291,15 +300,15 @@ const DamMarker3D: React.FC<{
 // ----------------------------------------------------
 // Ocean / Base Pedestal Plate
 // ----------------------------------------------------
-const BasePedestal: React.FC = () => {
+const BasePedestal: React.FC<{ theme?: 'light' | 'dark' }> = ({ theme = 'light' }) => {
   return (
     <group position={[0, 0, -0.05]}>
       {/* Matte Low-Relief Base Shadow Plate */}
       <mesh receiveShadow position={[0, 0, -0.01]}>
-        <planeGeometry args={[18, 18]} />
+        <planeGeometry args={[24, 24]} />
         <meshStandardMaterial
-          color="#0B132B"
-          roughness={0.9}
+          color={theme === 'dark' ? '#0B132B' : '#F8FAFC'}
+          roughness={0.95}
           metalness={0.0}
         />
       </mesh>
@@ -316,28 +325,32 @@ export const Thailand3DMap: React.FC<Thailand3DMapProps> = ({
   selectedDam,
   dams,
   onSelectRegion,
-  onSelectDam
+  onSelectDam,
+  theme = 'light'
 }) => {
   return (
-    <div className="relative w-full h-full bg-[#0B1120] select-none">
+    <div className={`relative w-full h-full select-none transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0B1120]' : 'bg-white'}`}>
       <Canvas
         camera={{ position: [0, -1.8, 8.8], fov: 45, near: 0.1, far: 50 }}
         shadows
-        gl={{ antialias: true, alpha: false }}
+        gl={{ antialias: true, alpha: true }}
         className="w-full h-full"
       >
+        {/* Set explicit canvas background color */}
+        <color attach="background" args={[theme === 'dark' ? '#0B1120' : '#FFFFFF']} />
+
         {/* Ambient & Studio Directional Lighting for Low-Relief Clay */}
-        <ambientLight intensity={0.9} />
+        <ambientLight intensity={theme === 'dark' ? 0.9 : 1.15} />
         <directionalLight
           position={[5, 8, 10]}
-          intensity={1.4}
+          intensity={theme === 'dark' ? 1.4 : 1.55}
           castShadow
           shadow-mapSize-width={1024}
           shadow-mapSize-height={1024}
           shadow-camera-near={0.5}
           shadow-camera-far={25}
         />
-        <directionalLight position={[-6, -4, 6]} intensity={0.5} color="#38BDF8" />
+        <directionalLight position={[-6, -4, 6]} intensity={theme === 'dark' ? 0.5 : 0.4} color="#38BDF8" />
         <directionalLight position={[0, -8, 4]} intensity={0.3} color="#0EA5E9" />
 
         {/* Camera Lerp Controller */}
@@ -352,6 +365,7 @@ export const Thailand3DMap: React.FC<Thailand3DMapProps> = ({
               feature={feature}
               selectedRegion={selectedRegion}
               onSelectRegion={onSelectRegion}
+              theme={theme}
             />
           ))}
 
@@ -364,17 +378,18 @@ export const Thailand3DMap: React.FC<Thailand3DMapProps> = ({
               isSelected={selectedDam?.id === dam.id}
               onSelectDam={onSelectDam}
               lang={lang}
+              theme={theme}
             />
           ))}
 
           {/* Underlay Pedestal */}
-          <BasePedestal />
+          <BasePedestal theme={theme} />
         </group>
       </Canvas>
 
       {/* Floating 3D Navigation Guide Tip */}
-      <div className="absolute bottom-4 left-4 z-10 pointer-events-none hidden sm:flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-800 text-[11px] text-slate-400">
-        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+      <div className="absolute bottom-4 left-4 z-10 pointer-events-none hidden sm:flex items-center gap-2 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400 shadow-md">
+        <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
         <span>
           {lang === 'th' 
             ? 'คลิกที่ภูมิภาคเพื่อ Drill-Down | หมุนมุมมองได้อิสระ (Drag & Scroll)'

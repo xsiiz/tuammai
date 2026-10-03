@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { RegionId, DamTelemetry } from './types/dam';
 import { DAMS_DATA } from './data/dams';
 import { Header } from './components/common/Header';
@@ -16,6 +16,25 @@ export function App() {
   const [selectedRegion, setSelectedRegion] = useState<RegionId>('all');
   const [selectedDam, setSelectedDam] = useState<DamTelemetry | null>(null);
   const [showMobilePanel, setShowMobilePanel] = useState<boolean>(false);
+
+  // Theme state: defaults to 'light', persisted in localStorage
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('tuammai_theme');
+    return (saved === 'dark' || saved === 'light') ? saved : 'light';
+  });
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('tuammai_theme', theme);
+  }, [theme]);
+
+  const handleToggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
 
   // Dam dataset
   const dams = DAMS_DATA;
@@ -41,13 +60,15 @@ export function App() {
   };
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-[#0B1120] text-slate-100 flex flex-col font-sans">
+    <div className={`relative w-screen h-screen overflow-hidden flex flex-col font-sans transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0B1120] text-slate-100' : 'bg-white text-slate-900'}`}>
       {/* Top Header */}
       <Header
         lang={lang}
         onToggleLang={() => setLang((prev) => (prev === 'th' ? 'en' : 'th'))}
         viewMode={viewMode}
         onToggleViewMode={() => setViewMode((prev) => (prev === '3d' ? '2d' : '3d'))}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
         lastUpdated="2026-10-03"
         damCount={dams.length}
         criticalCount={criticalCount}
@@ -65,6 +86,7 @@ export function App() {
               dams={dams}
               onSelectRegion={handleSelectRegion}
               onSelectDam={handleSelectDam}
+              theme={theme}
             />
           ) : (
             <Thailand2DFallback
@@ -74,6 +96,7 @@ export function App() {
               dams={dams}
               onSelectRegion={handleSelectRegion}
               onSelectDam={handleSelectDam}
+              theme={theme}
             />
           )}
         </div>
@@ -116,13 +139,13 @@ export function App() {
 
         {/* Mobile Bottom Collapsible Summary Sheet */}
         <div className="md:hidden absolute bottom-0 left-0 right-0 z-30 pointer-events-auto">
-          <div className="bg-slate-900/95 backdrop-blur-md border-t border-slate-800 rounded-t-2xl shadow-2xl p-3">
+          <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 rounded-t-2xl shadow-2xl p-3">
             <button
               onClick={() => setShowMobilePanel(!showMobilePanel)}
-              className="w-full flex items-center justify-between py-1 text-xs font-semibold text-slate-300"
+              className="w-full flex items-center justify-between py-1 text-xs font-semibold text-slate-700 dark:text-slate-300"
             >
               <span className="flex items-center gap-1.5">
-                <BarChart3 className="w-4 h-4 text-cyan-400" />
+                <BarChart3 className="w-4 h-4 text-sky-600 dark:text-cyan-400" />
                 <span>
                   {lang === 'th' ? 'สรุปข้อมูลเขื่อนในพื้นที่' : 'Regional Hydrology Summary'}
                 </span>

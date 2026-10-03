@@ -11,6 +11,7 @@ interface Thailand2DFallbackProps {
   dams: DamTelemetry[];
   onSelectRegion: (region: RegionId) => void;
   onSelectDam: (dam: DamTelemetry) => void;
+  theme?: 'light' | 'dark';
 }
 
 // Fixed dimensions for SVG canvas
@@ -42,7 +43,8 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
   selectedDam,
   dams,
   onSelectRegion,
-  onSelectDam
+  onSelectDam,
+  theme = 'light'
 }) => {
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
 
@@ -85,15 +87,15 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
   const currentViewBox = REGION_VIEWBOXES[selectedRegion] || REGION_VIEWBOXES.all;
 
   return (
-    <div className="relative w-full h-full bg-[#0B1120] flex items-center justify-center p-2 sm:p-6 overflow-hidden">
+    <div className={`relative w-full h-full flex items-center justify-center p-2 sm:p-6 overflow-hidden transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0B1120]' : 'bg-[#E2E8F0]/30'}`}>
       <svg
         viewBox={currentViewBox}
         className="w-full h-full max-h-[85vh] transition-all duration-700 ease-in-out drop-shadow-2xl"
       >
         <defs>
           <radialGradient id="oceanGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#0B132B" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#070B14" stopOpacity="1" />
+            <stop offset="0%" stopColor={theme === 'dark' ? '#0B132B' : '#BAE6FD'} stopOpacity="0.8" />
+            <stop offset="100%" stopColor={theme === 'dark' ? '#070B14' : '#E2E8F0'} stopOpacity="1" />
           </radialGradient>
         </defs>
 
@@ -108,17 +110,17 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
             const isHovered = hoveredRegion === prov.region;
 
             const regConfig = REGION_COLORS[prov.region];
-            let fillColor = '#1E293B'; // Inactive slate
+            let fillColor = theme === 'dark' ? '#1E293B' : '#E2E8F0'; // Inactive slate
             if (isHovered && isRegActive) fillColor = regConfig?.highlight || '#38BDF8';
             else if (isSelectedReg) fillColor = regConfig?.highlight || '#0284C7';
-            else if (selectedRegion === 'all') fillColor = regConfig?.base || '#64748B';
+            else if (selectedRegion === 'all') fillColor = regConfig?.base || (theme === 'dark' ? '#64748B' : '#94A3B8');
 
             return (
               <path
                 key={prov.id}
                 d={prov.pathD}
                 fill={fillColor}
-                stroke="#0F172A"
+                stroke={theme === 'dark' ? '#0F172A' : '#FFFFFF'}
                 strokeWidth={1}
                 className="cursor-pointer transition-colors duration-200"
                 onMouseEnter={() => setHoveredRegion(prov.region)}
@@ -175,7 +177,7 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
                   <text
                     x={dam.svgX + 8}
                     y={dam.svgY + 4}
-                    fill="#F8FAFC"
+                    fill={theme === 'dark' ? '#F8FAFC' : '#0F172A'}
                     fontSize={10}
                     fontWeight={600}
                     className="select-none pointer-events-none drop-shadow"
@@ -190,8 +192,8 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
       </svg>
 
       {/* 2D Fallback Indicator Badge */}
-      <div className="absolute bottom-4 left-4 z-10 hidden sm:flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-800 text-[11px] text-slate-400">
-        <span className="w-2 h-2 rounded-full bg-sky-400" />
+      <div className="absolute bottom-4 left-4 z-10 hidden sm:flex items-center gap-2 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400 shadow-md">
+        <span className="w-2 h-2 rounded-full bg-sky-500 dark:bg-sky-400" />
         <span>{lang === 'th' ? 'โหมดแผนที่ 2D ความละเอียดสูง (SVG View)' : '2D High-Resolution Vector Mode'}</span>
       </div>
     </div>

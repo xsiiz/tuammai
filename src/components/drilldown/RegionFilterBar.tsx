@@ -39,13 +39,13 @@ export const RegionFilterBar: React.FC<RegionFilterBarProps> = ({
             onClick={() => onSelectRegion(regId)}
             className={`group shrink-0 relative flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-200 border ${
               isSelected
-                ? 'bg-slate-800/90 text-white shadow-lg font-semibold'
-                : 'bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800/90 border-slate-800'
+                ? 'bg-white text-slate-900 shadow-md font-semibold dark:bg-slate-800/95 dark:text-white'
+                : 'bg-white/85 text-slate-700 hover:text-slate-900 hover:bg-white border-slate-200/90 shadow-sm dark:bg-slate-900/80 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/90 dark:border-slate-800'
             }`}
             style={
               isSelected
                 ? {
-                    borderColor: regColor?.highlight || '#38BDF8',
+                    borderColor: regColor?.highlight || '#0284C7',
                     boxShadow: `0 4px 14px -2px ${(regColor?.highlight || '#0284C7')}50`
                   }
                 : undefined
@@ -69,8 +69,8 @@ export const RegionFilterBar: React.FC<RegionFilterBarProps> = ({
             <span
               className={`text-[10px] px-1.5 py-0.5 rounded-full ${
                 isSelected
-                  ? 'bg-white/25 text-white'
-                  : 'bg-slate-800 text-slate-400 group-hover:text-slate-300'
+                  ? 'bg-slate-100 text-slate-800 dark:bg-white/20 dark:text-white font-semibold'
+                  : 'bg-slate-100 text-slate-500 group-hover:text-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:group-hover:text-slate-300'
               }`}
             >
               {stats.total}

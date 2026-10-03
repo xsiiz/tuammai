@@ -8,17 +8,37 @@
 
 - **Style:** Tactile 3D Low-Relief (นูนต่ำ) / Matte Clay Topographic Aesthetic
 - **Atmosphere:** สะอาดตา (Clean), สบายตา, มีมิติสมจริงแต่คงความเรียบง่าย (Soft Shadows, Matte Surface, ไม่สะท้อนแสงจัดจ้าน)
-- **Background Mode:** Dark & Clean Modern Hydrology Theme (โทน Slate / Deep Navy Blue) ช่วยขับให้โมเดลแผนที่ 3D และหมุดเตือนภัยเด่นชัด
+- **Dual Theme Support:**
+  - ☀️ **Light Mode (โหมดสีขาว - Default):** สะอาด โปร่งตา โทนสีขาวสว่างและเทานวล (`#F8FAFC`, `#FFFFFF`) ผิวการ์ดและ Header แบบ Frosted Glass สีขาวใส
+  - 🌙 **Dark Mode (โหมดกลางคืน):** สไตล์ Hydrology กลางคืน โทน Deep Navy / Slate (`#0B1120`, `#0F172A`) ช่วยขับให้แสงไฟหมุดและมวลน้ำเรืองแสงโดดเด่น
 
 ---
 
 ## 2. Color Palette & Design Tokens
 
-### 2.1. Brand & Hydrology Water Colors
+### 2.1. Brand, Background & Surface Tokens
+
+#### 2.1.1. Light Theme (โหมดสว่าง)
+- **Main Background:** `#F8FAFC` (Slate 50)
+- **3D Ocean Pedestal:** `#E2E8F0` (Slate 200) / `#CBD5E1`
+- **Surface Card / Glass:** `rgba(255, 255, 255, 0.88)` with `backdrop-blur-md`
+- **Surface Card Subtle:** `#F8FAFC` (Slate 50) / `#F1F5F9` (Slate 100)
+- **Borders & Dividers:** `#E2E8F0` (Slate 200)
+- **Text Primary:** `#0F172A` (Slate 900)
+- **Text Muted:** `#64748B` (Slate 500)
+
+#### 2.1.2. Dark Theme (โหมดกลางคืน)
+- **Main Background:** `#0B1120` (Slate 950)
+- **3D Ocean Pedestal:** `#0B132B` (Navy Deep)
+- **Surface Card / Glass:** `rgba(15, 23, 42, 0.85)` with `backdrop-blur-md`
+- **Surface Card Subtle:** `rgba(2, 6, 23, 0.6)` (Slate 950/60)
+- **Borders & Dividers:** `#1E293B` (Slate 800)
+- **Text Primary:** `#F8FAFC` (Slate 50)
+- **Text Muted:** `#94A3B8` (Slate 400)
+
+#### 2.1.3. Brand & Hydrology Water Colors
 - **Primary Water Blue:** `#0284C7` (Sky 600) — สีน้ำหลัก
 - **Water Cyan / Highlight:** `#06B6D4` (Cyan 500) — สีไฮไลต์ผิวน้ำ/สายน้ำ
-- **Deep Navy / Background:** `#0B1120` (Slate 950) — สีพื้นหลังหลักของแอป
-- **Surface Card / Glass:** `rgba(15, 23, 42, 0.75)` (Slate 900 with backdrop-blur) — ผิวการ์ดข้อมูล
 
 ### 2.2. Dam Alert Status Indicators (เกณฑ์เตือนภัยระดับน้ำตาม AGENTS.md)
 - 🔴 **Critical (วิกฤต):** `#EF4444` (Red 500)
