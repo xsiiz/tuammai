@@ -136,6 +136,11 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
     });
   }, [dams]);
 
+  const hoveredRiver = useMemo(() => {
+    if (!hoveredRiverId) return null;
+    return projectedRivers.find((r) => r.id === hoveredRiverId) || null;
+  }, [hoveredRiverId, projectedRivers]);
+
   const currentViewBox = REGION_VIEWBOXES[selectedRegion] || REGION_VIEWBOXES.all;
 
   return (
@@ -265,47 +270,6 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
                 >
                   <title>{tooltipText}</title>
                 </path>
-
-                {/* Floating tooltip on hover (River Name & Average Water Level) */}
-                {isHovered && (
-                  <g className="pointer-events-none animate-fadeIn select-none" transform={`translate(${river.midX}, ${river.midY - 14})`}>
-                    <rect
-                      x={-75}
-                      y={-12}
-                      width={150}
-                      height={24}
-                      rx={8}
-                      fill={theme === 'dark' ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)'}
-                      stroke={theme === 'dark' ? '#06B6D4' : '#0284C7'}
-                      strokeWidth={1.2}
-                      className="filter drop-shadow-xl"
-                    />
-                    <circle
-                      cx={-64}
-                      cy={0}
-                      r={3.5}
-                      fill={statusColor}
-                    />
-                    <text
-                      x={-54}
-                      y={4}
-                      fill={theme === 'dark' ? '#F8FAFC' : '#0F172A'}
-                      fontSize={9.5}
-                      fontWeight={700}
-                    >
-                      {lang === 'th' ? river.name_th : river.name_en}
-                    </text>
-                    <text
-                      x={26}
-                      y={4}
-                      fill={statusColor}
-                      fontSize={9.5}
-                      fontWeight={700}
-                    >
-                      {river.avgWaterLevel !== null ? `${river.avgWaterLevel.toFixed(1)}%` : '-'}
-                    </text>
-                  </g>
-                )}
               </g>
             );
           })}
@@ -434,6 +398,47 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
             );
           })}
         </g>
+
+        {/* Hovered River Tooltip Layer (Always rendered on top of dams) */}
+        {hoveredRiver && (
+          <g className="pointer-events-none animate-fadeIn select-none" transform={`translate(${hoveredRiver.midX}, ${hoveredRiver.midY - 14})`}>
+            <rect
+              x={-75}
+              y={-12}
+              width={150}
+              height={24}
+              rx={8}
+              fill={theme === 'dark' ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)'}
+              stroke={theme === 'dark' ? '#06B6D4' : '#0284C7'}
+              strokeWidth={1.2}
+              className="filter drop-shadow-xl"
+            />
+            <circle
+              cx={-64}
+              cy={0}
+              r={3.5}
+              fill={hoveredRiver.statusColor}
+            />
+            <text
+              x={-54}
+              y={4}
+              fill={theme === 'dark' ? '#F8FAFC' : '#0F172A'}
+              fontSize={9.5}
+              fontWeight={700}
+            >
+              {lang === 'th' ? hoveredRiver.name_th : hoveredRiver.name_en}
+            </text>
+            <text
+              x={26}
+              y={4}
+              fill={hoveredRiver.statusColor}
+              fontSize={9.5}
+              fontWeight={700}
+            >
+              {hoveredRiver.avgWaterLevel !== null ? `${hoveredRiver.avgWaterLevel.toFixed(1)}%` : '-'}
+            </text>
+          </g>
+        )}
       </svg>
     </div>
   );

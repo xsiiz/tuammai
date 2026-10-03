@@ -14,38 +14,28 @@ export const DamDetailModal: React.FC<DamDetailModalProps> = ({ dam, onClose, la
 
   // Advisory note based on storage percentage
   const getAdvisory = () => {
-    if (dam.storage_percent > 100) {
+    if (dam.storage_percent > 95) {
       return {
         level: 'critical',
-        text_th: 'ปริมาตรน้ำเกินความจุอ่างเก็บน้ำ (>100%) เฝ้าระวังการระบายน้ำฉุกเฉิน พื้นที่ท้ายน้ำอาจได้รับผลกระทบน้ำท่วม',
-        text_en: 'Reservoir exceeds 100% capacity! Spillway overflow risk, downstream areas may face flood advisory.'
+        text_th: dam.storage_percent > 100
+          ? 'ปริมาตรน้ำเกินความจุอ่างเก็บน้ำ (>100%) เฝ้าระวังการระบายน้ำฉุกเฉิน พื้นที่ท้ายน้ำอาจได้รับผลกระทบน้ำท่วม'
+          : 'ปริมาตรน้ำสูงเกินเกณฑ์วิกฤต (>95%) เสี่ยงต่อการล้นสปิลเวย์ พื้นที่ท้ายน้ำอาจได้รับผลกระทบน้ำท่วม',
+        text_en: dam.storage_percent > 100
+          ? 'Reservoir exceeds 100% capacity! Spillway overflow risk, downstream areas may face flood advisory.'
+          : 'Water level critical (>95%). High risk of spillway overflow, downstream flood alert in effect.'
       };
     }
-    if (dam.storage_percent < 30) {
-      return {
-        level: 'critical',
-        text_th: 'ปริมาตรน้ำต่ำกว่า 30% เข้าสู่ภาวะเสี่ยงภัยแล้งรุนแรง ควรวางแผนบริหารจัดการน้ำอุปโภคบริโภคอย่างเข้มงวด',
-        text_en: 'Water level critically low (<30%). Severe drought risk. Prioritize municipal water conservation.'
-      };
-    }
-    if (dam.storage_percent >= 80) {
+    if (dam.storage_percent > 80) {
       return {
         level: 'warning',
-        text_th: 'ปริมาตรน้ำ 80% - 100% อยู่ในเกณฑ์เฝ้าระวังน้ำหลาก ควรติดตามการปรับเพิ่มการระบายน้ำอย่างใกล้ชิด',
-        text_en: 'Storage between 80% - 100% (High retention). Monitor discharge rates for monsoon inflow.'
-      };
-    }
-    if (dam.storage_percent < 50) {
-      return {
-        level: 'warning',
-        text_th: 'ปริมาตรน้ำ 30% - 50% อยู่ในเกณฑ์น้ำน้อย ควรใช้น้ำอย่างประหยัดเพื่อสำรองช่วงฤดูแล้ง',
-        text_en: 'Storage between 30% - 50% (Low retention). Conserve water for dry season reserves.'
+        text_th: 'ปริมาตรน้ำอยู่ในเกณฑ์เฝ้าระวัง (>80%) ควรติดตามการปรับเพิ่มการระบายน้ำอย่างใกล้ชิด',
+        text_en: 'Storage in warning threshold (>80%). Monitor discharge rates for monsoon inflow closely.'
       };
     }
     return {
       level: 'normal',
-      text_th: 'ปริมาตรน้ำอยู่ในเกณฑ์ปกติ (50% - 80%) เหมาะสมต่อการบริหารจัดการน้ำเพื่อการเกษตรและอุปโภค',
-      text_en: 'Optimal storage range (50% - 80%). Balanced inflow and operational discharge.'
+      text_th: 'ปริมาตรน้ำอยู่ในเกณฑ์ปกติ (<80%) เหมาะสมต่อการบริหารจัดการน้ำ',
+      text_en: 'Normal storage range (<80%). Safe retention and operational discharge.'
     };
   };
 

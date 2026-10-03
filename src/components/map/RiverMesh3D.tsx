@@ -195,9 +195,11 @@ export const RiverMesh3D: React.FC<RiverMesh3DProps> = ({
           position={[midPoint.x, midPoint.y + 0.08, midPoint.z + 0.08]}
           center
           distanceFactor={9.5}
-          style={{ pointerEvents: 'none' }}
+          zIndexRange={[100000000, 100000000]}
+          wrapperClass="z-[999999] pointer-events-none"
+          style={{ zIndex: 100000000, pointerEvents: 'none' }}
         >
-          <div className="flex flex-col items-center animate-fadeIn select-none pointer-events-none">
+          <div className="flex flex-col items-center animate-fadeIn select-none pointer-events-none relative z-50">
             <div
               className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold whitespace-nowrap shadow-2xl border backdrop-blur-md flex items-center gap-2 ${
                 theme === 'dark'

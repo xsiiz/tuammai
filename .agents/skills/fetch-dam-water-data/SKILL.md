@@ -71,15 +71,15 @@ As mandated in `AGENTS.md` (Agent-DamData):
 
 ```javascript
 function evaluateDamStatus(storagePercent) {
-  // 🔴 Critical: Over 100% (spillway risk) OR Under 30% (severe drought)
-  if (storagePercent > 100 || storagePercent < 30) {
+  // 🔴 Critical: Over 95%
+  if (storagePercent > 95) {
     return { status: 'critical', color: '#EF4444', label_th: 'วิกฤต', label_en: 'Critical' };
   }
-  // 🟡 Warning: 80% - 100% (high water/flood risk) OR 30% - 50% (low water)
-  if (storagePercent >= 80 || storagePercent < 50) {
+  // 🟡 Warning: Over 80% (80% - 95%)
+  if (storagePercent > 80) {
     return { status: 'warning', color: '#F59E0B', label_th: 'เฝ้าระวัง', label_en: 'Warning' };
   }
-  // 🟢 Normal: 50% - 80% (optimal retention level)
+  // 🟢 Normal: Under 80%
   return { status: 'normal', color: '#10B981', label_th: 'ปกติ', label_en: 'Normal' };
 }
 ```

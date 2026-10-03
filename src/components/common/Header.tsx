@@ -47,8 +47,8 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">
               {lang === 'th' 
-                ? 'ระบบติดตามระดับน้ำในเขื่อนและอ่างเก็บน้ำ 3D แบบ Drill-Down'
-                : 'Interactive 3D Low-Relief Dam & Hydrology Telemetry'}
+                ? 'ระบบตรวจสอบระดับน้ำในเขื่อนและริมตลิ่งแม่น้ำ พร้อมวิเคราะห์พื้นที่ที่อาจจะได้รับผลกระทบด้วย AI'
+                : 'Dam & Riverbank Water Level Monitoring with AI Flood Impact Analysis'}
             </p>
           </div>
         </div>
@@ -58,15 +58,15 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="text-slate-500 dark:text-slate-400 font-medium">{lang === 'th' ? 'เกณฑ์เฝ้าระวัง:' : 'Status:'}</span>
           <span className="inline-flex items-center gap-1 text-red-600 dark:text-red-400 font-medium">
             <span className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-sm shadow-red-500/50"></span>
-            {lang === 'th' ? 'วิกฤต (>100% / <30%)' : 'Critical (>100% / <30%)'}
+            {lang === 'th' ? 'วิกฤต (>95%)' : 'Critical (>95%)'}
           </span>
           <span className="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium">
             <span className="w-2.5 h-2.5 rounded-full bg-amber-500 shadow-sm shadow-amber-500/50"></span>
-            {lang === 'th' ? 'เฝ้าระวัง (80-100% / 30-50%)' : 'Warning'}
+            {lang === 'th' ? 'เฝ้าระวัง (>80%)' : 'Warning (>80%)'}
           </span>
           <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50"></span>
-            {lang === 'th' ? 'ปกติ (50-80%)' : 'Normal (50-80%)'}
+            {lang === 'th' ? 'ปกติ (<80%)' : 'Normal (<80%)'}
           </span>
         </div>
 

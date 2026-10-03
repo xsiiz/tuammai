@@ -31,9 +31,9 @@ When handling tasks within this repository, agents should adopt the relevant rol
 - **Key Responsibilities:**
   - Define and parse dam telemetry data models (storage percentage, inflow/outflow, capacity thresholds).
   - Implement color-coded threshold logic:
-    - 🔴 Critical (> 100% or < 30%)
-    - 🟡 Warning (80% - 100% or 30% - 50%)
-    - 🟢 Normal (50% - 80%)
+    - 🔴 Critical (> 95%)
+    - 🟡 Warning (> 80%)
+    - 🟢 Normal (< 80%)
   - Manage modal states and drill-down historical graphs (e.g., 7-day water inflow trends).
 
 ### 2.3. Design & Asset Generation Agent (`Agent-NanoBanana`)

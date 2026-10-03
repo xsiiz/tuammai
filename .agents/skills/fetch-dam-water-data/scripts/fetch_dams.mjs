@@ -35,10 +35,10 @@ function inferRegion(lat, lon, name = '') {
  * Status threshold evaluation as defined in AGENTS.md
  */
 function evaluateStatus(storagePercent) {
-  if (storagePercent > 100 || storagePercent < 30) {
+  if (storagePercent > 95) {
     return { status: 'critical', color: '#EF4444', label_th: 'วิกฤต', label_en: 'Critical' };
   }
-  if (storagePercent >= 80 || storagePercent < 50) {
+  if (storagePercent > 80) {
     return { status: 'warning', color: '#F59E0B', label_th: 'เฝ้าระวัง', label_en: 'Warning' };
   }
   return { status: 'normal', color: '#10B981', label_th: 'ปกติ', label_en: 'Normal' };

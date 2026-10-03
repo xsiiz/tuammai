@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { AlertTriangle, Bell, ChevronRight, Droplets } from 'lucide-react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { AlertTriangle, Bell, ChevronRight, Droplets, X } from 'lucide-react';
 import { DamTelemetry } from '../../types/dam';
 
 interface DamAlertWidgetProps {
@@ -11,7 +11,11 @@ interface DamAlertWidgetProps {
 export const DamAlertWidget: React.FC<DamAlertWidgetProps> = ({ dams, onSelectDam, lang }) => {
   // Wiggle / animation runs for 10 seconds after mounting, then stops
   const [isWiggling, setIsWiggling] = useState<boolean>(true);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isPinned, setIsPinned] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const isOpen = isPinned || isHovered;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,6 +23,21 @@ export const DamAlertWidget: React.FC<DamAlertWidgetProps> = ({ dams, onSelectDa
     }, 10000); // 10 seconds
 
     return () => clearTimeout(timer);
+  }, []);
+
+  // Close popover when clicking outside the widget
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsPinned(false);
+        setIsHovered(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   // Filter dams with alert status (critical or warning)
@@ -39,9 +58,10 @@ export const DamAlertWidget: React.FC<DamAlertWidgetProps> = ({ dams, onSelectDa
 
   return (
     <div
+      ref={containerRef}
       className="fixed bottom-5 left-5 z-30 pointer-events-auto"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Alert Details Popover (when hovered / open) */}
       <div
@@ -70,6 +90,16 @@ export const DamAlertWidget: React.FC<DamAlertWidgetProps> = ({ dams, onSelectDa
                 🟡 {warningCount} {lang === 'th' ? 'เฝ้าระวัง' : 'Warning'}
               </span>
             )}
+            <button
+              onClick={() => {
+                setIsPinned(false);
+                setIsHovered(false);
+              }}
+              className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors ml-1"
+              title={lang === 'th' ? 'ปิด' : 'Close'}
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
 
@@ -82,7 +112,8 @@ export const DamAlertWidget: React.FC<DamAlertWidgetProps> = ({ dams, onSelectDa
                 key={dam.id}
                 onClick={() => {
                   onSelectDam(dam);
-                  setIsOpen(false);
+                  setIsPinned(false);
+                  setIsHovered(false);
                 }}
                 className="w-full text-left p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/70 transition-colors flex items-center justify-between group pt-2 first:pt-2"
               >
@@ -108,8 +139,8 @@ export const DamAlertWidget: React.FC<DamAlertWidgetProps> = ({ dams, onSelectDa
                     <span>•</span>
                     <span className={isCrit ? 'text-red-600 dark:text-red-400 font-medium' : 'text-amber-600 dark:text-amber-400 font-medium'}>
                       {isCrit
-                        ? (dam.storage_percent > 100 ? (lang === 'th' ? 'น้ำล้นเกินจุ' : 'Overflow') : (lang === 'th' ? 'วิกฤตแล้ง' : 'Drought'))
-                        : (dam.storage_percent >= 80 ? (lang === 'th' ? 'น้ำมาก' : 'High') : (lang === 'th' ? 'น้ำน้อย' : 'Low'))}
+                        ? (dam.storage_percent > 100 ? (lang === 'th' ? 'น้ำล้นเกินจุ' : 'Overflow') : (lang === 'th' ? 'วิกฤต (>95%)' : 'Critical (>95%)'))
+                        : (lang === 'th' ? 'เฝ้าระวัง (>80%)' : 'Warning (>80%)')}
                     </span>
                   </div>
                 </div>
@@ -140,8 +171,12 @@ export const DamAlertWidget: React.FC<DamAlertWidgetProps> = ({ dams, onSelectDa
 
       {/* Main Alert Trigger Button (Bottom-Left Pill) */}
       <button
-        onClick={() => setIsOpen((prev) => !prev)}
-        className={`group flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white/90 dark:bg-[#0F172A]/90 backdrop-blur-xl border border-red-300 dark:border-red-900/60 shadow-lg shadow-red-500/10 hover:shadow-red-500/20 text-slate-900 dark:text-white transition-all duration-300 select-none ${
+        onClick={() => setIsPinned((prev) => !prev)}
+        className={`group flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white/90 dark:bg-[#0F172A]/90 backdrop-blur-xl border ${
+          isPinned
+            ? 'border-red-500 ring-2 ring-red-500/20 shadow-red-500/25'
+            : 'border-red-300 dark:border-red-900/60 shadow-red-500/10 hover:shadow-red-500/20'
+        } shadow-lg text-slate-900 dark:text-white transition-all duration-300 select-none ${
           isWiggling ? 'animate-alert-wiggle' : ''
         }`}
         aria-label="Water alert notifications"
@@ -168,7 +203,9 @@ export const DamAlertWidget: React.FC<DamAlertWidgetProps> = ({ dams, onSelectDa
             </span>
           </div>
           <p className="text-[10px] text-slate-500 dark:text-slate-400">
-            {lang === 'th' ? 'ชี้เพื่อดูรายละเอียด' : 'Hover for details'}
+            {lang === 'th'
+              ? (isPinned ? 'เปิดค้าง (คลิกนอกกล่องเพื่อปิด)' : 'คลิกเพื่อเปิดค้างไว้')
+              : (isPinned ? 'Pinned (Click outside to close)' : 'Click to pin open')}
           </p>
         </div>
       </button>
