@@ -103,9 +103,9 @@ export function App() {
 
         {/* Top Floating Drill-Down Navigation & Region Filters */}
         <div className="absolute top-20 left-4 right-4 z-20 pointer-events-none">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-2.5">
             {/* Breadcrumb Nav */}
-            <div className="pointer-events-auto">
+            <div className="pointer-events-auto shrink-0">
               <BreadcrumbNav
                 lang={lang}
                 selectedRegion={selectedRegion}
@@ -116,7 +116,7 @@ export function App() {
             </div>
 
             {/* Quick 6 Regions Filter Pills */}
-            <div className="pointer-events-auto w-full sm:w-auto overflow-hidden">
+            <div className="pointer-events-auto w-full lg:w-auto min-w-0 max-w-full overflow-hidden">
               <RegionFilterBar
                 lang={lang}
                 selectedRegion={selectedRegion}

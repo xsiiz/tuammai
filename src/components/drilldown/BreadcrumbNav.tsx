@@ -44,13 +44,16 @@ export const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({
           <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-600 shrink-0" />
           <button
             onClick={onClearDam}
-            className={`px-2 py-1 rounded-lg transition-colors ${
+            title={lang === 'th' ? regionInfo.name_th : regionInfo.name_en}
+            className={`px-2 py-1 rounded-lg transition-colors whitespace-nowrap ${
               !selectedDam
                 ? 'text-sky-700 bg-sky-100/70 dark:text-cyan-400 font-semibold dark:bg-cyan-950/50'
                 : 'hover:text-slate-900 hover:bg-slate-100 dark:hover:text-slate-200 dark:hover:bg-slate-800/60'
             }`}
           >
-            {lang === 'th' ? regionInfo.name_th : regionInfo.name_en}
+            {lang === 'th'
+              ? (regionInfo.short_name_th || regionInfo.name_th)
+              : (regionInfo.short_name_en || regionInfo.name_en)}
           </button>
         </>
       )}

@@ -22,12 +22,15 @@ export interface DamTelemetry {
   status_color: string;
   status_label_th: string;
   status_label_en: string;
+  national_rank?: number;
 }
 
 export interface RegionMeta {
   id: RegionId;
   name_th: string;
   name_en: string;
+  short_name_th?: string;
+  short_name_en?: string;
   center: [number, number]; // [lng, lat]
   cameraTarget: [number, number, number]; // [x, y, z] in 3D scene
   zoom: number;

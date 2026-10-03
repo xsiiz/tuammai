@@ -66,7 +66,7 @@ export const DamDetailModal: React.FC<DamDetailModalProps> = ({ dam, onClose, la
           {/* Top Bar: Title & Close Button */}
           <div className="flex items-start justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <span 
                   className="px-2.5 py-0.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5"
                   style={{ 
@@ -78,6 +78,11 @@ export const DamDetailModal: React.FC<DamDetailModalProps> = ({ dam, onClose, la
                   <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dam.status_color }}></span>
                   {lang === 'th' ? dam.status_label_th : dam.status_label_en}
                 </span>
+                {dam.national_rank && dam.national_rank <= 10 && (
+                  <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-700 dark:bg-amber-400/20 dark:text-amber-300 border border-amber-300/40">
+                    {lang === 'th' ? `เขื่อนใหญ่อันดับ ${dam.national_rank} ของประเทศ` : `Top ${dam.national_rank} National Dam`}
+                  </span>
+                )}
                 <span className="text-xs text-slate-600 dark:text-slate-400 capitalize bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700/50">
                   {dam.region}
                 </span>
@@ -145,7 +150,9 @@ export const DamDetailModal: React.FC<DamDetailModalProps> = ({ dam, onClose, la
                 {dam.storage_mcm.toLocaleString()} <span className="text-xs font-normal text-slate-500 dark:text-slate-400">MCM</span>
               </div>
               <div className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">
-                {lang === 'th' ? 'ล้านลูกบาศก์เมตร' : 'Million Cubic Meters'}
+                {dam.capacity_mcm
+                  ? `${lang === 'th' ? 'ความจุสูงสุด' : 'Max capacity'}: ${dam.capacity_mcm.toLocaleString()} MCM`
+                  : (lang === 'th' ? 'ล้านลูกบาศก์เมตร' : 'Million Cubic Meters')}
               </div>
             </div>
 

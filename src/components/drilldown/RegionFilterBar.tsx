@@ -18,26 +18,74 @@ export const RegionFilterBar: React.FC<RegionFilterBarProps> = ({
   onSelectRegion,
   dams
 }) => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const pillRefs = React.useRef<Record<string, HTMLButtonElement | null>>({});
+
   // Count dams and critical dams per region
   const getStats = (regionId: RegionId) => {
-    const list = regionId === 'all' ? dams : dams.filter(d => d.region === regionId);
-    const critical = list.filter(d => d.status === 'critical').length;
+    if (regionId === 'all') {
+      const top10 = dams.filter((d) => d.national_rank && d.national_rank <= 10);
+      const critical = top10.filter((d) => d.status === 'critical').length;
+      return { total: top10.length, critical };
+    }
+    const list = dams.filter((d) => d.region === regionId);
+    const critical = list.filter((d) => d.status === 'critical').length;
     return { total: list.length, critical };
   };
 
+  // Enable mouse wheel horizontal scrolling on desktop
+  React.useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+      }
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => container.removeEventListener('wheel', handleWheel);
+  }, []);
+
+  // Scroll active button into view smoothly when changed
+  React.useEffect(() => {
+    const activePill = pillRefs.current[selectedRegion];
+    if (activePill && containerRef.current) {
+      activePill.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'nearest'
+      });
+    }
+  }, [selectedRegion]);
+
   return (
-    <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+    <div
+      ref={containerRef}
+      className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 touch-pan-x"
+    >
       {REGION_ORDER.map((regId) => {
         const info = REGIONS[regId];
         const isSelected = selectedRegion === regId;
         const stats = getStats(regId);
         const regColor = REGION_COLORS[regId];
+        const label = lang === 'th'
+          ? (info.short_name_th || info.name_th)
+          : (info.short_name_en || info.name_en);
+        const fullName = lang === 'th' ? info.name_th : info.name_en;
+        const tooltip = regId === 'all'
+          ? (lang === 'th' ? 'ภาพรวมทั้งประเทศ (10 เขื่อนใหญ่)' : 'National Overview (Top 10 Dams)')
+          : fullName;
 
         return (
           <button
             key={regId}
+            ref={(el) => { pillRefs.current[regId] = el; }}
             onClick={() => onSelectRegion(regId)}
-            className={`group shrink-0 relative flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-200 border ${
+            title={tooltip}
+            className={`group shrink-0 relative flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-3 rounded-xl text-xs font-medium transition-all duration-200 border select-none ${
               isSelected
                 ? 'bg-white text-slate-900 shadow-md font-semibold dark:bg-slate-800/95 dark:text-white'
                 : 'bg-white/85 text-slate-700 hover:text-slate-900 hover:bg-white border-slate-200/90 shadow-sm dark:bg-slate-900/80 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/90 dark:border-slate-800'
@@ -63,7 +111,7 @@ export const RegionFilterBar: React.FC<RegionFilterBarProps> = ({
               />
             )}
 
-            <span>{lang === 'th' ? info.name_th : info.name_en}</span>
+            <span className="whitespace-nowrap">{label}</span>
 
             {/* Total Dam Count Badge */}
             <span

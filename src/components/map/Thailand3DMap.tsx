@@ -24,33 +24,61 @@ const CameraController: React.FC<{
   selectedRegion: RegionId;
   selectedDam: DamTelemetry | null;
 }> = ({ selectedRegion, selectedDam }) => {
-  const { camera } = useThree();
+  const { camera, size } = useThree();
   const controlsRef = useRef<any>(null);
 
   const targetCoords = useMemo(() => {
+    // Determine right panel width based on responsive breakpoints
+    // On Desktop (width >= 1024): w-88 (352px) + 16px right margin = 368px
+    // On Tablet/Small Desktop (768 <= width < 1024): w-80 (320px) + 16px = 336px
+    // On Mobile (width < 768): bottom sheet drawer (offset = 0)
+    const isDesktop = size.width >= 768;
+    const panelWidth = size.width >= 1024 ? 368 : (isDesktop ? 336 : 0);
+    const aspect = size.width / Math.max(size.height, 1);
+    const fovRad = ((camera as any).fov * Math.PI) / 360;
+
+    // Helper to compute world X offset so content centers in the open space left of the panel
+    const getPanelOffsetX = (dist: number) => {
+      if (!isDesktop || panelWidth === 0) return 0;
+      const visibleHeight = 2 * dist * Math.tan(fovRad);
+      return (panelWidth / 2) * (visibleHeight / size.height);
+    };
+
     if (selectedDam) {
       const [x, y, z] = geoTo3D(selectedDam.coordinates[0], selectedDam.coordinates[1]);
+      const damDist = 3.6;
+      const offsetX = getPanelOffsetX(damDist);
       return {
-        target: new THREE.Vector3(x, y, z),
-        cameraPos: new THREE.Vector3(x, y - 1.2, 3.0)
+        target: new THREE.Vector3(x + offsetX, y, z),
+        cameraPos: new THREE.Vector3(x + offsetX, y - 0.8, damDist)
       };
     }
 
     const reg = REGIONS[selectedRegion] || REGIONS.all;
     if (selectedRegion === 'all') {
+      // Thailand spans latitude ~5.6 to ~20.5 (height ~8.2 units, width ~4.6 units)
+      // Distance adjusted so the entire country fits vertically with comfortable padding
+      let baseDist = 11.6;
+      if (aspect < 0.65) {
+        baseDist = Math.max(baseDist, 5.2 / (2 * aspect * Math.tan(fovRad)));
+      }
+      const offsetX = getPanelOffsetX(baseDist);
+      const [tx, ty, tz] = reg.cameraTarget;
+
       return {
-        target: new THREE.Vector3(0, 0, 0),
-        cameraPos: new THREE.Vector3(0, -1.8, 8.8)
+        target: new THREE.Vector3(tx + offsetX, ty, tz),
+        cameraPos: new THREE.Vector3(tx + offsetX, ty - 1.5, baseDist)
       };
     }
 
     const [tx, ty, tz] = reg.cameraTarget;
-    const zoomDist = 8.5 / reg.zoom;
+    const zoomDist = 10.5 / reg.zoom;
+    const offsetX = getPanelOffsetX(zoomDist);
     return {
-      target: new THREE.Vector3(tx, ty, tz),
-      cameraPos: new THREE.Vector3(tx, ty - 0.8, zoomDist)
+      target: new THREE.Vector3(tx + offsetX, ty, tz),
+      cameraPos: new THREE.Vector3(tx + offsetX, ty - 0.8, zoomDist)
     };
-  }, [selectedRegion, selectedDam]);
+  }, [selectedRegion, selectedDam, size.width, size.height, camera]);
 
   useFrame((_, delta) => {
     // Smooth lerp camera position and controls target
@@ -71,7 +99,7 @@ const CameraController: React.FC<{
       maxPolarAngle={Math.PI / 2.1}
       minPolarAngle={Math.PI / 6}
       minDistance={2.0}
-      maxDistance={14.0}
+      maxDistance={20.0}
     />
   );
 };
@@ -175,7 +203,13 @@ const DamMarker3D: React.FC<{
   const [hovered, setHovered] = useState(false);
   const ringRef = useRef<THREE.Mesh>(null);
 
-  const isVisible = selectedRegion === 'all' || selectedRegion === dam.region;
+  const isTop10 = Boolean(dam.national_rank && dam.national_rank <= 10);
+  // National overview ('all') displays only the top 10 largest dams.
+  // Drill-down into a specific region displays all reservoirs within that region.
+  const isVisible = selectedRegion === 'all'
+    ? (isTop10 || isSelected)
+    : (selectedRegion === dam.region);
+
   const [x, y, baseZ] = useMemo(() => {
     return geoTo3D(dam.coordinates[0], dam.coordinates[1], 0.35);
   }, [dam.coordinates]);
@@ -259,7 +293,7 @@ const DamMarker3D: React.FC<{
       </mesh>
 
       {/* Hover / Active Floating Tag */}
-      {(hovered || isSelected || selectedRegion !== 'all') && (
+      {(hovered || isSelected || selectedRegion !== 'all' || isTop10) && (
         <Html
           position={[0, 0.1, 0.22]}
           center
@@ -276,6 +310,11 @@ const DamMarker3D: React.FC<{
                 borderColor: `${dam.status_color}80`
               }}
             >
+              {dam.national_rank && dam.national_rank <= 10 && (
+                <span className="font-mono text-[9px] px-1 py-0.2 rounded font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400">
+                  #{dam.national_rank}
+                </span>
+              )}
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dam.status_color }} />
               <span>{lang === 'th' ? dam.name_th : dam.name_en}</span>
               <span
@@ -331,7 +370,7 @@ export const Thailand3DMap: React.FC<Thailand3DMapProps> = ({
   return (
     <div className={`relative w-full h-full select-none transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0B1120]' : 'bg-white'}`}>
       <Canvas
-        camera={{ position: [0, -1.8, 8.8], fov: 45, near: 0.1, far: 50 }}
+        camera={{ position: [0.54, -2.0, 11.6], fov: 45, near: 0.1, far: 50 }}
         shadows
         gl={{ antialias: true, alpha: true }}
         className="w-full h-full"

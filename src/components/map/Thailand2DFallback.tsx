@@ -87,7 +87,7 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
   const currentViewBox = REGION_VIEWBOXES[selectedRegion] || REGION_VIEWBOXES.all;
 
   return (
-    <div className={`relative w-full h-full flex items-center justify-center p-2 sm:p-6 overflow-hidden transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0B1120]' : 'bg-[#E2E8F0]/30'}`}>
+    <div className={`relative w-full h-full flex items-center justify-center p-2 sm:p-6 md:pr-84 lg:pr-96 overflow-hidden transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0B1120]' : 'bg-[#E2E8F0]/30'}`}>
       <svg
         viewBox={currentViewBox}
         className="w-full h-full max-h-[85vh] transition-all duration-700 ease-in-out drop-shadow-2xl"
@@ -136,7 +136,12 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
         {/* Dam Markers Layer */}
         <g>
           {projectedDams.map((dam) => {
-            const isVisible = selectedRegion === 'all' || selectedRegion === dam.region;
+            const isTop10 = Boolean(dam.national_rank && dam.national_rank <= 10);
+            // In national overview, show only top 10 largest dams.
+            // On drill-down into a region, show all dams of that region.
+            const isVisible = selectedRegion === 'all'
+              ? (isTop10 || selectedDam?.id === dam.id)
+              : (selectedRegion === dam.region);
             if (!isVisible) return null;
 
             const isSelected = selectedDam?.id === dam.id;
@@ -172,8 +177,8 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
                   className="filter drop-shadow-md"
                 />
 
-                {/* Floating label if region selected */}
-                {(selectedRegion !== 'all' || isSelected) && (
+                {/* Floating label if region selected, dam selected, or top 10 in national view */}
+                {(selectedRegion !== 'all' || isSelected || isTop10) && (
                   <text
                     x={dam.svgX + 8}
                     y={dam.svgY + 4}
@@ -182,6 +187,7 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
                     fontWeight={600}
                     className="select-none pointer-events-none drop-shadow"
                   >
+                    {isTop10 && selectedRegion === 'all' ? `#${dam.national_rank} ` : ''}
                     {lang === 'th' ? dam.name_th : dam.name_en} ({dam.storage_percent.toFixed(0)}%)
                   </text>
                 )}
