@@ -74,6 +74,32 @@
   animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Alert wiggle animation for 10-second attention grab */
+@keyframes alertWiggle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  10%, 30% {
+    transform: rotate(-7deg) scale(1.05);
+  }
+  20%, 40% {
+    transform: rotate(7deg) scale(1.05);
+  }
+  50% {
+    transform: rotate(0deg) scale(1.02);
+  }
+  60% {
+    transform: translateY(-4px) scale(1.03);
+  }
+  75% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-alert-wiggle {
+  animation: alertWiggle 1.8s ease-in-out infinite;
+}
+
 /* Water flow animation for 2D river paths */
 @keyframes flowWater {
   from {

@@ -435,12 +435,6 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
           })}
         </g>
       </svg>
-
-      {/* 2D Fallback Indicator Badge */}
-      <div className="absolute bottom-4 left-4 z-10 hidden sm:flex items-center gap-2 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400 shadow-md">
-        <span className="w-2 h-2 rounded-full bg-sky-500 dark:bg-sky-400" />
-        <span>{lang === 'th' ? 'โหมดแผนที่ 2D ความละเอียดสูง (SVG View)' : '2D High-Resolution Vector Mode'}</span>
-      </div>
     </div>
   );
 };

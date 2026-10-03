@@ -32,16 +32,14 @@ const CameraController: React.FC<{
   const controlsRef = useRef<any>(null);
 
   const targetCoords = useMemo(() => {
-    // Determine right panel width based on responsive breakpoints
-    // On Desktop (width >= 1024): w-88 (352px) + 16px right margin = 368px
-    // On Tablet/Small Desktop (768 <= width < 1024): w-80 (320px) + 16px = 336px
-    // On Mobile (width < 768): bottom sheet drawer (offset = 0)
+    // Determine right panel width: only offset camera when selectedDam is active (drawer open)
+    // When no dam drawer is active, panelWidth = 0 so the map is naturally centered in the viewport.
     const isDesktop = size.width >= 768;
-    const panelWidth = size.width >= 1024 ? 368 : (isDesktop ? 336 : 0);
+    const panelWidth = selectedDam ? (size.width >= 1024 ? 480 : (isDesktop ? 380 : 0)) : 0;
     const aspect = size.width / Math.max(size.height, 1);
     const fovRad = ((camera as any).fov * Math.PI) / 360;
 
-    // Helper to compute world X offset so content centers in the open space left of the panel
+    // Helper to compute world X offset so content centers in the open space left of the drawer
     const getPanelOffsetX = (dist: number) => {
       if (!isDesktop || panelWidth === 0) return 0;
       const visibleHeight = 2 * dist * Math.tan(fovRad);
@@ -62,7 +60,7 @@ const CameraController: React.FC<{
     if (selectedRegion === 'all') {
       // Thailand spans latitude ~5.6 to ~20.5 (height ~8.2 units, width ~4.6 units)
       // Distance adjusted so the entire country fits vertically with comfortable padding
-      let baseDist = 11.6;
+      let baseDist = 11.2;
       if (aspect < 0.65) {
         baseDist = Math.max(baseDist, 5.2 / (2 * aspect * Math.tan(fovRad)));
       }
@@ -71,7 +69,7 @@ const CameraController: React.FC<{
 
       return {
         target: new THREE.Vector3(tx + offsetX, ty, tz),
-        cameraPos: new THREE.Vector3(tx + offsetX, ty - 1.5, baseDist)
+        cameraPos: new THREE.Vector3(tx + offsetX, ty - 1.2, baseDist)
       };
     }
 
@@ -621,16 +619,6 @@ export const Thailand3DMap: React.FC<Thailand3DMapProps> = ({
           <BasePedestal theme={theme} />
         </group>
       </Canvas>
-
-      {/* Floating 3D Navigation Guide Tip */}
-      <div className="absolute bottom-4 left-4 z-10 pointer-events-none hidden sm:flex items-center gap-2 bg-white/85 dark:bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400 shadow-md">
-        <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
-        <span>
-          {lang === 'th' 
-            ? 'คลิกที่ภูมิภาคเพื่อ Drill-Down | หมุนมุมมองได้อิสระ (Drag & Scroll)'
-            : 'Click region to Drill-Down | Rotate & Zoom freely'}
-        </span>
-      </div>
     </div>
   );
 };
