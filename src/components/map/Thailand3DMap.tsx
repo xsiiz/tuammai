@@ -4,7 +4,15 @@ import { OrbitControls, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { RegionId, DamTelemetry } from '../../types/dam';
 import { REGIONS } from '../../data/regions';
-import { geoTo3D, REGION_COLORS, createShapesFromMultiPolygon, GEO_SCALE, THAILAND_CENTER_LNG, THAILAND_CENTER_LAT } from '../../utils/geoUtils';
+import {
+  geoTo3D,
+  REGION_COLORS,
+  createShapesFromMultiPolygon,
+  createRibbonGeometryFromRing,
+  GEO_SCALE,
+  THAILAND_CENTER_LNG,
+  THAILAND_CENTER_LAT
+} from '../../utils/geoUtils';
 import { PROVINCES_BY_CODE } from '../../data/provinces';
 import provincesGeoData from '../../data/thailand-provinces.json';
 import riversGeoData from '../../data/thailand-rivers.json';
@@ -172,23 +180,23 @@ const ProvinceMesh: React.FC<{
     bevelThickness: 0.015
   }), [extrudeDepth]);
 
-  // Crisp boundary line geometries along the outer rim of each polygon
-  const borderLines = useMemo(() => {
+  // Crisp polygonal boundary ribbons from GeoJSON coordinates
+  const borderRibbons = useMemo(() => {
     const geoms: THREE.BufferGeometry[] = [];
+    const ribbonWidth = isSelectedProvince ? 0.022 : (hovered ? 0.018 : 0.013);
     for (const polygon of feature.geometry.coordinates) {
-      const ring = polygon[0];
-      if (!ring || ring.length < 3) continue;
-      const points: THREE.Vector3[] = [];
-      for (const [lng, lat] of ring) {
-        const x = (lng - THAILAND_CENTER_LNG) * GEO_SCALE;
-        const y = (lat - THAILAND_CENTER_LAT) * GEO_SCALE;
-        // Float slightly above the extruded top surface to prevent z-fighting
-        points.push(new THREE.Vector3(x, y, extrudeDepth + 0.006));
+      for (const ring of polygon) {
+        if (!ring || ring.length < 3) continue;
+        const geom = createRibbonGeometryFromRing(
+          ring,
+          ribbonWidth,
+          extrudeDepth + 0.007
+        );
+        if (geom) geoms.push(geom);
       }
-      geoms.push(new THREE.BufferGeometry().setFromPoints(points));
     }
     return geoms;
-  }, [feature.geometry.coordinates, extrudeDepth]);
+  }, [feature.geometry.coordinates, extrudeDepth, isSelectedProvince, hovered]);
 
   // Color calculation matching Design.md
   const color = useMemo(() => {
@@ -220,7 +228,7 @@ const ProvinceMesh: React.FC<{
   const borderOpacity = useMemo(() => {
     if (isSelectedProvince || (hovered && isRegionActive)) return 1.0;
     if (isSelectedRegion) return theme === 'dark' ? 0.85 : 0.95;
-    if (selectedRegion === 'all') return theme === 'dark' ? 0.6 : 0.9;
+    if (selectedRegion === 'all') return theme === 'dark' ? 0.7 : 0.95;
     return 0.35;
   }, [isSelectedProvince, hovered, isRegionActive, isSelectedRegion, selectedRegion, theme]);
 
@@ -283,16 +291,19 @@ const ProvinceMesh: React.FC<{
         </mesh>
       ))}
 
-      {/* Crisp Province Outlines (Line Loops) */}
-      {borderLines.map((geom, idx) => (
-        <lineLoop key={`border-${idx}`} geometry={geom}>
-          <lineBasicMaterial
+      {/* Crisp Solid Province Boundary Ribbons from GeoJSON */}
+      {borderRibbons.map((geom, idx) => (
+        <mesh key={`ribbon-${idx}`} geometry={geom}>
+          <meshBasicMaterial
             color={borderColor}
             transparent
             opacity={borderOpacity}
-            linewidth={isSelectedProvince || hovered ? 2 : 1}
+            side={THREE.DoubleSide}
+            polygonOffset
+            polygonOffsetFactor={-2}
+            polygonOffsetUnits={-2}
           />
-        </lineLoop>
+        </mesh>
       ))}
 
       {/* Province Name Tag (Anchored at Centroid) */}

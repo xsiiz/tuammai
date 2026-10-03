@@ -87,6 +87,61 @@ export function createShapesFromMultiPolygon(
 }
 
 /**
+ * Create a solid 2D ribbon mesh geometry from a geographic polygon ring.
+ * Solves WebGL 1px line limitations by generating real polygonal quad strips
+ * with configurable physical world width.
+ */
+export function createRibbonGeometryFromRing(
+  ring: [number, number][],
+  width: number = 0.012,
+  elevation: number = 0.1
+): THREE.BufferGeometry | null {
+  const n = ring.length;
+  if (n < 3) return null;
+
+  const vertices: number[] = [];
+  const indices: number[] = [];
+
+  for (let i = 0; i < n; i++) {
+    const prev = ring[(i - 1 + n) % n];
+    const curr = ring[i];
+    const next = ring[(i + 1) % n];
+
+    // Convert coords to 3D plane
+    const prevX = (prev[0] - THAILAND_CENTER_LNG) * GEO_SCALE;
+    const prevY = (prev[1] - THAILAND_CENTER_LAT) * GEO_SCALE;
+    const nextX = (next[0] - THAILAND_CENTER_LNG) * GEO_SCALE;
+    const nextY = (next[1] - THAILAND_CENTER_LAT) * GEO_SCALE;
+    const currX = (curr[0] - THAILAND_CENTER_LNG) * GEO_SCALE;
+    const currY = (curr[1] - THAILAND_CENTER_LAT) * GEO_SCALE;
+
+    // 2D tangent and perpendicular normal
+    const dx = nextX - prevX;
+    const dy = nextY - prevY;
+    const len = Math.hypot(dx, dy) || 1;
+    const nx = -dy / len;
+    const ny = dx / len;
+
+    // Left vertex
+    vertices.push(currX + nx * (width / 2), currY + ny * (width / 2), elevation);
+    // Right vertex
+    vertices.push(currX - nx * (width / 2), currY - ny * (width / 2), elevation);
+
+    if (i < n - 1) {
+      const idx = i * 2;
+      indices.push(idx, idx + 1, idx + 2);
+      indices.push(idx + 1, idx + 3, idx + 2);
+    }
+  }
+
+  const geom = new THREE.BufferGeometry();
+  geom.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  geom.setIndex(indices);
+  geom.computeVertexNormals();
+  return geom;
+}
+
+/**
  * Convert GeoJSON MultiPolygon into SVG Path string for 2D Fallback Map
  */
 export function multiPolygonToSvgPath(

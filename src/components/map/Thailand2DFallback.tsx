@@ -4,6 +4,7 @@ import { REGIONS } from '../../data/regions';
 import { REGION_COLORS, multiPolygonToSvgPath, lineStringToSvgPath } from '../../utils/geoUtils';
 import { PROVINCES_BY_CODE } from '../../data/provinces';
 import provincesGeoData from '../../data/thailand-provinces.json';
+import bordersGeoData from '../../data/thailand-province-borders.json';
 import riversGeoData from '../../data/thailand-rivers.json';
 import { getRiverTelemetry } from '../../data/riverStations';
 import { getDamLabelConfig, getShortDamName } from '../../utils/labelUtils';
@@ -88,6 +89,24 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
         cx,
         cy,
         isMajorCity: Boolean(provMeta?.isMajorCity),
+        pathD
+      };
+    });
+  }, []);
+
+  // Pre-project GeoJSON province borders for crisp vector demarcation
+  const projectedBorders = useMemo(() => {
+    return (bordersGeoData.features as any[]).map((feature) => {
+      const pathD = lineStringToSvgPath(
+        feature.geometry.coordinates as [number, number][],
+        SVG_WIDTH,
+        SVG_HEIGHT,
+        THAILAND_BOUNDS
+      );
+      return {
+        id: feature.id,
+        pro_code: feature.properties.pro_code,
+        region: feature.properties.region as RegionId,
         pathD
       };
     });
@@ -261,6 +280,55 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
               >
                 <title>{`${prov.name_th} (${prov.name_en}) - ${prov.region}`}</title>
               </path>
+            );
+          })}
+        </g>
+
+        {/* Crisp GeoJSON Province Boundaries Layer */}
+        <g id="geojson-province-borders" pointerEvents="none">
+          {projectedBorders.map((b) => {
+            const isProvSelected = selectedProvince === b.pro_code;
+            const isProvHovered = hoveredProvId === b.pro_code;
+            const isRegActive = selectedRegion === 'all' || selectedRegion === b.region;
+            const isSelectedReg = selectedRegion === b.region;
+
+            let strokeColor = theme === 'dark' ? '#0F172A' : '#FFFFFF';
+            let strokeW = 1.0;
+            let strokeOpacity = 0.8;
+
+            if (isProvSelected) {
+              strokeColor = theme === 'dark' ? '#38BDF8' : '#0284C7';
+              strokeW = 2.6;
+              strokeOpacity = 1.0;
+            } else if (isProvHovered) {
+              strokeColor = theme === 'dark' ? '#38BDF8' : '#0284C7';
+              strokeW = 2.0;
+              strokeOpacity = 1.0;
+            } else if (isSelectedReg) {
+              strokeColor = theme === 'dark' ? '#38BDF8' : '#FFFFFF';
+              strokeW = 1.5;
+              strokeOpacity = 0.95;
+            } else if (isRegActive) {
+              strokeColor = theme === 'dark' ? '#334155' : '#FFFFFF';
+              strokeW = 1.2;
+              strokeOpacity = 0.9;
+            } else {
+              strokeColor = theme === 'dark' ? '#1E293B' : '#CBD5E1';
+              strokeW = 0.8;
+              strokeOpacity = 0.35;
+            }
+
+            return (
+              <path
+                key={b.id}
+                d={b.pathD}
+                fill="none"
+                stroke={strokeColor}
+                strokeWidth={strokeW}
+                strokeOpacity={strokeOpacity}
+                strokeLinejoin="round"
+                strokeLinecap="round"
+              />
             );
           })}
         </g>
