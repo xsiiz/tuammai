@@ -4,6 +4,7 @@ import { REGIONS } from '../../data/regions';
 import { REGION_COLORS, multiPolygonToSvgPath, lineStringToSvgPath } from '../../utils/geoUtils';
 import provincesGeoData from '../../data/thailand-provinces.json';
 import riversGeoData from '../../data/thailand-rivers.json';
+import { getRiverTelemetry } from '../../data/riverStations';
 
 interface Thailand2DFallbackProps {
   lang: 'th' | 'en';
@@ -71,8 +72,11 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
     });
   }, []);
 
-  // Pre-project all rivers into SVG paths
+  // Pre-project all rivers into SVG paths with riverbank telemetry
   const projectedRivers = useMemo(() => {
+    const lngRange = THAILAND_BOUNDS.maxLng - THAILAND_BOUNDS.minLng;
+    const latRange = THAILAND_BOUNDS.maxLat - THAILAND_BOUNDS.minLat;
+
     return (riversGeoData.features as any[]).map((feature) => {
       const coords = feature.geometry.coordinates as [number, number][];
       const pathD = lineStringToSvgPath(
@@ -81,6 +85,22 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
         SVG_HEIGHT,
         THAILAND_BOUNDS
       );
+
+      // Midpoint coordinate for hover tooltip
+      const midCoord = coords[Math.floor(coords.length / 2)] || coords[0];
+      const midX = ((midCoord[0] - THAILAND_BOUNDS.minLng) / lngRange) * (SVG_WIDTH * 0.9) + SVG_WIDTH * 0.05;
+      const midY = ((THAILAND_BOUNDS.maxLat - midCoord[1]) / latRange) * (SVG_HEIGHT * 0.9) + SVG_HEIGHT * 0.05;
+
+      const connectedDamIds = feature.properties.connected_dams as string[];
+      const connectedDams = dams.filter((d) => connectedDamIds.includes(d.id));
+      const riverTelemetry = getRiverTelemetry(feature.id);
+      const avgWaterLevel = riverTelemetry
+        ? riverTelemetry.avg_bank_percent
+        : (connectedDams.length > 0
+          ? connectedDams.reduce((s, d) => s + (d.storage_percent || 0), 0) / connectedDams.length
+          : null);
+      const statusColor = riverTelemetry?.status_color || '#10B981';
+
       return {
         id: feature.id,
         name_th: feature.properties.name_th,
@@ -88,12 +108,16 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
         basin: feature.properties.basin,
         basin_th: feature.properties.basin_th,
         region: feature.properties.region as RegionId,
-        connected_dams: feature.properties.connected_dams as string[],
+        connected_dams: connectedDamIds,
         major: feature.properties.major as boolean,
+        avgWaterLevel,
+        statusColor,
+        midX,
+        midY,
         pathD
       };
     });
-  }, []);
+  }, [dams]);
 
   // Project dam coordinates to SVG (x, y)
   const projectedDams = useMemo(() => {
@@ -166,12 +190,10 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
             const isConnectedToSelectedDam = Boolean(
               selectedDam && river.connected_dams.includes(selectedDam.id)
             );
-            const isVisible =
-              selectedRegion === 'all'
-                ? river.major || isConnectedToSelectedDam
-                : river.region === selectedRegion || isConnectedToSelectedDam;
-
-            if (!isVisible) return null;
+            const isRegionActive =
+              selectedRegion === 'all' ||
+              river.region === selectedRegion ||
+              isConnectedToSelectedDam;
 
             const isHovered = hoveredRiverId === river.id;
 
@@ -179,17 +201,37 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
               ? '#0284C7'
               : isHovered
               ? '#06B6D4'
-              : theme === 'dark'
-              ? '#0EA5E9'
-              : '#0284C7';
+              : isRegionActive
+              ? (theme === 'dark' ? '#0EA5E9' : '#0284C7')
+              : (theme === 'dark' ? '#0369A1' : '#38BDF8');
 
             const strokeW = isConnectedToSelectedDam
               ? 3.8
               : isHovered
-              ? 3.0
-              : river.major
-              ? 2.2
-              : 1.4;
+              ? 3.2
+              : isRegionActive
+              ? (river.major ? 2.2 : 1.4)
+              : (river.major ? 1.6 : 1.0);
+
+            const riverOpacity = isConnectedToSelectedDam
+              ? 1
+              : isHovered
+              ? 1
+              : isRegionActive
+              ? 0.85
+              : 0.55;
+
+            // Alert status color according to Design.md
+            const statusColor =
+              river.avgWaterLevel === null
+                ? '#06B6D4'
+                : river.avgWaterLevel > 100 || river.avgWaterLevel < 30
+                ? '#EF4444'
+                : (river.avgWaterLevel >= 80 && river.avgWaterLevel <= 100) || (river.avgWaterLevel >= 30 && river.avgWaterLevel < 50)
+                ? '#F59E0B'
+                : '#10B981';
+
+            const tooltipText = `${lang === 'th' ? river.name_th : river.name_en} - ${lang === 'th' ? 'ระดับน้ำเฉลี่ย' : 'Avg Water Level'} ${river.avgWaterLevel !== null ? `${river.avgWaterLevel.toFixed(1)}%` : '-'}`;
 
             return (
               <g
@@ -206,7 +248,7 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
                   strokeWidth={strokeW + 1.6}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  opacity={0.7}
+                  opacity={isRegionActive ? 0.7 : 0.4}
                 />
 
                 {/* Flowing animated river path */}
@@ -217,11 +259,52 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
                   strokeWidth={strokeW}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className={isConnectedToSelectedDam ? 'river-flow-fast' : 'river-flow-animated'}
-                  opacity={isConnectedToSelectedDam ? 1 : 0.85}
+                  className={isConnectedToSelectedDam ? 'river-flow-fast' : isRegionActive ? 'river-flow-animated' : undefined}
+                  opacity={riverOpacity}
                 >
-                  <title>{`${river.name_th} (${river.name_en}) - ${river.basin_th}`}</title>
+                  <title>{tooltipText}</title>
                 </path>
+
+                {/* Floating tooltip on hover (River Name & Average Water Level) */}
+                {isHovered && (
+                  <g className="pointer-events-none animate-fadeIn select-none" transform={`translate(${river.midX}, ${river.midY - 14})`}>
+                    <rect
+                      x={-75}
+                      y={-12}
+                      width={150}
+                      height={24}
+                      rx={8}
+                      fill={theme === 'dark' ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)'}
+                      stroke={theme === 'dark' ? '#06B6D4' : '#0284C7'}
+                      strokeWidth={1.2}
+                      className="filter drop-shadow-xl"
+                    />
+                    <circle
+                      cx={-64}
+                      cy={0}
+                      r={3.5}
+                      fill={statusColor}
+                    />
+                    <text
+                      x={-54}
+                      y={4}
+                      fill={theme === 'dark' ? '#F8FAFC' : '#0F172A'}
+                      fontSize={9.5}
+                      fontWeight={700}
+                    >
+                      {lang === 'th' ? river.name_th : river.name_en}
+                    </text>
+                    <text
+                      x={26}
+                      y={4}
+                      fill={statusColor}
+                      fontSize={9.5}
+                      fontWeight={700}
+                    >
+                      {river.avgWaterLevel !== null ? `${river.avgWaterLevel.toFixed(1)}%` : '-'}
+                    </text>
+                  </g>
+                )}
               </g>
             );
           })}
