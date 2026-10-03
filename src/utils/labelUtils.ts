@@ -1,11 +1,11 @@
 import { DamTelemetry } from '../types/dam';
 
-export type LabelDirection = 'NW' | 'NE' | 'SE' | 'SW' | 'N' | 'S' | 'E' | 'W';
+export type LabelDirection = 'top' | 'bottom' | 'left' | 'right' | 'NW' | 'NE' | 'SE' | 'SW' | 'N' | 'S' | 'E' | 'W';
 
 export interface DamLabelConfig {
   dir: LabelDirection;
-  offset3D: [number, number, number];
   tailClass: string;
+  wrapperClass: string;
   offset2D: {
     dx: number;
     dy: number;
@@ -30,118 +30,98 @@ export function getShortDamName(nameTh: string, nameEn: string, lang: 'th' | 'en
  */
 export const DAM_DIRECTION_MAP: Record<string, LabelDirection> = {
   // Western Cluster (Kanchanaburi / Phetchaburi / Prachuap)
-  'dam-15': 'NW', // วชิราลงกรณ -> Top-Left
-  'dam-14': 'SE', // ศรีนครินทร์ -> Bottom-Right
-  'dam-55': 'SW', // ท่าทุ่งนา -> Bottom-Left
-  'dam-13': 'SW', // แก่งกระจาน -> Bottom-Left
-  'dam-16': 'SE', // ปราณบุรี -> Bottom-Right
+  'dam-15': 'left',   // วชิราลงกรณ -> Left
+  'dam-14': 'right',  // ศรีนครินทร์ -> Right
+  'dam-55': 'bottom', // ท่าทุ่งนา -> Bottom
+  'dam-13': 'left',   // แก่งกระจาน -> Left
+  'dam-16': 'right',  // ปราณบุรี -> Right
 
   // Northern Cluster
-  'dam-1': 'NW',  // ภูมิพล -> Top-Left
-  'dam-12': 'NE', // สิริกิติ์ -> Top-Right
-  'dam-36': 'SE', // แควน้อยบำรุงแดน -> Bottom-Right
-  'dam-230': 'SW',// แม่มอก -> Bottom-Left
-  'dam-23': 'NW', // แม่งัดสมบูรณ์ชล -> Top-Left
-  'dam-38': 'SE', // แม่กวงอุดมธารา -> Bottom-Right
-  'dam-35': 'NE', // กิ่วคอหมา -> Top-Right
-  'dam-34': 'SW', // กิ่วลม -> Bottom-Left
+  'dam-1': 'top',     // ภูมิพล -> Top
+  'dam-12': 'top',    // สิริกิติ์ -> Top
+  'dam-36': 'right',  // แควน้อยบำรุงแดน -> Right
+  'dam-230': 'left',  // แม่มอก -> Left
+  'dam-23': 'left',   // แม่งัดสมบูรณ์ชล -> Left
+  'dam-38': 'right',  // แม่กวงอุดมธารา -> Right
+  'dam-35': 'top',    // กิ่วคอหมา -> Top
+  'dam-34': 'bottom', // กิ่วลม -> Bottom
 
   // Central Cluster
-  'dam-11': 'N',  // ป่าสักชลสิทธิ์ -> Top
-  'dam-17': 'W',  // กระเสียว -> Left
-  'dam-18': 'NW', // ทับเสลา -> Top-Left
+  'dam-11': 'right',  // ป่าสักชลสิทธิ์ -> Right
+  'dam-17': 'left',   // กระเสียว -> Left
+  'dam-18': 'top',    // ทับเสลา -> Top
 
   // Eastern Cluster
-  'dam-32': 'SE', // ขุนด่านปราการชล -> Bottom-Right
-  'dam-19': 'NW', // บางพระ -> Top-Left
-  'dam-30': 'NE', // คลองสียัด -> Top-Right
-  'dam-24': 'SW', // หนองปลาไหล -> Bottom-Left
-  'dam-33': 'SE', // ประแสร์ -> Bottom-Right
-  'dam-37': 'NE', // นฤบดินทรจินดา -> Top-Right
+  'dam-32': 'bottom', // ขุนด่านปราการชล -> Bottom
+  'dam-19': 'left',   // บางพระ -> Left
+  'dam-30': 'right',  // คลองสียัด -> Right
+  'dam-24': 'left',   // หนองปลาไหล -> Left
+  'dam-33': 'right',  // ประแสร์ -> Right
+  'dam-37': 'top',    // นฤบดินทรจินดา -> Top
 
   // Northeastern (Isan) Cluster
-  'dam-2': 'NW',  // อุบลรัตน์ -> Top-Left
-  'dam-39': 'SE', // ลำปาว -> Bottom-Right
-  'dam-4': 'NW',  // จุฬาภรณ์ -> Top-Left
-  'dam-47': 'SE', // ห้วยกุ่ม -> Bottom-Right
-  'dam-40': 'NW', // ลำตะคอง -> Top-Left
-  'dam-41': 'SW', // ลำพระเพลิง -> Bottom-Left
-  'dam-7': 'NE',  // มูลบน -> Top-Right
-  'dam-9': 'SE',  // ลำแชะ -> Bottom-Right
-  'dam-6': 'NE',  // ลำนางรอง -> Top-Right
-  'dam-5': 'N',   // ห้วยหลวง -> Top
-  'dam-42': 'NW', // น้ำอูน -> Top-Left
-  'dam-8': 'SE',  // น้ำพุง -> Bottom-Right
-  'dam-3': 'NE',  // สิรินธร -> Top-Right
+  'dam-2': 'top',     // อุบลรัตน์ -> Top
+  'dam-39': 'right',  // ลำปาว -> Right
+  'dam-4': 'left',    // จุฬาภรณ์ -> Left
+  'dam-47': 'bottom', // ห้วยกุ่ม -> Bottom
+  'dam-40': 'left',   // ลำตะคอง -> Left
+  'dam-41': 'bottom', // ลำพระเพลิง -> Bottom
+  'dam-7': 'top',     // มูลบน -> Top
+  'dam-9': 'bottom',  // ลำแชะ -> Bottom
+  'dam-6': 'right',   // ลำนางรอง -> Right
+  'dam-5': 'top',     // ห้วยหลวง -> Top
+  'dam-42': 'left',   // น้ำอูน -> Left
+  'dam-8': 'bottom',  // น้ำพุง -> Bottom
+  'dam-3': 'left',    // สิรินธร -> Left (keeps within Thailand!)
 
   // Southern Cluster
-  'dam-25': 'NW', // รัชชประภา -> Top-Left
-  'dam-26': 'NE'  // บางลาง -> Top-Right
+  'dam-25': 'right',  // รัชชประภา -> Right (into Surat Thani/Gulf)
+  'dam-26': 'right'   // บางลาง -> Right
 };
 
 /**
  * Get positioning and visual offsets for a specific dam
  */
 export function getDamLabelConfig(damId: string): DamLabelConfig {
-  const dir = DAM_DIRECTION_MAP[damId] || 'NE';
+  const dir = DAM_DIRECTION_MAP[damId] || 'top';
 
   switch (dir) {
+    case 'left':
+    case 'W':
     case 'NW':
-      return {
-        dir: 'NW',
-        offset3D: [-0.22, 0.13, 0.22],
-        tailClass: 'right-3 -bottom-1 border-r border-b rotate-45',
-        offset2D: { dx: -12, dy: -12, align: 'end' }
-      };
-    case 'NE':
-      return {
-        dir: 'NE',
-        offset3D: [0.22, 0.13, 0.22],
-        tailClass: 'left-3 -bottom-1 border-l border-b -rotate-45',
-        offset2D: { dx: 12, dy: -12, align: 'start' }
-      };
-    case 'SE':
-      return {
-        dir: 'SE',
-        offset3D: [0.22, -0.13, 0.22],
-        tailClass: 'left-3 -top-1 border-l border-t rotate-45',
-        offset2D: { dx: 12, dy: 14, align: 'start' }
-      };
     case 'SW':
       return {
-        dir: 'SW',
-        offset3D: [-0.22, -0.13, 0.22],
-        tailClass: 'right-3 -top-1 border-r border-t -rotate-45',
-        offset2D: { dx: -12, dy: 14, align: 'end' }
+        dir: 'left',
+        wrapperClass: 'right-[9px] top-1/2 -translate-y-1/2',
+        tailClass: '-right-1 top-1/2 -translate-y-1/2 border-r border-t rotate-45',
+        offset2D: { dx: -12, dy: 0, align: 'end' }
       };
-    case 'N':
+    case 'right':
+    case 'E':
+    case 'NE':
+    case 'SE':
       return {
-        dir: 'N',
-        offset3D: [0.0, 0.19, 0.22],
-        tailClass: 'left-1/2 -translate-x-1/2 -bottom-1 border-r border-b rotate-45',
-        offset2D: { dx: 0, dy: -20, align: 'middle' }
+        dir: 'right',
+        wrapperClass: 'left-[9px] top-1/2 -translate-y-1/2',
+        tailClass: '-left-1 top-1/2 -translate-y-1/2 border-l border-b rotate-45',
+        offset2D: { dx: 12, dy: 0, align: 'start' }
       };
+    case 'bottom':
     case 'S':
       return {
-        dir: 'S',
-        offset3D: [0.0, -0.19, 0.22],
-        tailClass: 'left-1/2 -translate-x-1/2 -top-1 border-l border-t rotate-45',
-        offset2D: { dx: 0, dy: 22, align: 'middle' }
+        dir: 'bottom',
+        wrapperClass: 'top-[7px] left-1/2 -translate-x-1/2',
+        tailClass: '-top-1 left-1/2 -translate-x-1/2 border-l border-t rotate-45',
+        offset2D: { dx: 0, dy: 14, align: 'middle' }
       };
-    case 'W':
-      return {
-        dir: 'W',
-        offset3D: [-0.25, 0.0, 0.22],
-        tailClass: '-right-1 top-1/2 -translate-y-1/2 border-r border-t rotate-45',
-        offset2D: { dx: -14, dy: 0, align: 'end' }
-      };
-    case 'E':
+    case 'top':
+    case 'N':
     default:
       return {
-        dir: 'E',
-        offset3D: [0.25, 0.0, 0.22],
-        tailClass: '-left-1 top-1/2 -translate-y-1/2 border-l border-b rotate-45',
-        offset2D: { dx: 14, dy: 0, align: 'start' }
+        dir: 'top',
+        wrapperClass: 'bottom-[7px] left-1/2 -translate-x-1/2',
+        tailClass: '-bottom-1 left-1/2 -translate-x-1/2 border-r border-b rotate-45',
+        offset2D: { dx: 0, dy: -14, align: 'middle' }
       };
   }
 }

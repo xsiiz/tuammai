@@ -204,6 +204,34 @@ const DamMarker3D: React.FC<{
 }> = React.memo(({ dam, selectedRegion, isSelected, onSelectDam, lang, theme = 'light' }) => {
   const [hovered, setHovered] = useState(false);
   const ringRef = useRef<THREE.Mesh>(null);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handlePointerEnter = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setHovered(true);
+    document.body.style.cursor = 'pointer';
+  };
+
+  const handlePointerLeave = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setHovered(false);
+      document.body.style.cursor = 'auto';
+    }, 180);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const isTop10 = Boolean(dam.national_rank && dam.national_rank <= 10);
   const isMajor = Boolean(isTop10 || (dam.region === 'east' && dam.national_rank === 14));
@@ -232,23 +260,6 @@ const DamMarker3D: React.FC<{
   const shortName = useMemo(() => getShortDamName(dam.name_th, dam.name_en, lang), [dam.name_th, dam.name_en, lang]);
   const fullName = lang === 'th' ? dam.name_th : dam.name_en;
 
-  // Subtle 3D leader line connecting pin top to floating label
-  const leaderLine = useMemo(() => {
-    const p1 = new THREE.Vector3(0, 0, isSmallDam ? 0.03 : 0.18);
-    const p2 = new THREE.Vector3(
-      labelConfig.offset3D[0] * 0.75,
-      labelConfig.offset3D[1] * 0.75,
-      labelConfig.offset3D[2] * 0.90
-    );
-    const geom = new THREE.BufferGeometry().setFromPoints([p1, p2]);
-    const mat = new THREE.LineBasicMaterial({
-      color: dam.status_color,
-      transparent: true,
-      opacity: hovered || isSelected ? 0.85 : 0.35
-    });
-    return new THREE.Line(geom, mat);
-  }, [labelConfig, isSmallDam, dam.status_color, hovered, isSelected]);
-
   if (!isVisible) return null;
 
   // Label visibility:
@@ -258,130 +269,71 @@ const DamMarker3D: React.FC<{
 
   return (
     <group position={[x, y, baseZ]}>
-      {/* 3D Pin Geometry */}
-      {isSmallDam ? (
-        // Small dam tactile dot
-        <>
-          {/* Hit Sphere */}
-          <mesh
-            onPointerOver={(e) => {
-              e.stopPropagation();
-              setHovered(true);
-              document.body.style.cursor = 'pointer';
-            }}
-            onPointerOut={(e) => {
-              e.stopPropagation();
-              setHovered(false);
-              document.body.style.cursor = 'auto';
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              onSelectDam(dam);
-            }}
-          >
-            <sphereGeometry args={[0.09, 12, 12]} />
-            <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-          </mesh>
+      {/* 2D Flat Dam Beacon Geometry */}
+      {/* Hit Disc */}
+      <mesh
+        position={[0, 0, 0.03]}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          handlePointerEnter();
+        }}
+        onPointerOut={(e) => {
+          e.stopPropagation();
+          handlePointerLeave();
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onSelectDam(dam);
+        }}
+      >
+        <circleGeometry args={[isMajor ? 0.09 : 0.07, 16]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} side={THREE.DoubleSide} />
+      </mesh>
 
-          {/* Outer glowing halo ring */}
-          <mesh ref={ringRef} position={[0, 0, 0.005]}>
-            <ringGeometry args={[0.035, 0.055, 20]} />
-            <meshBasicMaterial
-              color={dam.status_color}
-              transparent
-              opacity={hovered || isSelected ? 0.85 : (dam.status === 'critical' ? 0.6 : 0.3)}
-            />
-          </mesh>
+      {/* Outer Pulsing Halo Wave */}
+      <mesh ref={ringRef} position={[0, 0, 0.006]}>
+        <ringGeometry args={[isMajor ? 0.045 : 0.035, isMajor ? 0.075 : 0.055, 24]} />
+        <meshBasicMaterial
+          color={dam.status_color}
+          transparent
+          opacity={hovered || isSelected ? 0.85 : (dam.status === 'critical' ? 0.65 : 0.35)}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
 
-          {/* 3D Dot Core */}
-          <mesh position={[0, 0, 0.02]} scale={isSelected || hovered ? 1.45 : 1.0}>
-            <sphereGeometry args={[0.032, 16, 16]} />
-            <meshStandardMaterial
-              color={dam.status_color}
-              emissive={dam.status_color}
-              emissiveIntensity={hovered || isSelected ? 0.9 : (dam.status === 'critical' ? 0.65 : 0.3)}
-              roughness={0.25}
-              metalness={0.1}
-            />
-          </mesh>
-        </>
-      ) : (
-        // Major dam pin
-        <>
-          {/* Pulse ground ring */}
-          <mesh ref={ringRef} position={[0, 0, -0.05]}>
-            <ringGeometry args={[0.04, 0.08, 16]} />
-            <meshBasicMaterial
-              color={dam.status_color}
-              transparent
-              opacity={dam.status === 'critical' ? 0.8 : 0.4}
-            />
-          </mesh>
+      {/* Outer Contrast Rim */}
+      <mesh position={[0, 0, 0.012]}>
+        <circleGeometry args={[isMajor ? 0.045 : 0.034, 24]} />
+        <meshBasicMaterial
+          color={theme === 'dark' ? '#0F172A' : '#FFFFFF'}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
 
-          {/* Pin Stem */}
-          <mesh
-            position={[0, 0, 0.08]}
-            rotation={[Math.PI / 2, 0, 0]}
-            onPointerOver={(e) => {
-              e.stopPropagation();
-              setHovered(true);
-              document.body.style.cursor = 'pointer';
-            }}
-            onPointerOut={(e) => {
-              e.stopPropagation();
-              setHovered(false);
-              document.body.style.cursor = 'auto';
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              onSelectDam(dam);
-            }}
-          >
-            <cylinderGeometry args={[0.015, 0.01, 0.16, 8]} />
-            <meshStandardMaterial
-              color={theme === 'dark' ? '#E2E8F0' : '#64748B'}
-              metalness={0.8}
-              roughness={0.2}
-            />
-          </mesh>
+      {/* Status Color Disc */}
+      <mesh position={[0, 0, 0.018]} scale={hovered || isSelected ? 1.25 : 1.0}>
+        <circleGeometry args={[isMajor ? 0.036 : 0.026, 24]} />
+        <meshBasicMaterial
+          color={dam.status_color}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
 
-          {/* Pin Head Sphere */}
-          <mesh
-            position={[0, 0, 0.18]}
-            scale={isSelected || hovered ? 1.4 : 1.0}
-            onPointerOver={(e) => {
-              e.stopPropagation();
-              setHovered(true);
-              document.body.style.cursor = 'pointer';
-            }}
-            onPointerOut={(e) => {
-              e.stopPropagation();
-              setHovered(false);
-              document.body.style.cursor = 'auto';
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              onSelectDam(dam);
-            }}
-          >
-            <sphereGeometry args={[0.05, 16, 16]} />
-            <meshStandardMaterial
-              color={dam.status_color}
-              emissive={dam.status_color}
-              emissiveIntensity={dam.status === 'critical' ? 0.7 : 0.3}
-              roughness={0.3}
-            />
-          </mesh>
-        </>
+      {/* Inner Bullseye Center Dot for Major Dams */}
+      {isMajor && (
+        <mesh position={[0, 0, 0.024]}>
+          <circleGeometry args={[0.012, 16]} />
+          <meshBasicMaterial
+            color="#FFFFFF"
+            side={THREE.DoubleSide}
+          />
+        </mesh>
       )}
 
-      {/* 3D Connector Leader Line when label is displayed */}
-      {showLabel && <primitive object={leaderLine} />}
-
-      {/* Floating Anti-Collision Label */}
+      {/* Floating Anti-Collision Label (Anchored directly to pin, never drifts) */}
       {showLabel && (
         <Html
-          position={labelConfig.offset3D}
+          position={[0, 0, 0.03]}
           center
           distanceFactor={8.5}
           style={{
@@ -390,9 +342,9 @@ const DamMarker3D: React.FC<{
           }}
         >
           <div
-            className="relative select-none pointer-events-auto transition-transform duration-200 ease-out"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+            className={`absolute select-none pointer-events-auto transition-transform duration-200 ease-out ${labelConfig.wrapperClass}`}
+            onMouseEnter={handlePointerEnter}
+            onMouseLeave={handlePointerLeave}
             onClick={(e) => {
               e.stopPropagation();
               onSelectDam(dam);
