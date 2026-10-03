@@ -9,6 +9,7 @@ import provincesGeoData from '../../data/thailand-provinces.json';
 import riversGeoData from '../../data/thailand-rivers.json';
 import { RiverMesh3D } from './RiverMesh3D';
 import { RiverFeature } from '../../types/river';
+import { getDamLabelConfig, getShortDamName } from '../../utils/labelUtils';
 
 interface Thailand3DMapProps {
   lang: 'th' | 'en';
@@ -229,202 +230,273 @@ const DamMarker3D: React.FC<{
     }
   });
 
+  const labelConfig = useMemo(() => getDamLabelConfig(dam.id), [dam.id]);
+  const shortName = useMemo(() => getShortDamName(dam.name_th, dam.name_en, lang), [dam.name_th, dam.name_en, lang]);
+  const fullName = lang === 'th' ? dam.name_th : dam.name_en;
+
+  // Subtle 3D leader line connecting pin top to floating label
+  const leaderLine = useMemo(() => {
+    const p1 = new THREE.Vector3(0, 0, isSmallDam ? 0.03 : 0.18);
+    const p2 = new THREE.Vector3(
+      labelConfig.offset3D[0] * 0.75,
+      labelConfig.offset3D[1] * 0.75,
+      labelConfig.offset3D[2] * 0.90
+    );
+    const geom = new THREE.BufferGeometry().setFromPoints([p1, p2]);
+    const mat = new THREE.LineBasicMaterial({
+      color: dam.status_color,
+      transparent: true,
+      opacity: hovered || isSelected ? 0.85 : 0.35
+    });
+    return new THREE.Line(geom, mat);
+  }, [labelConfig, isSmallDam, dam.status_color, hovered, isSelected]);
+
   if (!isVisible) return null;
 
-  // 1) Small Dam (เขื่อนเล็ก): Render as a sleek tactile 3D dot
-  if (isSmallDam) {
-    return (
-      <group position={[x, y, baseZ]}>
-        {/* Invisible hit sphere for effortless hover & click */}
-        <mesh
-          onPointerOver={(e) => {
-            e.stopPropagation();
-            setHovered(true);
-            document.body.style.cursor = 'pointer';
-          }}
-          onPointerOut={(e) => {
-            e.stopPropagation();
-            setHovered(false);
-            document.body.style.cursor = 'auto';
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-            onSelectDam(dam);
-          }}
-        >
-          <sphereGeometry args={[0.09, 12, 12]} />
-          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-        </mesh>
+  // Label visibility:
+  // - Major dam: always display compact pill, expand on hover/select
+  // - Small dam: display only when hovered or selected
+  const showLabel = isMajor || hovered || isSelected;
 
-        {/* Outer glowing halo ring */}
-        <mesh ref={ringRef} position={[0, 0, 0.005]}>
-          <ringGeometry args={[0.035, 0.055, 20]} />
-          <meshBasicMaterial
-            color={dam.status_color}
-            transparent
-            opacity={hovered || isSelected ? 0.85 : (dam.status === 'critical' ? 0.6 : 0.3)}
-          />
-        </mesh>
-
-        {/* 3D Dot Core */}
-        <mesh
-          position={[0, 0, 0.02]}
-          scale={isSelected || hovered ? 1.45 : 1.0}
-        >
-          <sphereGeometry args={[0.032, 16, 16]} />
-          <meshStandardMaterial
-            color={dam.status_color}
-            emissive={dam.status_color}
-            emissiveIntensity={hovered || isSelected ? 0.9 : (dam.status === 'critical' ? 0.65 : 0.3)}
-            roughness={0.25}
-            metalness={0.1}
-          />
-        </mesh>
-
-        {/* Floating Tooltip ONLY on Hover or Selection */}
-        {(hovered || isSelected) && (
-          <Html
-            position={[0, 0.06, 0.06]}
-            center
-            distanceFactor={8.5}
-            style={{ pointerEvents: 'none' }}
+  return (
+    <group position={[x, y, baseZ]}>
+      {/* 3D Pin Geometry */}
+      {isSmallDam ? (
+        // Small dam tactile dot
+        <>
+          {/* Hit Sphere */}
+          <mesh
+            onPointerOver={(e) => {
+              e.stopPropagation();
+              setHovered(true);
+              document.body.style.cursor = 'pointer';
+            }}
+            onPointerOut={(e) => {
+              e.stopPropagation();
+              setHovered(false);
+              document.body.style.cursor = 'auto';
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectDam(dam);
+            }}
           >
-            <div className="flex flex-col items-center animate-fadeIn select-none pointer-events-none">
-              <div 
-                className={`px-2 py-1 rounded-lg text-[10px] font-bold whitespace-nowrap shadow-xl border flex items-center gap-1.5 backdrop-blur-md ${
+            <sphereGeometry args={[0.09, 12, 12]} />
+            <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+          </mesh>
+
+          {/* Outer glowing halo ring */}
+          <mesh ref={ringRef} position={[0, 0, 0.005]}>
+            <ringGeometry args={[0.035, 0.055, 20]} />
+            <meshBasicMaterial
+              color={dam.status_color}
+              transparent
+              opacity={hovered || isSelected ? 0.85 : (dam.status === 'critical' ? 0.6 : 0.3)}
+            />
+          </mesh>
+
+          {/* 3D Dot Core */}
+          <mesh position={[0, 0, 0.02]} scale={isSelected || hovered ? 1.45 : 1.0}>
+            <sphereGeometry args={[0.032, 16, 16]} />
+            <meshStandardMaterial
+              color={dam.status_color}
+              emissive={dam.status_color}
+              emissiveIntensity={hovered || isSelected ? 0.9 : (dam.status === 'critical' ? 0.65 : 0.3)}
+              roughness={0.25}
+              metalness={0.1}
+            />
+          </mesh>
+        </>
+      ) : (
+        // Major dam pin
+        <>
+          {/* Pulse ground ring */}
+          <mesh ref={ringRef} position={[0, 0, -0.05]}>
+            <ringGeometry args={[0.04, 0.08, 16]} />
+            <meshBasicMaterial
+              color={dam.status_color}
+              transparent
+              opacity={dam.status === 'critical' ? 0.8 : 0.4}
+            />
+          </mesh>
+
+          {/* Pin Stem */}
+          <mesh
+            position={[0, 0, 0.08]}
+            rotation={[Math.PI / 2, 0, 0]}
+            onPointerOver={(e) => {
+              e.stopPropagation();
+              setHovered(true);
+              document.body.style.cursor = 'pointer';
+            }}
+            onPointerOut={(e) => {
+              e.stopPropagation();
+              setHovered(false);
+              document.body.style.cursor = 'auto';
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectDam(dam);
+            }}
+          >
+            <cylinderGeometry args={[0.015, 0.01, 0.16, 8]} />
+            <meshStandardMaterial
+              color={theme === 'dark' ? '#E2E8F0' : '#64748B'}
+              metalness={0.8}
+              roughness={0.2}
+            />
+          </mesh>
+
+          {/* Pin Head Sphere */}
+          <mesh
+            position={[0, 0, 0.18]}
+            scale={isSelected || hovered ? 1.4 : 1.0}
+            onPointerOver={(e) => {
+              e.stopPropagation();
+              setHovered(true);
+              document.body.style.cursor = 'pointer';
+            }}
+            onPointerOut={(e) => {
+              e.stopPropagation();
+              setHovered(false);
+              document.body.style.cursor = 'auto';
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectDam(dam);
+            }}
+          >
+            <sphereGeometry args={[0.05, 16, 16]} />
+            <meshStandardMaterial
+              color={dam.status_color}
+              emissive={dam.status_color}
+              emissiveIntensity={dam.status === 'critical' ? 0.7 : 0.3}
+              roughness={0.3}
+            />
+          </mesh>
+        </>
+      )}
+
+      {/* 3D Connector Leader Line when label is displayed */}
+      {showLabel && <primitive object={leaderLine} />}
+
+      {/* Floating Anti-Collision Label */}
+      {showLabel && (
+        <Html
+          position={labelConfig.offset3D}
+          center
+          distanceFactor={8.5}
+          style={{
+            zIndex: isSelected ? 60 : (hovered ? 50 : 10),
+            pointerEvents: 'none'
+          }}
+        >
+          <div
+            className="relative select-none pointer-events-auto transition-transform duration-200 ease-out"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectDam(dam);
+            }}
+          >
+            {/* Visual Caret Tail pointing towards pin */}
+            <div
+              className={`absolute w-2 h-2 ${labelConfig.tailClass} ${
+                theme === 'dark'
+                  ? 'bg-slate-900 border-slate-700/80'
+                  : 'bg-white border-slate-200'
+              }`}
+              style={{
+                borderColor: hovered || isSelected ? `${dam.status_color}90` : undefined
+              }}
+            />
+
+            {/* EXPANDED HOVER / SELECTED STATE */}
+            {(hovered || isSelected) ? (
+              <div
+                className={`relative px-3 py-2 rounded-xl shadow-2xl border backdrop-blur-md cursor-pointer transition-all duration-200 flex flex-col gap-1 min-w-[170px] max-w-[220px] ${
+                  theme === 'dark' ? 'bg-slate-900/95 text-slate-100' : 'bg-white/95 text-slate-800'
+                }`}
+                style={{
+                  borderColor: dam.status_color,
+                  boxShadow: `0 10px 25px -5px ${dam.status_color}30, 0 8px 10px -6px rgba(0,0,0,0.2)`
+                }}
+              >
+                {/* Header row: rank + full name + status */}
+                <div className="flex items-center justify-between gap-1.5 border-b pb-1 border-slate-200/60 dark:border-slate-800/80">
+                  <div className="flex items-center gap-1.5 truncate">
+                    {dam.national_rank && dam.national_rank <= 10 && (
+                      <span className="font-mono text-[9px] px-1 py-0.2 rounded font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400 shrink-0">
+                        #{dam.national_rank}
+                      </span>
+                    )}
+                    <span className="text-[11px] font-bold truncate leading-tight">
+                      {fullName}
+                    </span>
+                  </div>
+                  <span
+                    className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded shrink-0"
+                    style={{ backgroundColor: `${dam.status_color}25`, color: dam.status_color }}
+                  >
+                    {dam.storage_percent.toFixed(0)}%
+                  </span>
+                </div>
+
+                {/* Storage volume progress */}
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex justify-between text-[9px] text-slate-500 dark:text-slate-400 font-mono">
+                    <span>{dam.storage_mcm.toLocaleString()} MCM</span>
+                    <span>{dam.capacity_mcm ? dam.capacity_mcm.toLocaleString() : '-'} MCM</span>
+                  </div>
+                  <div className="w-full h-1 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all duration-300"
+                      style={{
+                        width: `${Math.min(dam.storage_percent, 100)}%`,
+                        backgroundColor: dam.status_color
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Status and Action Tip */}
+                <div className="flex items-center justify-between pt-0.5 text-[9px]">
+                  <span className="flex items-center gap-1 font-medium" style={{ color: dam.status_color }}>
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dam.status_color }} />
+                    {lang === 'th' ? dam.status_label_th : dam.status_label_en}
+                  </span>
+                  <span className="text-slate-400 dark:text-slate-500 text-[8.5px]">
+                    {lang === 'th' ? 'คลิกดูข้อมูล ↗' : 'Details ↗'}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              /* COMPACT PILL (Normal Unhovered State) */
+              <div
+                className={`relative px-2 py-1 rounded-lg text-[10px] font-bold whitespace-nowrap shadow-lg border flex items-center gap-1.5 backdrop-blur-md cursor-pointer transition-all duration-150 hover:scale-105 ${
                   theme === 'dark' ? 'text-white' : 'text-slate-900'
                 }`}
                 style={{
-                  backgroundColor: theme === 'dark' ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-                  borderColor: `${dam.status_color}90`
+                  backgroundColor: theme === 'dark' ? 'rgba(15, 23, 42, 0.90)' : 'rgba(255, 255, 255, 0.92)',
+                  borderColor: `${dam.status_color}70`
                 }}
               >
-                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dam.status_color }} />
-                <span>{lang === 'th' ? dam.name_th : dam.name_en}</span>
+                {isTop10 && selectedRegion === 'all' && (
+                  <span className="font-mono text-[9px] px-1 py-0.2 rounded font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400">
+                    #{dam.national_rank}
+                  </span>
+                )}
+                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: dam.status_color }} />
+                <span className="tracking-tight">{shortName}</span>
                 <span
-                  className="font-mono text-[9px] px-1 py-0.2 rounded font-bold"
+                  className="font-mono text-[9px] px-1 py-0.2 rounded font-bold ml-0.5"
                   style={{ backgroundColor: `${dam.status_color}25`, color: dam.status_color }}
                 >
                   {dam.storage_percent.toFixed(0)}%
                 </span>
               </div>
-              <div 
-                className={`w-1.5 h-1.5 rotate-45 -mt-0.8 border-r border-b ${
-                  theme === 'dark' ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-300'
-                }`}
-              />
-            </div>
-          </Html>
-        )}
-      </group>
-    );
-  }
-
-  // 2) Major Dam (เขื่อนหลัก): 3D Pin with Stem, Head, and Floating Tag
-  return (
-    <group position={[x, y, baseZ]}>
-      {/* Pulse ground ring */}
-      <mesh ref={ringRef} position={[0, 0, -0.05]} rotation={[0, 0, 0]}>
-        <ringGeometry args={[0.04, 0.08, 16]} />
-        <meshBasicMaterial
-          color={dam.status_color}
-          transparent
-          opacity={dam.status === 'critical' ? 0.8 : 0.4}
-        />
-      </mesh>
-
-      {/* Pin Stem */}
-      <mesh
-        position={[0, 0, 0.08]}
-        rotation={[Math.PI / 2, 0, 0]}
-        onPointerOver={(e) => {
-          e.stopPropagation();
-          setHovered(true);
-          document.body.style.cursor = 'pointer';
-        }}
-        onPointerOut={(e) => {
-          e.stopPropagation();
-          setHovered(false);
-          document.body.style.cursor = 'auto';
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-          onSelectDam(dam);
-        }}
-      >
-        <cylinderGeometry args={[0.015, 0.01, 0.16, 8]} />
-        <meshStandardMaterial
-          color={theme === 'dark' ? '#E2E8F0' : '#64748B'}
-          metalness={0.8}
-          roughness={0.2}
-        />
-      </mesh>
-
-      {/* Pin Head Sphere */}
-      <mesh
-        position={[0, 0, 0.18]}
-        scale={isSelected || hovered ? 1.4 : 1.0}
-        onPointerOver={(e) => {
-          e.stopPropagation();
-          setHovered(true);
-          document.body.style.cursor = 'pointer';
-        }}
-        onPointerOut={(e) => {
-          e.stopPropagation();
-          setHovered(false);
-          document.body.style.cursor = 'auto';
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-          onSelectDam(dam);
-        }}
-      >
-        <sphereGeometry args={[0.05, 16, 16]} />
-        <meshStandardMaterial
-          color={dam.status_color}
-          emissive={dam.status_color}
-          emissiveIntensity={dam.status === 'critical' ? 0.7 : 0.3}
-          roughness={0.3}
-        />
-      </mesh>
-
-      {/* Hover / Active Floating Tag */}
-      {(hovered || isSelected || selectedRegion !== 'all' || isTop10) && (
-        <Html
-          position={[0, 0.1, 0.22]}
-          center
-          distanceFactor={9}
-          style={{ pointerEvents: 'none' }}
-        >
-          <div className="flex flex-col items-center animate-fadeIn select-none">
-            <div 
-              className={`px-2 py-1 rounded-lg text-[10px] font-bold whitespace-nowrap shadow-xl border flex items-center gap-1 backdrop-blur-md ${
-                theme === 'dark' ? 'text-white' : 'text-slate-900'
-              }`}
-              style={{
-                backgroundColor: theme === 'dark' ? 'rgba(15, 23, 42, 0.92)' : 'rgba(255, 255, 255, 0.95)',
-                borderColor: `${dam.status_color}80`
-              }}
-            >
-              {dam.national_rank && dam.national_rank <= 10 && (
-                <span className="font-mono text-[9px] px-1 py-0.2 rounded font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400">
-                  #{dam.national_rank}
-                </span>
-              )}
-              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dam.status_color }} />
-              <span>{lang === 'th' ? dam.name_th : dam.name_en}</span>
-              <span
-                className="font-mono text-[9px] px-1 py-0.2 rounded"
-                style={{ backgroundColor: `${dam.status_color}25`, color: dam.status_color }}
-              >
-                {dam.storage_percent.toFixed(0)}%
-              </span>
-            </div>
-            <div 
-              className={`w-1 h-1 rotate-45 -mt-0.5 border-r border-b ${
-                theme === 'dark' ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-300'
-              }`}
-            />
+            )}
           </div>
         </Html>
       )}

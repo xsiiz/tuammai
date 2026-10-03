@@ -27,7 +27,15 @@ Once the coding task is complete:
    > *"ต้องการให้ Commit โค้ดชุดนี้ด้วยข้อความนี้เลยหรือไม่?"*
 5. Wait for user confirmation before executing the commit command.
 
-## 4. COMMIT MESSAGE CONVENTIONS
+## 4. PRE-MERGE TO MASTER CONFIRMATION (MANDATORY)
+ห้ามทำการ Merge โค้ดจาก dev branch เข้าสู่ `master` โดยพลการเด็ดขาด:
+1. ต้องทำการทดสอบและตรวจสอบความเรียบร้อยของโค้ดใน dev branch ให้เสร็จสิ้น
+2. รายงานสรุปรายการเปลี่ยนแปลงและฟังก์ชันที่จะรวมเข้าสู่ `master` ให้ผู้ใช้ทราบ
+3. ถามขออนุมัติจากผู้ใช้ก่อนเสมอ:
+   > *"ยืนยันการ Merge สาขา `<branch-name>` เข้าสู่ `master` หรือไม่?"*
+4. ดำเนินการ Merge ได้ก็ต่อเมื่อได้รับคำยืนยันที่ชัดเจนจากผู้ใช้เท่านั้น
+
+## 5. COMMIT MESSAGE CONVENTIONS
 Format all commit messages strictly using section headers and bilingual bullet points (Thai description followed by English summary in square brackets `[...]`):
 
 ```text
@@ -36,3 +44,4 @@ Format all commit messages strictly using section headers and bilingual bullet p
 
 -- FIX --
 - <สิ่งที่แก้ไข/บั๊กที่แก้เป็นภาษาไทย> [<short English description>]
+```
