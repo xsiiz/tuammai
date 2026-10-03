@@ -5,6 +5,7 @@ import { REGION_COLORS, multiPolygonToSvgPath, lineStringToSvgPath } from '../..
 import provincesGeoData from '../../data/thailand-provinces.json';
 import riversGeoData from '../../data/thailand-rivers.json';
 import { getRiverTelemetry } from '../../data/riverStations';
+import { getDamLabelConfig, getShortDamName } from '../../utils/labelUtils';
 
 interface Thailand2DFallbackProps {
   lang: 'th' | 'en';
@@ -368,37 +369,67 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
                   className="filter drop-shadow-md transition-all duration-150"
                 />
 
-                {/* Floating label/tooltip:
-                    - Major dam: visible when drilled down, or top 10 in national, or selected
-                    - Small dam: visible ONLY when hovered or selected */}
-                {((!isSmallDam && (selectedRegion !== 'all' || isTop10 || isSelected)) || (isSmallDam && (isHovered || isSelected))) && (
-                  <g className="pointer-events-none animate-fadeIn select-none">
-                    {isSmallDam && (
+                {/* Floating label/tooltip with anti-collision directional layout */}
+                {((!isSmallDam && (selectedRegion !== 'all' || isTop10 || isSelected)) || (isSmallDam && (isHovered || isSelected))) && (() => {
+                  const labelCfg = getDamLabelConfig(dam.id);
+                  const shortName = getShortDamName(dam.name_th, dam.name_en, lang);
+                  const { dx, dy, align } = labelCfg.offset2D;
+                  const labelText = `${isTop10 && selectedRegion === 'all' ? '#' + dam.national_rank + ' ' : ''}${shortName} ${dam.storage_percent.toFixed(0)}%`;
+                  const pillW = labelText.length * 6.5 + 20;
+                  const pillH = 18;
+
+                  let rx = dam.svgX + dx;
+                  if (align === 'end') rx = dam.svgX + dx - pillW;
+                  else if (align === 'middle') rx = dam.svgX + dx - pillW / 2;
+                  const ry = dam.svgY + dy - pillH / 2;
+
+                  return (
+                    <g className="pointer-events-none animate-fadeIn select-none">
+                      {/* Subtle dotted connector leader line */}
+                      <line
+                        x1={dam.svgX}
+                        y1={dam.svgY}
+                        x2={dam.svgX + dx * 0.7}
+                        y2={dam.svgY + dy * 0.7}
+                        stroke={dam.status_color}
+                        strokeWidth={1}
+                        strokeDasharray="2,2"
+                        opacity={0.65}
+                      />
+                      {/* Pill container */}
                       <rect
-                        x={dam.svgX + 8}
-                        y={dam.svgY - 12}
-                        width={(lang === 'th' ? dam.name_th : dam.name_en).length * 8 + 50}
-                        height={18}
+                        x={rx}
+                        y={ry}
+                        width={pillW}
+                        height={pillH}
                         rx={6}
                         fill={theme === 'dark' ? '#0F172A' : '#FFFFFF'}
-                        stroke={`${dam.status_color}90`}
-                        strokeWidth={1}
-                        className="filter drop-shadow-lg"
+                        fillOpacity={0.92}
+                        stroke={dam.status_color}
+                        strokeWidth={isSelected || isHovered ? 1.5 : 0.8}
+                        className="filter drop-shadow-md"
                       />
-                    )}
-                    <text
-                      x={dam.svgX + (isSmallDam ? 14 : 8)}
-                      y={dam.svgY + (isSmallDam ? 1 : 4)}
-                      fill={theme === 'dark' ? '#F8FAFC' : '#0F172A'}
-                      fontSize={isSmallDam ? 9.5 : 10}
-                      fontWeight={600}
-                      className="select-none pointer-events-none drop-shadow"
-                    >
-                      {isTop10 && selectedRegion === 'all' ? `#${dam.national_rank} ` : ''}
-                      {lang === 'th' ? dam.name_th : dam.name_en} ({dam.storage_percent.toFixed(0)}%)
-                    </text>
-                  </g>
-                )}
+                      {/* Status indicator dot */}
+                      <circle
+                        cx={rx + 8}
+                        cy={ry + pillH / 2}
+                        r={2.5}
+                        fill={dam.status_color}
+                      />
+                      {/* Label Text */}
+                      <text
+                        x={rx + 15}
+                        y={ry + pillH / 2 + 3.5}
+                        fill={theme === 'dark' ? '#F8FAFC' : '#0F172A'}
+                        fontSize={9.2}
+                        fontWeight={600}
+                        className="select-none pointer-events-none"
+                      >
+                        {labelText}
+                      </text>
+                    </g>
+                  );
+                })()}
               </g>
             );
           })}
