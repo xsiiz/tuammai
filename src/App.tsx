@@ -1,10 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { RegionId, DamTelemetry } from './types/dam';
+import { ContactCategory } from './types/contact';
 import { DAMS_DATA } from './data/dams';
 import { Header } from './components/common/Header';
 import { BreadcrumbNav } from './components/drilldown/BreadcrumbNav';
 import { DamDetailDrawer } from './components/drilldown/DamDetailDrawer';
 import { DamAlertWidget } from './components/drilldown/DamAlertWidget';
+import { EmergencyContactModal } from './components/common/EmergencyContactModal';
+import { EmergencyHotlineWidget } from './components/common/EmergencyHotlineWidget';
 import { Thailand3DMap } from './components/map/Thailand3DMap';
 import { Thailand2DFallback } from './components/map/Thailand2DFallback';
 
@@ -13,6 +16,8 @@ export function App() {
   const [viewMode, setViewMode] = useState<'3d' | '2d'>('3d');
   const [selectedRegion, setSelectedRegion] = useState<RegionId>('all');
   const [selectedDam, setSelectedDam] = useState<DamTelemetry | null>(null);
+  const [isContactModalOpen, setIsContactModalOpen] = useState<boolean>(false);
+  const [contactCategory, setContactCategory] = useState<ContactCategory>('all');
 
   // Theme state: defaults to 'light', persisted in localStorage
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -121,6 +126,23 @@ export function App() {
           dam={selectedDam}
           onClose={() => setSelectedDam(null)}
           lang={lang}
+        />
+
+        {/* Bottom-Right Emergency Hotline Quick Widget */}
+        <EmergencyHotlineWidget
+          lang={lang}
+          onOpenAll={() => {
+            setContactCategory('all');
+            setIsContactModalOpen(true);
+          }}
+        />
+
+        {/* Emergency & Relevant Agency Contacts Modal */}
+        <EmergencyContactModal
+          isOpen={isContactModalOpen}
+          onClose={() => setIsContactModalOpen(false)}
+          lang={lang}
+          defaultCategory={contactCategory}
         />
       </main>
     </div>

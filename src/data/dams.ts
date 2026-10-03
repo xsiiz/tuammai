@@ -22,6 +22,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "วิกฤต",
     "status_label_en": "Critical",
     "capacity_mcm": 17745,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 15919.47,
+        "storage_percent": 89.71,
+        "inflow_mcm": 144.84,
+        "outflow_mcm": 5.02,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 16124.06,
+        "storage_percent": 90.87,
+        "inflow_mcm": 194.06,
+        "outflow_mcm": 3.94,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 16374.14,
+        "storage_percent": 92.27,
+        "inflow_mcm": 240.93,
+        "outflow_mcm": 2.01,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 16582.39,
+        "storage_percent": 93.45,
+        "inflow_mcm": 207.89,
+        "outflow_mcm": 2.01,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 16719.46,
+        "storage_percent": 94.22,
+        "inflow_mcm": 136.08,
+        "outflow_mcm": 2,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 16816.64,
+        "storage_percent": 94.77,
+        "inflow_mcm": 96.85,
+        "outflow_mcm": 2.01,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 16889.76,
+        "storage_percent": 95.18,
+        "inflow_mcm": 74.74,
+        "outflow_mcm": 2.01,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 1
   },
   {
@@ -45,6 +103,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 13462,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 8470.24,
+        "storage_percent": 62.92,
+        "inflow_mcm": 36.16,
+        "outflow_mcm": 3,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 8512.28,
+        "storage_percent": 63.23,
+        "inflow_mcm": 45.65,
+        "outflow_mcm": 3,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 8642.05,
+        "storage_percent": 64.2,
+        "inflow_mcm": 133.37,
+        "outflow_mcm": 3,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 8800.3,
+        "storage_percent": 65.37,
+        "inflow_mcm": 161.09,
+        "outflow_mcm": 2,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 8904.85,
+        "storage_percent": 66.15,
+        "inflow_mcm": 105.16,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 8973.54,
+        "storage_percent": 66.66,
+        "inflow_mcm": 69.31,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 9020.41,
+        "storage_percent": 67.01,
+        "inflow_mcm": 47.51,
+        "outflow_mcm": 0.5,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 2
   },
   {
@@ -68,6 +184,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "เฝ้าระวัง",
     "status_label_en": "Warning",
     "capacity_mcm": 9510,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 7606.06,
+        "storage_percent": 79.98,
+        "inflow_mcm": 22.74,
+        "outflow_mcm": 8.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 7615.37,
+        "storage_percent": 80.08,
+        "inflow_mcm": 18.06,
+        "outflow_mcm": 7.99,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 7624.68,
+        "storage_percent": 80.18,
+        "inflow_mcm": 18.08,
+        "outflow_mcm": 8.01,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 7633.99,
+        "storage_percent": 80.27,
+        "inflow_mcm": 17.09,
+        "outflow_mcm": 7.01,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 7647.97,
+        "storage_percent": 80.42,
+        "inflow_mcm": 21.76,
+        "outflow_mcm": 7.01,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 7657.3,
+        "storage_percent": 80.52,
+        "inflow_mcm": 17.1,
+        "outflow_mcm": 7.01,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 7664.3,
+        "storage_percent": 80.59,
+        "inflow_mcm": 14.76,
+        "outflow_mcm": 7,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 3
   },
   {
@@ -91,6 +265,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "วิกฤต",
     "status_label_en": "Critical",
     "capacity_mcm": 8860,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 8246.88,
+        "storage_percent": 93.08,
+        "inflow_mcm": 108.84,
+        "outflow_mcm": 0,
+        "water_level_msl": 153.39
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 8533.56,
+        "storage_percent": 96.32,
+        "inflow_mcm": 287.63,
+        "outflow_mcm": 0,
+        "water_level_msl": 154.15
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 8679.02,
+        "storage_percent": 97.96,
+        "inflow_mcm": 176.51,
+        "outflow_mcm": 30.1,
+        "water_level_msl": 154.53
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 8736.82,
+        "storage_percent": 98.61,
+        "inflow_mcm": 99.2,
+        "outflow_mcm": 40.44,
+        "water_level_msl": 154.68
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 8760,
+        "storage_percent": 98.87,
+        "inflow_mcm": 64.68,
+        "outflow_mcm": 40.45,
+        "water_level_msl": 154.74
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 8771.61,
+        "storage_percent": 99,
+        "inflow_mcm": 53.06,
+        "outflow_mcm": 40.4,
+        "water_level_msl": 154.77
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 8771.61,
+        "storage_percent": 99,
+        "inflow_mcm": 53.06,
+        "outflow_mcm": 40.41,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 4
   },
   {
@@ -114,6 +346,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 5639,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 4149.1,
+        "storage_percent": 73.58,
+        "inflow_mcm": 19.85,
+        "outflow_mcm": 2.99,
+        "water_level_msl": 86.07
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 4158.11,
+        "storage_percent": 73.74,
+        "inflow_mcm": 12.82,
+        "outflow_mcm": 3.44,
+        "water_level_msl": 86.13
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 4164.12,
+        "storage_percent": 73.85,
+        "inflow_mcm": 11.49,
+        "outflow_mcm": 5.11,
+        "water_level_msl": 86.17
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 4171.64,
+        "storage_percent": 73.98,
+        "inflow_mcm": 11.44,
+        "outflow_mcm": 3.55,
+        "water_level_msl": 86.22
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 4176.16,
+        "storage_percent": 74.06,
+        "inflow_mcm": 8.36,
+        "outflow_mcm": 3.47,
+        "water_level_msl": 86.25
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 4180.68,
+        "storage_percent": 74.14,
+        "inflow_mcm": 8.43,
+        "outflow_mcm": 3.53,
+        "water_level_msl": 86.28
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 4180.68,
+        "storage_percent": 74.14,
+        "inflow_mcm": 8.43,
+        "outflow_mcm": 3.54,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 5
   },
   {
@@ -137,6 +427,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 2431,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 1168.61,
+        "storage_percent": 48.07,
+        "inflow_mcm": 31.43,
+        "outflow_mcm": 0.96,
+        "water_level_msl": 177.97
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 1198.38,
+        "storage_percent": 49.3,
+        "inflow_mcm": 31.94,
+        "outflow_mcm": 1.01,
+        "water_level_msl": 178.09
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 1231.21,
+        "storage_percent": 50.65,
+        "inflow_mcm": 34.99,
+        "outflow_mcm": 1.01,
+        "water_level_msl": 178.22
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 1256.87,
+        "storage_percent": 51.7,
+        "inflow_mcm": 27.85,
+        "outflow_mcm": 1.01,
+        "water_level_msl": 178.32
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 1280.28,
+        "storage_percent": 52.66,
+        "inflow_mcm": 25.68,
+        "outflow_mcm": 0.96,
+        "water_level_msl": 178.41
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 1301.33,
+        "storage_percent": 53.53,
+        "inflow_mcm": 23.4,
+        "outflow_mcm": 1.03,
+        "water_level_msl": 178.49
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 1301.33,
+        "storage_percent": 53.53,
+        "inflow_mcm": 23.4,
+        "outflow_mcm": 1.03,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 6
   },
   {
@@ -160,6 +508,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 1980,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 1204.4,
+        "storage_percent": 60.83,
+        "inflow_mcm": 4.82,
+        "outflow_mcm": 4.04,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 1206.61,
+        "storage_percent": 60.94,
+        "inflow_mcm": 7.09,
+        "outflow_mcm": 4.04,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 1208.82,
+        "storage_percent": 61.05,
+        "inflow_mcm": 7.04,
+        "outflow_mcm": 4.04,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 1208.82,
+        "storage_percent": 61.05,
+        "inflow_mcm": 4.93,
+        "outflow_mcm": 4.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 1208.82,
+        "storage_percent": 61.05,
+        "inflow_mcm": 4.94,
+        "outflow_mcm": 4.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 1208.82,
+        "storage_percent": 61.05,
+        "inflow_mcm": 4.98,
+        "outflow_mcm": 4.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 1206.61,
+        "storage_percent": 60.94,
+        "inflow_mcm": 2.81,
+        "outflow_mcm": 4.06,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 7
   },
   {
@@ -183,6 +589,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "เฝ้าระวัง",
     "status_label_en": "Warning",
     "capacity_mcm": 1966,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 1801.09,
+        "storage_percent": 91.61,
+        "inflow_mcm": 11.63,
+        "outflow_mcm": 10.81,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 1801.09,
+        "storage_percent": 91.61,
+        "inflow_mcm": 11.59,
+        "outflow_mcm": 10.77,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 1798.36,
+        "storage_percent": 91.47,
+        "inflow_mcm": 6.72,
+        "outflow_mcm": 8.63,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 1798.36,
+        "storage_percent": 91.47,
+        "inflow_mcm": 7.95,
+        "outflow_mcm": 7.13,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 1798.36,
+        "storage_percent": 91.47,
+        "inflow_mcm": 7.84,
+        "outflow_mcm": 7.02,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 1801.09,
+        "storage_percent": 91.61,
+        "inflow_mcm": 6.43,
+        "outflow_mcm": 2.78,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 1820.27,
+        "storage_percent": 92.59,
+        "inflow_mcm": 20.11,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 8
   },
   {
@@ -206,6 +670,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 1454,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 754.66,
+        "storage_percent": 51.89,
+        "inflow_mcm": 2.58,
+        "outflow_mcm": 3.96,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 752.42,
+        "storage_percent": 51.74,
+        "inflow_mcm": 1.94,
+        "outflow_mcm": 4.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 750.57,
+        "storage_percent": 51.61,
+        "inflow_mcm": 2.29,
+        "outflow_mcm": 4.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 747.97,
+        "storage_percent": 51.43,
+        "inflow_mcm": 1.54,
+        "outflow_mcm": 4.02,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 748.34,
+        "storage_percent": 51.45,
+        "inflow_mcm": 4.51,
+        "outflow_mcm": 4.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 748.34,
+        "storage_percent": 51.45,
+        "inflow_mcm": 4.07,
+        "outflow_mcm": 3.96,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 746.86,
+        "storage_percent": 51.35,
+        "inflow_mcm": 2.41,
+        "outflow_mcm": 3.78,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 9
   },
   {
@@ -229,6 +751,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "วิกฤต",
     "status_label_en": "Critical",
     "capacity_mcm": 960,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 779.8,
+        "storage_percent": 89.48,
+        "inflow_mcm": 59.14,
+        "outflow_mcm": 2.16,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 840.94,
+        "storage_percent": 96.49,
+        "inflow_mcm": 63.74,
+        "outflow_mcm": 2.17,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 891.26,
+        "storage_percent": 102.27,
+        "inflow_mcm": 52.95,
+        "outflow_mcm": 2.16,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 930.78,
+        "storage_percent": 106.8,
+        "inflow_mcm": 47.54,
+        "outflow_mcm": 9.94,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 950.54,
+        "storage_percent": 109.07,
+        "inflow_mcm": 35.88,
+        "outflow_mcm": 19.87,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 962.07,
+        "storage_percent": 110.39,
+        "inflow_mcm": 40.75,
+        "outflow_mcm": 34.57,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 963.71,
+        "storage_percent": 110.58,
+        "inflow_mcm": 36.75,
+        "outflow_mcm": 34.61,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 10
   },
   {
@@ -252,6 +832,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 939,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 666.88,
+        "storage_percent": 71.02,
+        "inflow_mcm": 13.3,
+        "outflow_mcm": 1.3,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 676.25,
+        "storage_percent": 72.02,
+        "inflow_mcm": 10.56,
+        "outflow_mcm": 1.19,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 685.25,
+        "storage_percent": 72.98,
+        "inflow_mcm": 9.86,
+        "outflow_mcm": 0.86,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 693.13,
+        "storage_percent": 73.82,
+        "inflow_mcm": 8.74,
+        "outflow_mcm": 0.86,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 699.88,
+        "storage_percent": 74.53,
+        "inflow_mcm": 7.77,
+        "outflow_mcm": 0.86,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 705.5,
+        "storage_percent": 75.13,
+        "inflow_mcm": 6.7,
+        "outflow_mcm": 0.86,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 710,
+        "storage_percent": 75.61,
+        "inflow_mcm": 5.58,
+        "outflow_mcm": 0.86,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 11
   },
   {
@@ -275,6 +913,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "วิกฤต",
     "status_label_en": "Critical",
     "capacity_mcm": 710,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 639.74,
+        "storage_percent": 90.1,
+        "inflow_mcm": 22.63,
+        "outflow_mcm": 3.17,
+        "water_level_msl": 97.46
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 670.34,
+        "storage_percent": 94.41,
+        "inflow_mcm": 39.57,
+        "outflow_mcm": 3.13,
+        "water_level_msl": 98.13
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 700.91,
+        "storage_percent": 98.72,
+        "inflow_mcm": 39.53,
+        "outflow_mcm": 3.08,
+        "water_level_msl": 98.8
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 715.9,
+        "storage_percent": 100.83,
+        "inflow_mcm": 24.16,
+        "outflow_mcm": 3.05,
+        "water_level_msl": 99.13
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 723.14,
+        "storage_percent": 101.85,
+        "inflow_mcm": 17.41,
+        "outflow_mcm": 3.04,
+        "water_level_msl": 99.29
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 725.4,
+        "storage_percent": 102.17,
+        "inflow_mcm": 12.94,
+        "outflow_mcm": 3.05,
+        "water_level_msl": 99.34
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 725.85,
+        "storage_percent": 102.23,
+        "inflow_mcm": 10.91,
+        "outflow_mcm": 10.41,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 12
   },
   {
@@ -298,6 +994,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 520,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 330.63,
+        "storage_percent": 63.58,
+        "inflow_mcm": 0.24,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 330.63,
+        "storage_percent": 63.58,
+        "inflow_mcm": 0.27,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 329.38,
+        "storage_percent": 63.34,
+        "inflow_mcm": 0.28,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 328.75,
+        "storage_percent": 63.22,
+        "inflow_mcm": 0.92,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 327.5,
+        "storage_percent": 62.98,
+        "inflow_mcm": 0.38,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 326.25,
+        "storage_percent": 62.74,
+        "inflow_mcm": 0.31,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 325,
+        "storage_percent": 62.5,
+        "inflow_mcm": 0.34,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 13
   },
   {
@@ -321,6 +1075,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "เฝ้าระวัง",
     "status_label_en": "Warning",
     "capacity_mcm": 420,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 389.5,
+        "storage_percent": 92.74,
+        "inflow_mcm": 54.13,
+        "outflow_mcm": 0.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 415,
+        "storage_percent": 98.81,
+        "inflow_mcm": 50.44,
+        "outflow_mcm": 24.82,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 420,
+        "storage_percent": 100,
+        "inflow_mcm": 48.54,
+        "outflow_mcm": 43.41,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 406,
+        "storage_percent": 96.67,
+        "inflow_mcm": 20.83,
+        "outflow_mcm": 34.7,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 395.5,
+        "storage_percent": 94.17,
+        "inflow_mcm": 20.7,
+        "outflow_mcm": 31.35,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 384.5,
+        "storage_percent": 91.55,
+        "inflow_mcm": 6.65,
+        "outflow_mcm": 15.39,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 385.5,
+        "storage_percent": 91.79,
+        "inflow_mcm": 22.98,
+        "outflow_mcm": 21.83,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 14
   },
   {
@@ -344,6 +1156,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "เฝ้าระวัง",
     "status_label_en": "Warning",
     "capacity_mcm": 391,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 261.87,
+        "storage_percent": 66.97,
+        "inflow_mcm": 8.05,
+        "outflow_mcm": 1.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 275.11,
+        "storage_percent": 70.36,
+        "inflow_mcm": 14.3,
+        "outflow_mcm": 1.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 297.91,
+        "storage_percent": 76.19,
+        "inflow_mcm": 24.25,
+        "outflow_mcm": 1.44,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 310.76,
+        "storage_percent": 79.48,
+        "inflow_mcm": 14.81,
+        "outflow_mcm": 1.96,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 317.74,
+        "storage_percent": 81.26,
+        "inflow_mcm": 9.36,
+        "outflow_mcm": 2.39,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 320.08,
+        "storage_percent": 81.86,
+        "inflow_mcm": 9.79,
+        "outflow_mcm": 5.29,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 321.55,
+        "storage_percent": 82.24,
+        "inflow_mcm": 8.92,
+        "outflow_mcm": 5.29,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 15
   },
   {
@@ -367,6 +1237,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 314,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 165.98,
+        "storage_percent": 52.78,
+        "inflow_mcm": 19.92,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 183.82,
+        "storage_percent": 58.45,
+        "inflow_mcm": 20.42,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 204.36,
+        "storage_percent": 64.98,
+        "inflow_mcm": 19.19,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 217.33,
+        "storage_percent": 69.1,
+        "inflow_mcm": 11.62,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 222.74,
+        "storage_percent": 70.82,
+        "inflow_mcm": 6.4,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 227.85,
+        "storage_percent": 72.45,
+        "inflow_mcm": 5.34,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 230.85,
+        "storage_percent": 73.4,
+        "inflow_mcm": 3.01,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 16
   },
   {
@@ -390,30 +1318,65 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 299,
-    "national_rank": 17
-  },
-  {
-    "id": "dam-33",
-    "name_th": "เขื่อนประแสร์",
-    "name_en": "Pra Sae Dam",
-    "type": "large",
-    "region": "east",
-    "coordinates": [
-      101.558297,
-      12.977205
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 77,
+        "storage_percent": 25.75,
+        "inflow_mcm": 4.94,
+        "outflow_mcm": 0.05,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 83,
+        "storage_percent": 27.76,
+        "inflow_mcm": 6.15,
+        "outflow_mcm": 0.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 98,
+        "storage_percent": 32.78,
+        "inflow_mcm": 15.16,
+        "outflow_mcm": 0.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 111,
+        "storage_percent": 37.12,
+        "inflow_mcm": 13.17,
+        "outflow_mcm": 0.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 121,
+        "storage_percent": 40.47,
+        "inflow_mcm": 10.17,
+        "outflow_mcm": 0.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 126.5,
+        "storage_percent": 42.31,
+        "inflow_mcm": 5.68,
+        "outflow_mcm": 0.06,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 130.1,
+        "storage_percent": 43.51,
+        "inflow_mcm": 3.78,
+        "outflow_mcm": 0.06,
+        "water_level_msl": 0
+      }
     ],
-    "date": "2026-10-03",
-    "storage_mcm": 295.5,
-    "storage_percent": 100.17,
-    "inflow_mcm": 10.63,
-    "outflow_mcm": 16.34,
-    "water_level_msl": 0,
-    "status": "critical",
-    "status_color": "#EF4444",
-    "status_label_th": "วิกฤต",
-    "status_label_en": "Critical",
-    "capacity_mcm": 295,
-    "national_rank": 18
+    "national_rank": 17
   },
   {
     "id": "dam-37",
@@ -436,6 +1399,145 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "วิกฤต",
     "status_label_en": "Critical",
     "capacity_mcm": 295,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 256.84,
+        "storage_percent": 87.06,
+        "inflow_mcm": 19.62,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 265,
+        "storage_percent": 89.83,
+        "inflow_mcm": 8.23,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 270.41,
+        "storage_percent": 91.66,
+        "inflow_mcm": 5.47,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 274.03,
+        "storage_percent": 92.89,
+        "inflow_mcm": 3.69,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 276.89,
+        "storage_percent": 93.86,
+        "inflow_mcm": 2.93,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 278.97,
+        "storage_percent": 94.57,
+        "inflow_mcm": 2.16,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 282.89,
+        "storage_percent": 95.89,
+        "inflow_mcm": 4,
+        "outflow_mcm": 0.01,
+        "water_level_msl": 0
+      }
+    ],
+    "national_rank": 18
+  },
+  {
+    "id": "dam-33",
+    "name_th": "เขื่อนประแสร์",
+    "name_en": "Pra Sae Dam",
+    "type": "large",
+    "region": "east",
+    "coordinates": [
+      101.558297,
+      12.977205
+    ],
+    "date": "2026-10-03",
+    "storage_mcm": 295.5,
+    "storage_percent": 100.17,
+    "inflow_mcm": 10.63,
+    "outflow_mcm": 16.34,
+    "water_level_msl": 0,
+    "status": "critical",
+    "status_color": "#EF4444",
+    "status_label_th": "วิกฤต",
+    "status_label_en": "Critical",
+    "capacity_mcm": 295,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 294.99,
+        "storage_percent": 100,
+        "inflow_mcm": 38.36,
+        "outflow_mcm": 0.44,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 331,
+        "storage_percent": 112.2,
+        "inflow_mcm": 27.5,
+        "outflow_mcm": 27.94,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 338,
+        "storage_percent": 114.58,
+        "inflow_mcm": 33.19,
+        "outflow_mcm": 33.2,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 325.6,
+        "storage_percent": 110.37,
+        "inflow_mcm": 19.26,
+        "outflow_mcm": 31.49,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 311.18,
+        "storage_percent": 105.48,
+        "inflow_mcm": 10.69,
+        "outflow_mcm": 24.94,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 301.38,
+        "storage_percent": 102.16,
+        "inflow_mcm": 8.42,
+        "outflow_mcm": 18.05,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 295.5,
+        "storage_percent": 100.17,
+        "inflow_mcm": 10.63,
+        "outflow_mcm": 16.34,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 19
   },
   {
@@ -459,6 +1561,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 275,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 149.81,
+        "storage_percent": 54.48,
+        "inflow_mcm": 18.79,
+        "outflow_mcm": 0.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 156.85,
+        "storage_percent": 57.04,
+        "inflow_mcm": 6.98,
+        "outflow_mcm": 0.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 160.25,
+        "storage_percent": 58.27,
+        "inflow_mcm": 3.54,
+        "outflow_mcm": 0.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 163.43,
+        "storage_percent": 59.43,
+        "inflow_mcm": 3.32,
+        "outflow_mcm": 0.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 165.25,
+        "storage_percent": 60.09,
+        "inflow_mcm": 1.79,
+        "outflow_mcm": 0.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 167.02,
+        "storage_percent": 60.73,
+        "inflow_mcm": 1.92,
+        "outflow_mcm": 0.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 168.33,
+        "storage_percent": 61.21,
+        "inflow_mcm": 1.46,
+        "outflow_mcm": 0.03,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 20
   },
   {
@@ -482,6 +1642,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "เฝ้าระวัง",
     "status_label_en": "Warning",
     "capacity_mcm": 265,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 244.58,
+        "storage_percent": 92.29,
+        "inflow_mcm": 1.59,
+        "outflow_mcm": 0,
+        "water_level_msl": 395.29
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 245.24,
+        "storage_percent": 92.54,
+        "inflow_mcm": 1.09,
+        "outflow_mcm": 0.1,
+        "water_level_msl": 395.33
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 245.57,
+        "storage_percent": 92.67,
+        "inflow_mcm": 0.84,
+        "outflow_mcm": 0.12,
+        "water_level_msl": 395.35
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 246.24,
+        "storage_percent": 92.92,
+        "inflow_mcm": 1.07,
+        "outflow_mcm": 0.35,
+        "water_level_msl": 395.39
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 246.74,
+        "storage_percent": 93.11,
+        "inflow_mcm": 0.87,
+        "outflow_mcm": 0.26,
+        "water_level_msl": 395.42
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 247.07,
+        "storage_percent": 93.23,
+        "inflow_mcm": 0.75,
+        "outflow_mcm": 0,
+        "water_level_msl": 395.44
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 247.4,
+        "storage_percent": 93.47,
+        "inflow_mcm": 0.76,
+        "outflow_mcm": 0.42,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 21
   },
   {
@@ -505,6 +1723,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 263,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 186.32,
+        "storage_percent": 70.84,
+        "inflow_mcm": 0.88,
+        "outflow_mcm": 0.87,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 186.07,
+        "storage_percent": 70.75,
+        "inflow_mcm": 0.66,
+        "outflow_mcm": 0.92,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 185.96,
+        "storage_percent": 70.71,
+        "inflow_mcm": 0.8,
+        "outflow_mcm": 0.92,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 186.06,
+        "storage_percent": 70.74,
+        "inflow_mcm": 1.01,
+        "outflow_mcm": 0.91,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 185.87,
+        "storage_percent": 70.67,
+        "inflow_mcm": 0.67,
+        "outflow_mcm": 0.86,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 185.67,
+        "storage_percent": 70.6,
+        "inflow_mcm": 0.63,
+        "outflow_mcm": 0.83,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 185.19,
+        "storage_percent": 70.41,
+        "inflow_mcm": 0.52,
+        "outflow_mcm": 1.01,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 22
   },
   {
@@ -528,6 +1804,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "วิกฤต",
     "status_label_en": "Critical",
     "capacity_mcm": 224,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 224.34,
+        "storage_percent": 100.15,
+        "inflow_mcm": 37.41,
+        "outflow_mcm": 31.66,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 219.15,
+        "storage_percent": 97.83,
+        "inflow_mcm": 14.29,
+        "outflow_mcm": 19.43,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 217.17,
+        "storage_percent": 96.95,
+        "inflow_mcm": 11.48,
+        "outflow_mcm": 13.41,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 215.84,
+        "storage_percent": 96.36,
+        "inflow_mcm": 4.2,
+        "outflow_mcm": 5.48,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 216.97,
+        "storage_percent": 96.86,
+        "inflow_mcm": 2.47,
+        "outflow_mcm": 1.27,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 215.39,
+        "storage_percent": 96.16,
+        "inflow_mcm": 4.67,
+        "outflow_mcm": 6.38,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 213.13,
+        "storage_percent": 95.15,
+        "inflow_mcm": 3.92,
+        "outflow_mcm": 6.13,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 23
   },
   {
@@ -551,6 +1885,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "วิกฤต",
     "status_label_en": "Critical",
     "capacity_mcm": 170,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 159.9,
+        "storage_percent": 94.06,
+        "inflow_mcm": 1.87,
+        "outflow_mcm": 0.39,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 160.71,
+        "storage_percent": 94.53,
+        "inflow_mcm": 1.2,
+        "outflow_mcm": 0.39,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 161.38,
+        "storage_percent": 94.93,
+        "inflow_mcm": 1.06,
+        "outflow_mcm": 0.39,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 162.05,
+        "storage_percent": 95.32,
+        "inflow_mcm": 1.06,
+        "outflow_mcm": 0.39,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 162.72,
+        "storage_percent": 95.72,
+        "inflow_mcm": 1.06,
+        "outflow_mcm": 0.39,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 162.99,
+        "storage_percent": 95.87,
+        "inflow_mcm": 0.66,
+        "outflow_mcm": 0.39,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 163.12,
+        "storage_percent": 95.95,
+        "inflow_mcm": 0.53,
+        "outflow_mcm": 0.39,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 24
   },
   {
@@ -574,30 +1966,65 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 165,
-    "national_rank": 25
-  },
-  {
-    "id": "dam-24",
-    "name_th": "เขื่อนหนองปลาไหล",
-    "name_en": "Nong Pla Lai Dam",
-    "type": "large",
-    "region": "east",
-    "coordinates": [
-      101.297011,
-      12.934647
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 81.64,
+        "storage_percent": 49.48,
+        "inflow_mcm": 0.16,
+        "outflow_mcm": 0.51,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 82.47,
+        "storage_percent": 49.98,
+        "inflow_mcm": 0.89,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 82.61,
+        "storage_percent": 50.07,
+        "inflow_mcm": 0.2,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 83.16,
+        "storage_percent": 50.4,
+        "inflow_mcm": 0.62,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 83.44,
+        "storage_percent": 50.57,
+        "inflow_mcm": 0.34,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 83.58,
+        "storage_percent": 50.65,
+        "inflow_mcm": 0.21,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 83.72,
+        "storage_percent": 50.74,
+        "inflow_mcm": 0.21,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      }
     ],
-    "date": "2026-10-03",
-    "storage_mcm": 161.56,
-    "storage_percent": 98.66,
-    "inflow_mcm": 3.43,
-    "outflow_mcm": 0.5,
-    "water_level_msl": 0,
-    "status": "critical",
-    "status_color": "#EF4444",
-    "status_label_th": "วิกฤต",
-    "status_label_en": "Critical",
-    "capacity_mcm": 164,
-    "national_rank": 26
+    "national_rank": 25
   },
   {
     "id": "dam-4",
@@ -620,6 +2047,145 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 164,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 111.77,
+        "storage_percent": 68.15,
+        "inflow_mcm": 11.09,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 117.45,
+        "storage_percent": 71.62,
+        "inflow_mcm": 5.7,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 120.47,
+        "storage_percent": 73.46,
+        "inflow_mcm": 3.04,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 122.75,
+        "storage_percent": 74.85,
+        "inflow_mcm": 2.31,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 124.36,
+        "storage_percent": 75.83,
+        "inflow_mcm": 1.63,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 125.53,
+        "storage_percent": 76.54,
+        "inflow_mcm": 1.19,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 126.52,
+        "storage_percent": 77.15,
+        "inflow_mcm": 1.02,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      }
+    ],
+    "national_rank": 26
+  },
+  {
+    "id": "dam-24",
+    "name_th": "เขื่อนหนองปลาไหล",
+    "name_en": "Nong Pla Lai Dam",
+    "type": "large",
+    "region": "east",
+    "coordinates": [
+      101.297011,
+      12.934647
+    ],
+    "date": "2026-10-03",
+    "storage_mcm": 161.56,
+    "storage_percent": 98.66,
+    "inflow_mcm": 3.43,
+    "outflow_mcm": 0.5,
+    "water_level_msl": 0,
+    "status": "critical",
+    "status_color": "#EF4444",
+    "status_label_th": "วิกฤต",
+    "status_label_en": "Critical",
+    "capacity_mcm": 164,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 117.68,
+        "storage_percent": 71.87,
+        "inflow_mcm": 11.19,
+        "outflow_mcm": 0.47,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 133.45,
+        "storage_percent": 81.49,
+        "inflow_mcm": 14.88,
+        "outflow_mcm": 0.41,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 144.47,
+        "storage_percent": 88.23,
+        "inflow_mcm": 10.05,
+        "outflow_mcm": 0.43,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 148.64,
+        "storage_percent": 90.77,
+        "inflow_mcm": 3.26,
+        "outflow_mcm": 0.42,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 153.89,
+        "storage_percent": 93.98,
+        "inflow_mcm": 4.39,
+        "outflow_mcm": 0.42,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 157.4,
+        "storage_percent": 96.12,
+        "inflow_mcm": 2.68,
+        "outflow_mcm": 0.43,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 161.56,
+        "storage_percent": 98.66,
+        "inflow_mcm": 3.43,
+        "outflow_mcm": 0.5,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 27
   },
   {
@@ -643,6 +2209,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 160,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 72.23,
+        "storage_percent": 45.14,
+        "inflow_mcm": 7.87,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 88.74,
+        "storage_percent": 55.46,
+        "inflow_mcm": 16.51,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 99.22,
+        "storage_percent": 62.01,
+        "inflow_mcm": 10.48,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 102.82,
+        "storage_percent": 64.26,
+        "inflow_mcm": 3.6,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 106.35,
+        "storage_percent": 66.47,
+        "inflow_mcm": 3.53,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 108.69,
+        "storage_percent": 67.93,
+        "inflow_mcm": 2.34,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 109.19,
+        "storage_percent": 68.24,
+        "inflow_mcm": 0.5,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 28
   },
   {
@@ -666,6 +2290,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "เฝ้าระวัง",
     "status_label_en": "Warning",
     "capacity_mcm": 155,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 97.99,
+        "storage_percent": 63.22,
+        "inflow_mcm": 23.68,
+        "outflow_mcm": 0.21,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 119.23,
+        "storage_percent": 76.92,
+        "inflow_mcm": 21.93,
+        "outflow_mcm": 0.7,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 124.19,
+        "storage_percent": 80.12,
+        "inflow_mcm": 6.29,
+        "outflow_mcm": 1.34,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 126.13,
+        "storage_percent": 81.37,
+        "inflow_mcm": 3.45,
+        "outflow_mcm": 1.45,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 126.35,
+        "storage_percent": 81.51,
+        "inflow_mcm": 1.73,
+        "outflow_mcm": 1.45,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 126.35,
+        "storage_percent": 81.51,
+        "inflow_mcm": 1.52,
+        "outflow_mcm": 1.45,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 126.13,
+        "storage_percent": 81.37,
+        "inflow_mcm": 1.3,
+        "outflow_mcm": 1.45,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 29
   },
   {
@@ -689,6 +2371,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 141,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 67.16,
+        "storage_percent": 47.63,
+        "inflow_mcm": 9.17,
+        "outflow_mcm": 0.08,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 73.09,
+        "storage_percent": 51.84,
+        "inflow_mcm": 6,
+        "outflow_mcm": 0.08,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 75.63,
+        "storage_percent": 53.64,
+        "inflow_mcm": 2.62,
+        "outflow_mcm": 0.03,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 78.04,
+        "storage_percent": 55.35,
+        "inflow_mcm": 2.49,
+        "outflow_mcm": 0.02,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 79.01,
+        "storage_percent": 56.04,
+        "inflow_mcm": 1.04,
+        "outflow_mcm": 0.02,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 79.74,
+        "storage_percent": 56.55,
+        "inflow_mcm": 0.8,
+        "outflow_mcm": 0.02,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 79.98,
+        "storage_percent": 56.72,
+        "inflow_mcm": 0.31,
+        "outflow_mcm": 0.02,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 30
   },
   {
@@ -712,6 +2452,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 135,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 85.07,
+        "storage_percent": 62.75,
+        "inflow_mcm": 0.9,
+        "outflow_mcm": 0.08,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 85.81,
+        "storage_percent": 63.29,
+        "inflow_mcm": 0.89,
+        "outflow_mcm": 0.08,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 86.54,
+        "storage_percent": 63.83,
+        "inflow_mcm": 0.9,
+        "outflow_mcm": 0.08,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 87.52,
+        "storage_percent": 64.56,
+        "inflow_mcm": 1.16,
+        "outflow_mcm": 0.08,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 87.52,
+        "storage_percent": 64.56,
+        "inflow_mcm": 0.18,
+        "outflow_mcm": 0.08,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 87.65,
+        "storage_percent": 64.65,
+        "inflow_mcm": 0.31,
+        "outflow_mcm": 0.08,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 87.77,
+        "storage_percent": 64.74,
+        "inflow_mcm": 0.31,
+        "outflow_mcm": 0.08,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 31
   },
   {
@@ -735,6 +2533,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 121,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 53.96,
+        "storage_percent": 44.44,
+        "inflow_mcm": 2.5,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 56.6,
+        "storage_percent": 46.62,
+        "inflow_mcm": 2.68,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 57.3,
+        "storage_percent": 47.2,
+        "inflow_mcm": 0.74,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 58.01,
+        "storage_percent": 47.78,
+        "inflow_mcm": 0.75,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 58.29,
+        "storage_percent": 48.01,
+        "inflow_mcm": 0.33,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 58.71,
+        "storage_percent": 48.35,
+        "inflow_mcm": 0.47,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 59.41,
+        "storage_percent": 48.93,
+        "inflow_mcm": 0.74,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 32
   },
   {
@@ -758,6 +2614,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "เฝ้าระวัง",
     "status_label_en": "Warning",
     "capacity_mcm": 117,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 84.64,
+        "storage_percent": 72.34,
+        "inflow_mcm": 4.7,
+        "outflow_mcm": 0.27,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 88.48,
+        "storage_percent": 75.62,
+        "inflow_mcm": 3.46,
+        "outflow_mcm": 0.28,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 90.39,
+        "storage_percent": 77.26,
+        "inflow_mcm": 1.51,
+        "outflow_mcm": 0.27,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 92,
+        "storage_percent": 78.63,
+        "inflow_mcm": 1.24,
+        "outflow_mcm": 0.29,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 92.73,
+        "storage_percent": 79.25,
+        "inflow_mcm": 0.58,
+        "outflow_mcm": 0.3,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 93.45,
+        "storage_percent": 79.87,
+        "inflow_mcm": 0.52,
+        "outflow_mcm": 0.32,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 94.33,
+        "storage_percent": 80.62,
+        "inflow_mcm": 0.53,
+        "outflow_mcm": 0.32,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 33
   },
   {
@@ -781,6 +2695,64 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "ปกติ",
     "status_label_en": "Normal",
     "capacity_mcm": 110,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 63.19,
+        "storage_percent": 57.45,
+        "inflow_mcm": 0.28,
+        "outflow_mcm": 0.15,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 64.75,
+        "storage_percent": 58.86,
+        "inflow_mcm": 1.71,
+        "outflow_mcm": 0.15,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 71.78,
+        "storage_percent": 65.25,
+        "inflow_mcm": 7.19,
+        "outflow_mcm": 0.16,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 76.96,
+        "storage_percent": 69.96,
+        "inflow_mcm": 5.27,
+        "outflow_mcm": 0.09,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 78.92,
+        "storage_percent": 71.75,
+        "inflow_mcm": 2.05,
+        "outflow_mcm": 0.09,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 79.76,
+        "storage_percent": 72.51,
+        "inflow_mcm": 0.93,
+        "outflow_mcm": 0.09,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 80.32,
+        "storage_percent": 73.02,
+        "inflow_mcm": 0.65,
+        "outflow_mcm": 0.09,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 34
   },
   {
@@ -804,53 +2776,65 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_th": "เฝ้าระวัง",
     "status_label_en": "Warning",
     "capacity_mcm": 106,
+    "history7Days": [
+      {
+        "date": "2026-09-27",
+        "storage_mcm": 96.08,
+        "storage_percent": 90.45,
+        "inflow_mcm": 2.28,
+        "outflow_mcm": 1.97,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-28",
+        "storage_mcm": 96.16,
+        "storage_percent": 90.53,
+        "inflow_mcm": 1.87,
+        "outflow_mcm": 1.79,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-29",
+        "storage_mcm": 96.39,
+        "storage_percent": 90.75,
+        "inflow_mcm": 2.31,
+        "outflow_mcm": 2.07,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-09-30",
+        "storage_mcm": 97.64,
+        "storage_percent": 91.92,
+        "inflow_mcm": 3.35,
+        "outflow_mcm": 2.1,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-01",
+        "storage_mcm": 98.5,
+        "storage_percent": 92.73,
+        "inflow_mcm": 3.48,
+        "outflow_mcm": 2.62,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-02",
+        "storage_mcm": 97.95,
+        "storage_percent": 92.22,
+        "inflow_mcm": 2.44,
+        "outflow_mcm": 2.98,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-03",
+        "storage_mcm": 97.17,
+        "storage_percent": 91.48,
+        "inflow_mcm": 2.2,
+        "outflow_mcm": 2.98,
+        "water_level_msl": 0
+      }
+    ],
     "national_rank": 35
-  },
-  {
-    "id": "dam-55",
-    "name_th": "เขื่อนท่าทุ่งนา",
-    "name_en": "THA THUNG NA DAM Dam",
-    "type": "large",
-    "region": "west",
-    "coordinates": [
-      99.233333,
-      14.216667
-    ],
-    "date": "2026-10-02",
-    "storage_mcm": 42.92,
-    "storage_percent": 0,
-    "inflow_mcm": 1.43,
-    "outflow_mcm": 2.01,
-    "water_level_msl": 58.07,
-    "status": "normal",
-    "status_color": "#10B981",
-    "status_label_th": "ปกติ",
-    "status_label_en": "Normal",
-    "capacity_mcm": 55,
-    "national_rank": 36
-  },
-  {
-    "id": "dam-47",
-    "name_th": "เขื่อนห้วยกุ่ม",
-    "name_en": "HUAI KUM DAM Dam",
-    "type": "large",
-    "region": "northeast",
-    "coordinates": [
-      101.797222,
-      16.413056
-    ],
-    "date": "2026-10-02",
-    "storage_mcm": 19.82,
-    "storage_percent": 0,
-    "inflow_mcm": 0.15,
-    "outflow_mcm": 0.36,
-    "water_level_msl": 311.82,
-    "status": "normal",
-    "status_color": "#10B981",
-    "status_label_th": "ปกติ",
-    "status_label_en": "Normal",
-    "capacity_mcm": 20,
-    "national_rank": 37
   }
 ];
 

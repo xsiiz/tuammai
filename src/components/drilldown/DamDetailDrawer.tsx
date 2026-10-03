@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { X, ArrowDownRight, ArrowUpRight, Droplets, AlertTriangle, ShieldCheck, Waves, Calendar, ChevronRight } from 'lucide-react';
+import { X, ArrowDownRight, ArrowUpRight, Droplets, AlertTriangle, ShieldCheck, Waves, Calendar, ChevronRight, Phone, PhoneCall } from 'lucide-react';
 import { DamTelemetry } from '../../types/dam';
+import { DamTrendChart } from './DamTrendChart';
 import riversGeoData from '../../data/thailand-rivers.json';
 
 interface DamDetailDrawerProps {
@@ -206,6 +207,16 @@ export const DamDetailDrawer: React.FC<DamDetailDrawerProps> = ({ dam, onClose, 
                 </div>
               </div>
 
+              {/* 7-Day Hydrology Trend Chart */}
+              {dam.history7Days && dam.history7Days.length > 0 && (
+                <DamTrendChart
+                  history={dam.history7Days}
+                  currentStoragePercent={dam.storage_percent}
+                  statusColor={dam.status_color}
+                  lang={lang}
+                />
+              )}
+
               {/* Connected Downstream Rivers & Basin */}
               {connectedRivers.length > 0 && (
                 <div className="p-4 rounded-xl bg-sky-50/70 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800/60">
@@ -256,6 +267,54 @@ export const DamDetailDrawer: React.FC<DamDetailDrawerProps> = ({ dam, onClose, 
                   </div>
                 </div>
               )}
+
+              {/* Managing Agency & Emergency Contact */}
+              {(() => {
+                const damAuthority = dam.authority || (
+                  ['ภูมิพล', 'สิริกิติ์', 'ศรีนครินทร์', 'วชิราลงกรณ', 'อุบลรัตน์', 'สิรินธร', 'จุฬาภรณ์', 'บางลาง', 'รัชชประภา'].some(n => dam.name_th.includes(n))
+                    ? 'EGAT'
+                    : 'RID'
+                );
+                const isEgat = damAuthority === 'EGAT';
+
+                return (
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <Phone className="w-3.5 h-3.5 text-sky-600 dark:text-cyan-400" />
+                        <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                          {lang === 'th' ? 'หน่วยงานผู้รับผิดชอบเขื่อน' : 'Managing Authority'}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                        {damAuthority}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs bg-white dark:bg-slate-800 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
+                      <div className="min-w-0 pr-2">
+                        <p className="font-semibold text-slate-900 dark:text-white truncate">
+                          {isEgat
+                            ? (lang === 'th' ? 'การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย (กฟผ.)' : 'EGAT Call Center')
+                            : (lang === 'th' ? 'กรมชลประทาน (สายด่วนน้ำ)' : 'RID Water Hotline')}
+                        </p>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                          {isEgat
+                            ? (lang === 'th' ? 'ศูนย์บริการข้อมูลเขื่อนพลังน้ำ' : 'Hydroelectric dam information')
+                            : (lang === 'th' ? 'ศูนย์ปฏิบัติการน้ำอัจฉริยะ' : 'Smart Water Operation Center')}
+                        </p>
+                      </div>
+                      <a
+                        href={`tel:${isEgat ? '1416' : '1460'}`}
+                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs shadow-sm transition-all shrink-0 hover:scale-102"
+                      >
+                        <PhoneCall className="w-3.5 h-3.5" />
+                        <span>{isEgat ? '1416' : '1460'}</span>
+                      </a>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
 
             {/* Footer */}

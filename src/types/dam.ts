@@ -2,6 +2,15 @@ export type RegionId = 'all' | 'north' | 'northeast' | 'central' | 'east' | 'wes
 
 export type AlertStatus = 'critical' | 'warning' | 'normal';
 
+export interface DamHistoryRecord {
+  date: string;
+  storage_mcm: number;
+  storage_percent: number;
+  inflow_mcm: number;
+  outflow_mcm: number;
+  water_level_msl?: number;
+}
+
 export interface DamTelemetry {
   id: string;
   name_th: string;
@@ -23,6 +32,7 @@ export interface DamTelemetry {
   status_label_th: string;
   status_label_en: string;
   national_rank?: number;
+  history7Days?: DamHistoryRecord[];
 }
 
 export interface RegionMeta {
