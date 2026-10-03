@@ -73,3 +73,23 @@
 .animate-fadeIn {
   animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Water flow animation for 2D river paths */
+@keyframes flowWater {
+  from {
+    stroke-dashoffset: 48;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.river-flow-animated {
+  stroke-dasharray: 8 4;
+  animation: flowWater 2s linear infinite;
+}
+
+.river-flow-fast {
+  stroke-dasharray: 10 4;
+  animation: flowWater 0.9s linear infinite;
+}

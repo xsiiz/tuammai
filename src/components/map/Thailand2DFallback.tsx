@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { RegionId, DamTelemetry } from '../../types/dam';
 import { REGIONS } from '../../data/regions';
-import { REGION_COLORS, multiPolygonToSvgPath } from '../../utils/geoUtils';
+import { REGION_COLORS, multiPolygonToSvgPath, lineStringToSvgPath } from '../../utils/geoUtils';
 import provincesGeoData from '../../data/thailand-provinces.json';
+import riversGeoData from '../../data/thailand-rivers.json';
 
 interface Thailand2DFallbackProps {
   lang: 'th' | 'en';
@@ -47,6 +48,8 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
   theme = 'light'
 }) => {
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
+  const [hoveredDamId, setHoveredDamId] = useState<string | null>(null);
+  const [hoveredRiverId, setHoveredRiverId] = useState<string | null>(null);
 
   // Pre-project all provinces into SVG paths
   const projectedProvinces = useMemo(() => {
@@ -63,6 +66,30 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
         name_th: feature.properties.pro_th,
         name_en: feature.properties.pro_en,
         region: regId,
+        pathD
+      };
+    });
+  }, []);
+
+  // Pre-project all rivers into SVG paths
+  const projectedRivers = useMemo(() => {
+    return (riversGeoData.features as any[]).map((feature) => {
+      const coords = feature.geometry.coordinates as [number, number][];
+      const pathD = lineStringToSvgPath(
+        coords,
+        SVG_WIDTH,
+        SVG_HEIGHT,
+        THAILAND_BOUNDS
+      );
+      return {
+        id: feature.id,
+        name_th: feature.properties.name_th,
+        name_en: feature.properties.name_en,
+        basin: feature.properties.basin,
+        basin_th: feature.properties.basin_th,
+        region: feature.properties.region as RegionId,
+        connected_dams: feature.properties.connected_dams as string[],
+        major: feature.properties.major as boolean,
         pathD
       };
     });
@@ -133,10 +160,80 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
           })}
         </g>
 
+        {/* River Outflow Network Layer */}
+        <g id="rivers-layer">
+          {projectedRivers.map((river) => {
+            const isConnectedToSelectedDam = Boolean(
+              selectedDam && river.connected_dams.includes(selectedDam.id)
+            );
+            const isVisible =
+              selectedRegion === 'all'
+                ? river.major || isConnectedToSelectedDam
+                : river.region === selectedRegion || isConnectedToSelectedDam;
+
+            if (!isVisible) return null;
+
+            const isHovered = hoveredRiverId === river.id;
+
+            const strokeColor = isConnectedToSelectedDam
+              ? '#0284C7'
+              : isHovered
+              ? '#06B6D4'
+              : theme === 'dark'
+              ? '#0EA5E9'
+              : '#0284C7';
+
+            const strokeW = isConnectedToSelectedDam
+              ? 3.8
+              : isHovered
+              ? 3.0
+              : river.major
+              ? 2.2
+              : 1.4;
+
+            return (
+              <g
+                key={river.id}
+                className="cursor-pointer transition-all duration-200"
+                onMouseEnter={() => setHoveredRiverId(river.id)}
+                onMouseLeave={() => setHoveredRiverId(null)}
+              >
+                {/* Background casing line */}
+                <path
+                  d={river.pathD}
+                  fill="none"
+                  stroke={theme === 'dark' ? '#0F172A' : '#FFFFFF'}
+                  strokeWidth={strokeW + 1.6}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity={0.7}
+                />
+
+                {/* Flowing animated river path */}
+                <path
+                  d={river.pathD}
+                  fill="none"
+                  stroke={strokeColor}
+                  strokeWidth={strokeW}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className={isConnectedToSelectedDam ? 'river-flow-fast' : 'river-flow-animated'}
+                  opacity={isConnectedToSelectedDam ? 1 : 0.85}
+                >
+                  <title>{`${river.name_th} (${river.name_en}) - ${river.basin_th}`}</title>
+                </path>
+              </g>
+            );
+          })}
+        </g>
+
         {/* Dam Markers Layer */}
         <g>
           {projectedDams.map((dam) => {
             const isTop10 = Boolean(dam.national_rank && dam.national_rank <= 10);
+            const isMajor = Boolean(isTop10 || (dam.region === 'east' && dam.national_rank === 14));
+            const isSmallDam = !isMajor;
+
             // In national overview, show only top 10 largest dams.
             // On drill-down into a region, show all dams of that region.
             const isVisible = selectedRegion === 'all'
@@ -145,11 +242,14 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
             if (!isVisible) return null;
 
             const isSelected = selectedDam?.id === dam.id;
+            const isHovered = hoveredDamId === dam.id;
 
             return (
               <g
                 key={dam.id}
-                className="cursor-pointer transition-transform duration-200 hover:scale-125"
+                className="cursor-pointer"
+                onMouseEnter={() => setHoveredDamId(dam.id)}
+                onMouseLeave={() => setHoveredDamId(null)}
                 onClick={() => onSelectDam(dam)}
               >
                 {/* Ping ring for critical */}
@@ -157,7 +257,7 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
                   <circle
                     cx={dam.svgX}
                     cy={dam.svgY}
-                    r={12}
+                    r={isSmallDam ? 8 : 12}
                     fill="none"
                     stroke={dam.status_color}
                     strokeWidth={1.5}
@@ -166,30 +266,55 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
                   />
                 )}
 
-                {/* Base circle */}
+                {/* Invisible larger hit target for smooth hover */}
                 <circle
                   cx={dam.svgX}
                   cy={dam.svgY}
-                  r={isSelected ? 7 : 5}
-                  fill={dam.status_color}
-                  stroke="#FFFFFF"
-                  strokeWidth={isSelected ? 2 : 1}
-                  className="filter drop-shadow-md"
+                  r={10}
+                  fill="transparent"
                 />
 
-                {/* Floating label if region selected, dam selected, or top 10 in national view */}
-                {(selectedRegion !== 'all' || isSelected || isTop10) && (
-                  <text
-                    x={dam.svgX + 8}
-                    y={dam.svgY + 4}
-                    fill={theme === 'dark' ? '#F8FAFC' : '#0F172A'}
-                    fontSize={10}
-                    fontWeight={600}
-                    className="select-none pointer-events-none drop-shadow"
-                  >
-                    {isTop10 && selectedRegion === 'all' ? `#${dam.national_rank} ` : ''}
-                    {lang === 'th' ? dam.name_th : dam.name_en} ({dam.storage_percent.toFixed(0)}%)
-                  </text>
+                {/* Base circle (Dot for small dam, larger marker for major) */}
+                <circle
+                  cx={dam.svgX}
+                  cy={dam.svgY}
+                  r={isSmallDam ? (isSelected || isHovered ? 5 : 3.2) : (isSelected ? 7 : 5)}
+                  fill={dam.status_color}
+                  stroke="#FFFFFF"
+                  strokeWidth={isSelected ? 2 : (isSmallDam ? 1 : 1.5)}
+                  className="filter drop-shadow-md transition-all duration-150"
+                />
+
+                {/* Floating label/tooltip:
+                    - Major dam: visible when drilled down, or top 10 in national, or selected
+                    - Small dam: visible ONLY when hovered or selected */}
+                {((!isSmallDam && (selectedRegion !== 'all' || isTop10 || isSelected)) || (isSmallDam && (isHovered || isSelected))) && (
+                  <g className="pointer-events-none animate-fadeIn select-none">
+                    {isSmallDam && (
+                      <rect
+                        x={dam.svgX + 8}
+                        y={dam.svgY - 12}
+                        width={(lang === 'th' ? dam.name_th : dam.name_en).length * 8 + 50}
+                        height={18}
+                        rx={6}
+                        fill={theme === 'dark' ? '#0F172A' : '#FFFFFF'}
+                        stroke={`${dam.status_color}90`}
+                        strokeWidth={1}
+                        className="filter drop-shadow-lg"
+                      />
+                    )}
+                    <text
+                      x={dam.svgX + (isSmallDam ? 14 : 8)}
+                      y={dam.svgY + (isSmallDam ? 1 : 4)}
+                      fill={theme === 'dark' ? '#F8FAFC' : '#0F172A'}
+                      fontSize={isSmallDam ? 9.5 : 10}
+                      fontWeight={600}
+                      className="select-none pointer-events-none drop-shadow"
+                    >
+                      {isTop10 && selectedRegion === 'all' ? `#${dam.national_rank} ` : ''}
+                      {lang === 'th' ? dam.name_th : dam.name_en} ({dam.storage_percent.toFixed(0)}%)
+                    </text>
+                  </g>
                 )}
               </g>
             );

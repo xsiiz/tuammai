@@ -6,6 +6,9 @@ import { RegionId, DamTelemetry } from '../../types/dam';
 import { REGIONS } from '../../data/regions';
 import { geoTo3D, REGION_COLORS, createShapesFromMultiPolygon } from '../../utils/geoUtils';
 import provincesGeoData from '../../data/thailand-provinces.json';
+import riversGeoData from '../../data/thailand-rivers.json';
+import { RiverMesh3D } from './RiverMesh3D';
+import { RiverFeature } from '../../types/river';
 
 interface Thailand3DMapProps {
   lang: 'th' | 'en';
@@ -204,6 +207,9 @@ const DamMarker3D: React.FC<{
   const ringRef = useRef<THREE.Mesh>(null);
 
   const isTop10 = Boolean(dam.national_rank && dam.national_rank <= 10);
+  const isMajor = Boolean(isTop10 || (dam.region === 'east' && dam.national_rank === 14));
+  const isSmallDam = !isMajor;
+
   // National overview ('all') displays only the top 10 largest dams.
   // Drill-down into a specific region displays all reservoirs within that region.
   const isVisible = selectedRegion === 'all'
@@ -211,20 +217,110 @@ const DamMarker3D: React.FC<{
     : (selectedRegion === dam.region);
 
   const [x, y, baseZ] = useMemo(() => {
-    return geoTo3D(dam.coordinates[0], dam.coordinates[1], 0.35);
-  }, [dam.coordinates]);
+    return geoTo3D(dam.coordinates[0], dam.coordinates[1], isSmallDam ? 0.33 : 0.35);
+  }, [dam.coordinates, isSmallDam]);
 
   // Pulse animation for critical & warning pins
   useFrame(({ clock }) => {
     if (ringRef.current && isVisible) {
       const elapsed = clock.getElapsedTime() * 2;
-      const scale = 1 + (Math.sin(elapsed) + 1) * 0.4;
+      const scale = 1 + (Math.sin(elapsed) + 1) * (isSmallDam ? 0.25 : 0.4);
       ringRef.current.scale.set(scale, scale, 1);
     }
   });
 
   if (!isVisible) return null;
 
+  // 1) Small Dam (เขื่อนเล็ก): Render as a sleek tactile 3D dot
+  if (isSmallDam) {
+    return (
+      <group position={[x, y, baseZ]}>
+        {/* Invisible hit sphere for effortless hover & click */}
+        <mesh
+          onPointerOver={(e) => {
+            e.stopPropagation();
+            setHovered(true);
+            document.body.style.cursor = 'pointer';
+          }}
+          onPointerOut={(e) => {
+            e.stopPropagation();
+            setHovered(false);
+            document.body.style.cursor = 'auto';
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelectDam(dam);
+          }}
+        >
+          <sphereGeometry args={[0.09, 12, 12]} />
+          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+        </mesh>
+
+        {/* Outer glowing halo ring */}
+        <mesh ref={ringRef} position={[0, 0, 0.005]}>
+          <ringGeometry args={[0.035, 0.055, 20]} />
+          <meshBasicMaterial
+            color={dam.status_color}
+            transparent
+            opacity={hovered || isSelected ? 0.85 : (dam.status === 'critical' ? 0.6 : 0.3)}
+          />
+        </mesh>
+
+        {/* 3D Dot Core */}
+        <mesh
+          position={[0, 0, 0.02]}
+          scale={isSelected || hovered ? 1.45 : 1.0}
+        >
+          <sphereGeometry args={[0.032, 16, 16]} />
+          <meshStandardMaterial
+            color={dam.status_color}
+            emissive={dam.status_color}
+            emissiveIntensity={hovered || isSelected ? 0.9 : (dam.status === 'critical' ? 0.65 : 0.3)}
+            roughness={0.25}
+            metalness={0.1}
+          />
+        </mesh>
+
+        {/* Floating Tooltip ONLY on Hover or Selection */}
+        {(hovered || isSelected) && (
+          <Html
+            position={[0, 0.06, 0.06]}
+            center
+            distanceFactor={8.5}
+            style={{ pointerEvents: 'none' }}
+          >
+            <div className="flex flex-col items-center animate-fadeIn select-none pointer-events-none">
+              <div 
+                className={`px-2 py-1 rounded-lg text-[10px] font-bold whitespace-nowrap shadow-xl border flex items-center gap-1.5 backdrop-blur-md ${
+                  theme === 'dark' ? 'text-white' : 'text-slate-900'
+                }`}
+                style={{
+                  backgroundColor: theme === 'dark' ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                  borderColor: `${dam.status_color}90`
+                }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: dam.status_color }} />
+                <span>{lang === 'th' ? dam.name_th : dam.name_en}</span>
+                <span
+                  className="font-mono text-[9px] px-1 py-0.2 rounded font-bold"
+                  style={{ backgroundColor: `${dam.status_color}25`, color: dam.status_color }}
+                >
+                  {dam.storage_percent.toFixed(0)}%
+                </span>
+              </div>
+              <div 
+                className={`w-1.5 h-1.5 rotate-45 -mt-0.8 border-r border-b ${
+                  theme === 'dark' ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-300'
+                }`}
+              />
+            </div>
+          </Html>
+        )}
+      </group>
+    );
+  }
+
+  // 2) Major Dam (เขื่อนหลัก): 3D Pin with Stem, Head, and Floating Tag
   return (
     <group position={[x, y, baseZ]}>
       {/* Pulse ground ring */}
@@ -367,6 +463,21 @@ export const Thailand3DMap: React.FC<Thailand3DMapProps> = ({
   onSelectDam,
   theme = 'light'
 }) => {
+  // Memoize structured river features
+  const rivers: RiverFeature[] = useMemo(() => {
+    return (riversGeoData.features as any[]).map((f) => ({
+      id: f.id,
+      name_th: f.properties.name_th,
+      name_en: f.properties.name_en,
+      basin: f.properties.basin,
+      basin_th: f.properties.basin_th,
+      region: f.properties.region,
+      connected_dams: f.properties.connected_dams,
+      major: f.properties.major,
+      coordinates: f.geometry.coordinates as [number, number][]
+    }));
+  }, []);
+
   return (
     <div className={`relative w-full h-full select-none transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0B1120]' : 'bg-white'}`}>
       <Canvas
@@ -405,6 +516,19 @@ export const Thailand3DMap: React.FC<Thailand3DMapProps> = ({
               selectedRegion={selectedRegion}
               onSelectRegion={onSelectRegion}
               theme={theme}
+            />
+          ))}
+
+          {/* River Outflow Network (3D Channels & Animated Droplets) */}
+          {rivers.map((river) => (
+            <RiverMesh3D
+              key={river.id}
+              river={river}
+              selectedRegion={selectedRegion}
+              selectedDam={selectedDam}
+              dams={dams}
+              theme={theme}
+              lang={lang}
             />
           ))}
 

@@ -121,3 +121,67 @@ export function multiPolygonToSvgPath(
   }
   return pathD;
 }
+
+/**
+ * Approximate terrain elevation based on geographic coordinates for smooth river draping
+ */
+export function getTerrainElevation(lng: number, lat: number): number {
+  if (lat >= 17.0) return 0.23; // North mountain ranges
+  if (lat >= 16.0) {
+    if (lng > 101.5) return 0.17; // Isan Khorat plateau
+    return 0.19; // Lower North
+  }
+  if (lat >= 13.8 && lng < 99.8) return 0.21; // West Kanchanaburi
+  if (lat >= 14.5 && lng > 101.2) return 0.17; // Isan Mun basin
+  if (lng > 101.2 && lat < 14.2 && lat > 12.5) return 0.15; // East coast
+  if (lat < 11.0) return 0.16; // South peninsula
+  // Central plains & Chao Phraya delta
+  if (lat < 13.6) return 0.07; // River mouth / Gulf of Thailand
+  return 0.11; // Central
+}
+
+/**
+ * Convert GeoJSON LineString coordinates into Three.js Vector3 array for 3D lines/curves
+ */
+export function lineStringTo3DPoints(
+  coordinates: [number, number][],
+  elevationOffset: number = 0.02
+): THREE.Vector3[] {
+  return coordinates.map(([lng, lat]) => {
+    const elev = getTerrainElevation(lng, lat) + elevationOffset;
+    const [x, y, z] = geoTo3D(lng, lat, elev);
+    return new THREE.Vector3(x, y, z);
+  });
+}
+
+/**
+ * Convert GeoJSON LineString coordinates into SVG Path string for 2D Fallback Map
+ */
+export function lineStringToSvgPath(
+  coordinates: [number, number][],
+  width: number,
+  height: number,
+  bounds: { minLng: number; maxLng: number; minLat: number; maxLat: number }
+): string {
+  if (!coordinates || coordinates.length < 2) return '';
+
+  const { minLng, maxLng, minLat, maxLat } = bounds;
+  const lngRange = maxLng - minLng;
+  const latRange = maxLat - minLat;
+
+  const project = (lng: number, lat: number): [number, number] => {
+    const x = ((lng - minLng) / lngRange) * (width * 0.9) + width * 0.05;
+    const y = ((maxLat - lat) / latRange) * (height * 0.9) + height * 0.05;
+    return [x, y];
+  };
+
+  const [p0x, p0y] = project(coordinates[0][0], coordinates[0][1]);
+  let pathD = `M ${p0x.toFixed(1)} ${p0y.toFixed(1)}`;
+
+  for (let i = 1; i < coordinates.length; i++) {
+    const [px, py] = project(coordinates[i][0], coordinates[i][1]);
+    pathD += ` L ${px.toFixed(1)} ${py.toFixed(1)}`;
+  }
+
+  return pathD;
+}

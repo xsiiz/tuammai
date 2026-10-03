@@ -1,6 +1,7 @@
-import React from 'react';
-import { X, ArrowDownRight, ArrowUpRight, Droplets, AlertTriangle, ShieldCheck, MapPin, Building2, Calendar } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { X, ArrowDownRight, ArrowUpRight, Droplets, AlertTriangle, ShieldCheck, MapPin, Building2, Calendar, Waves } from 'lucide-react';
 import { DamTelemetry } from '../../types/dam';
+import riversGeoData from '../../data/thailand-rivers.json';
 
 interface DamDetailModalProps {
   dam: DamTelemetry | null;
@@ -49,6 +50,13 @@ export const DamDetailModal: React.FC<DamDetailModalProps> = ({ dam, onClose, la
   };
 
   const advisory = getAdvisory();
+
+  // Find rivers connected to this dam
+  const connectedRivers = useMemo(() => {
+    return (riversGeoData.features as any[]).filter((r) =>
+      r.properties.connected_dams.includes(dam.id)
+    );
+  }, [dam.id]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
@@ -190,8 +198,36 @@ export const DamDetailModal: React.FC<DamDetailModalProps> = ({ dam, onClose, la
             </div>
           </div>
 
+          {/* Downstream River Reach & Basin Info */}
+          {connectedRivers.length > 0 && (
+            <div className="mt-3.5 p-3 rounded-xl bg-sky-50/70 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800/60">
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-sky-800 dark:text-sky-300 mb-1.5">
+                <Waves className="w-3.5 h-3.5 text-sky-600 dark:text-cyan-400" />
+                <span>
+                  {lang === 'th' ? 'สายน้ำท้ายเขื่อนที่รับน้ำ & ลุ่มน้ำ' : 'Downstream River & Basin'}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {connectedRivers.map((r: any) => (
+                  <div
+                    key={r.id}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs bg-white dark:bg-slate-900 border border-sky-300 dark:border-sky-700/80 shadow-sm"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
+                    <span className="font-semibold text-slate-900 dark:text-white">
+                      {lang === 'th' ? r.properties.name_th : r.properties.name_en}
+                    </span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                      ({lang === 'th' ? r.properties.basin_th : r.properties.basin})
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Risk Advisory Note */}
-          <div className="mt-4 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+          <div className="mt-3.5 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 flex items-start gap-3">
             {advisory.level === 'critical' ? (
               <AlertTriangle className="w-5 h-5 text-red-500 dark:text-red-400 shrink-0 mt-0.5 animate-pulse" />
             ) : advisory.level === 'warning' ? (
