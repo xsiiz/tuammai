@@ -97,7 +97,7 @@ export function App() {
         onToggleViewMode={() => setViewMode((prev) => (prev === '3d' ? '2d' : '3d'))}
         theme={theme}
         onToggleTheme={handleToggleTheme}
-        lastUpdated="2026-10-03"
+        lastUpdated={dams[0]?.date || '2026-10-05'}
         damCount={dams.length}
         criticalCount={criticalCount}
       />

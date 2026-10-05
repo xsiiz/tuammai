@@ -1,0 +1,42 @@
+name: Daily Dam Hydrology Sync
+
+on:
+  schedule:
+    # Runs at 01:00 UTC daily (08:00 AM Indochina Time / Thailand UTC+7)
+    - cron: '0 1 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  sync-dam-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run dam hydrology sync
+        run: npm run sync:dams
+
+      - name: Commit and push updated dam telemetry
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain src/data/dams.ts)" ]; then
+            git add src/data/dams.ts .agents/skills/fetch-dam-water-data/data/dams_latest.json
+            git commit -m "chore(data): auto-sync daily dam water levels [skip ci]"
+            git push
+            echo "✅ Successfully synced and pushed latest dam data."
+          else
+            echo "ℹ️ Dam data is already up-to-date. No changes to commit."
+          fi
