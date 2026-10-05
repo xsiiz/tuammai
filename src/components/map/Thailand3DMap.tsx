@@ -167,9 +167,11 @@ const ProvinceMesh: React.FC<{
     return createShapesFromMultiPolygon(feature.geometry.coordinates);
   }, [feature]);
 
-  // Elevation based on region terrain + extra lift if province is selected
+  // Region color config matching Design.md
   const regionConfig = REGION_COLORS[regionNameRaw] || REGION_COLORS.central;
-  const extrudeDepth = regionConfig.elevation + (isSelectedRegion ? 0.08 : 0) + (isSelectedProvince ? 0.05 : 0);
+
+  // Uniform extrusion depth across all provinces and regions
+  const extrudeDepth = 0.15;
 
   const extrudeSettings = useMemo(() => ({
     depth: extrudeDepth,
@@ -180,17 +182,20 @@ const ProvinceMesh: React.FC<{
     bevelThickness: 0.015
   }), [extrudeDepth]);
 
-  // Crisp polygonal boundary ribbons from GeoJSON coordinates
+  // Crisp, fine polygonal boundary ribbons from GeoJSON coordinates
+  // Placed at Z = extrudeDepth + 0.015 (bevelThickness) + 0.003 so it rests directly on top of the surface
   const borderRibbons = useMemo(() => {
     const geoms: THREE.BufferGeometry[] = [];
-    const ribbonWidth = isSelectedProvince ? 0.022 : (hovered ? 0.018 : 0.013);
+    // Finer, elegant white border line (0.012 normal, 0.015 hover, 0.018 selected)
+    const ribbonWidth = isSelectedProvince ? 0.018 : (hovered ? 0.015 : 0.012);
+    const topSurfaceZ = extrudeDepth + 0.015 + 0.003;
     for (const polygon of feature.geometry.coordinates) {
       for (const ring of polygon) {
         if (!ring || ring.length < 3) continue;
         const geom = createRibbonGeometryFromRing(
           ring,
           ribbonWidth,
-          extrudeDepth + 0.007
+          topSurfaceZ
         );
         if (geom) geoms.push(geom);
       }
@@ -216,27 +221,26 @@ const ProvinceMesh: React.FC<{
     return theme === 'dark' ? '#334155' : '#E2E8F0';
   }, [hovered, isRegionActive, isSelectedRegion, isSelectedProvince, selectedRegion, regionConfig, theme]);
 
-  // Border outline color & opacity for crisp delineation
+  // Border outline color & opacity for crisp white delineation matching user reference
   const borderColor = useMemo(() => {
-    if (isSelectedProvince) return theme === 'dark' ? '#38BDF8' : '#0284C7';
-    if (hovered && isRegionActive) return theme === 'dark' ? '#38BDF8' : '#0369A1';
-    if (isSelectedRegion) return theme === 'dark' ? '#38BDF8' : '#FFFFFF';
-    if (selectedRegion === 'all') return theme === 'dark' ? '#64748B' : '#FFFFFF';
-    return theme === 'dark' ? '#1E293B' : '#CBD5E1';
-  }, [isSelectedProvince, hovered, isRegionActive, isSelectedRegion, selectedRegion, theme]);
+    if (isSelectedProvince) return theme === 'dark' ? '#38BDF8' : '#FFFFFF';
+    if (hovered && isRegionActive) return theme === 'dark' ? '#38BDF8' : '#FFFFFF';
+    if (isRegionActive) return theme === 'dark' ? '#38BDF8' : '#FFFFFF';
+    return theme === 'dark' ? '#1E293B' : '#E2E8F0';
+  }, [isSelectedProvince, hovered, isRegionActive, theme]);
 
   const borderOpacity = useMemo(() => {
     if (isSelectedProvince || (hovered && isRegionActive)) return 1.0;
-    if (isSelectedRegion) return theme === 'dark' ? 0.85 : 0.95;
-    if (selectedRegion === 'all') return theme === 'dark' ? 0.7 : 0.95;
+    if (isSelectedRegion) return 1.0;
+    if (selectedRegion === 'all') return 0.95;
     return 0.35;
-  }, [isSelectedProvince, hovered, isRegionActive, isSelectedRegion, selectedRegion, theme]);
+  }, [isSelectedProvince, hovered, isRegionActive, isSelectedRegion, selectedRegion]);
 
   // Label 3D position at centroid
   const [labelX, labelY, labelZ] = useMemo(() => {
     const cLng = provMeta ? provMeta.centroid[0] : 100.5;
     const cLat = provMeta ? provMeta.centroid[1] : 13.5;
-    return geoTo3D(cLng, cLat, extrudeDepth + 0.035);
+    return geoTo3D(cLng, cLat, extrudeDepth + 0.045);
   }, [provMeta, extrudeDepth]);
 
   // Visual hierarchy for province label display:
@@ -293,15 +297,17 @@ const ProvinceMesh: React.FC<{
 
       {/* Crisp Solid Province Boundary Ribbons from GeoJSON */}
       {borderRibbons.map((geom, idx) => (
-        <mesh key={`ribbon-${idx}`} geometry={geom}>
+        <mesh key={`ribbon-${idx}`} geometry={geom} renderOrder={5}>
           <meshBasicMaterial
             color={borderColor}
-            transparent
+            transparent={borderOpacity < 1.0}
             opacity={borderOpacity}
             side={THREE.DoubleSide}
-            polygonOffset
-            polygonOffsetFactor={-2}
-            polygonOffsetUnits={-2}
+            depthTest={true}
+            depthWrite={false}
+            polygonOffset={true}
+            polygonOffsetFactor={-4}
+            polygonOffsetUnits={-4}
           />
         </mesh>
       ))}

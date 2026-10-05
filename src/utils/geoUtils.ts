@@ -19,17 +19,20 @@ export function geoTo3D(
   return [x, y, elevation];
 }
 
+export const UNIFORM_TERRAIN_ELEVATION = 0.15;
+
 /**
  * Region color mapping according to Design.md (Tactile matte clay palette)
+ * With uniform low-relief extrusion depth across all regions
  */
 export const REGION_COLORS: Record<RegionId, { base: string; highlight: string; elevation: number }> = {
-  all: { base: '#94A3B8', highlight: '#38BDF8', elevation: 0.1 },
-  north: { base: '#86EFAC', highlight: '#22C55E', elevation: 0.22 },      // 🌿 Mint / Sage Green (ภูเขาสูง ป่าไม้)
-  northeast: { base: '#FDBA74', highlight: '#F97316', elevation: 0.16 },  // 🍑 Warm Coral / Peach (ที่ราบสูงโคราช)
-  central: { base: '#FDE68A', highlight: '#FACC15', elevation: 0.1 },    // 🌾 Butter Yellow (ที่ราบลุ่ม อู่ข้าวอู่น้ำ)
-  west: { base: '#DDD6FE', highlight: '#8B5CF6', elevation: 0.2 },       // 🪻 Soft Lavender (เทือกเขาตะนาวศรี)
-  east: { base: '#FDA4AF', highlight: '#F43F5E', elevation: 0.14 },      // 🌸 Rose Pink (พื้นที่ชายฝั่ง EEC)
-  south: { base: '#7DD3FC', highlight: '#0EA5E9', elevation: 0.15 }      // 🌊 Sky Aqua (คาบสมุทร ทะเลใต้)
+  all: { base: '#94A3B8', highlight: '#38BDF8', elevation: UNIFORM_TERRAIN_ELEVATION },
+  north: { base: '#86EFAC', highlight: '#22C55E', elevation: UNIFORM_TERRAIN_ELEVATION },
+  northeast: { base: '#FDBA74', highlight: '#F97316', elevation: UNIFORM_TERRAIN_ELEVATION },
+  central: { base: '#FDE68A', highlight: '#FACC15', elevation: UNIFORM_TERRAIN_ELEVATION },
+  west: { base: '#DDD6FE', highlight: '#8B5CF6', elevation: UNIFORM_TERRAIN_ELEVATION },
+  east: { base: '#FDA4AF', highlight: '#F43F5E', elevation: UNIFORM_TERRAIN_ELEVATION },
+  south: { base: '#7DD3FC', highlight: '#0EA5E9', elevation: UNIFORM_TERRAIN_ELEVATION }
 };
 
 /**
@@ -183,52 +186,13 @@ export function multiPolygonToSvgPath(
  * pop up with +0.08 depth. We boost elevation accordingly so rivers stay on the top surface.
  */
 export function getTerrainElevation(
-  lng: number,
-  lat: number,
-  selectedRegion?: RegionId,
-  riverRegion?: RegionId
+  _lng?: number,
+  _lat?: number,
+  _selectedRegion?: RegionId,
+  _riverRegion?: RegionId
 ): number {
-  let baseElev = 0.11; // Central plains
-
-  if (lat >= 17.0) {
-    baseElev = 0.23; // North mountain ranges
-  } else if (lat >= 16.0) {
-    if (lng > 101.5) baseElev = 0.17; // Isan Khorat plateau
-    else baseElev = 0.19; // Lower North
-  } else if (lat >= 13.8 && lng < 99.8) {
-    baseElev = 0.21; // West Kanchanaburi
-  } else if (lat >= 14.2 && lng > 101.2) {
-    baseElev = 0.17; // Isan Mun basin
-  } else if (lng > 101.2 && lat < 14.2 && lat >= 12.5) {
-    baseElev = 0.15; // East coast
-  } else if (lat < 11.5) {
-    baseElev = 0.16; // South peninsula
-  } else if (lat < 13.6) {
-    baseElev = 0.08; // River mouth / Gulf of Thailand
-  } else {
-    baseElev = 0.11; // Central
-  }
-
-  // Drill-down elevation boost:
-  // If this river belongs to the active region or if the point falls inside the active region,
-  // raise the elevation by +0.085 to perfectly drape above the +0.08 extruded region mesh
-  if (selectedRegion && selectedRegion !== 'all') {
-    const isMatchingRiverRegion = riverRegion === selectedRegion;
-    let isPointInSelected = false;
-
-    if (selectedRegion === 'north' && (lat >= 16.0 && lng <= 101.5)) isPointInSelected = true;
-    else if (selectedRegion === 'northeast' && ((lat >= 16.0 && lng > 101.5) || (lat >= 14.2 && lng > 101.2))) isPointInSelected = true;
-    else if (selectedRegion === 'central' && (lat >= 13.5 && lat < 16.0 && lng >= 99.8 && lng <= 101.2)) isPointInSelected = true;
-    else if (selectedRegion === 'west' && (lat >= 11.5 && lat <= 16.0 && lng < 99.8)) isPointInSelected = true;
-    else if (selectedRegion === 'east' && (lat >= 12.5 && lat < 14.2 && lng > 101.2)) isPointInSelected = true;
-    else if (selectedRegion === 'south' && lat < 11.5) isPointInSelected = true;
-
-    if (isMatchingRiverRegion || isPointInSelected) {
-      baseElev += 0.088;
-    }
-  }
-
-  return baseElev;
+  // Uniform terrain top surface elevation across all of Thailand
+  return UNIFORM_TERRAIN_ELEVATION + 0.015;
 }
 
 /**

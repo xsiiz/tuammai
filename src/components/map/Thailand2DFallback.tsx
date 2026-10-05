@@ -297,24 +297,20 @@ export const Thailand2DFallback: React.FC<Thailand2DFallbackProps> = ({
             let strokeOpacity = 0.8;
 
             if (isProvSelected) {
-              strokeColor = theme === 'dark' ? '#38BDF8' : '#0284C7';
-              strokeW = 2.6;
+              strokeColor = theme === 'dark' ? '#38BDF8' : '#FFFFFF';
+              strokeW = 2.4;
               strokeOpacity = 1.0;
             } else if (isProvHovered) {
-              strokeColor = theme === 'dark' ? '#38BDF8' : '#0284C7';
-              strokeW = 2.0;
-              strokeOpacity = 1.0;
-            } else if (isSelectedReg) {
               strokeColor = theme === 'dark' ? '#38BDF8' : '#FFFFFF';
-              strokeW = 1.5;
-              strokeOpacity = 0.95;
-            } else if (isRegActive) {
-              strokeColor = theme === 'dark' ? '#334155' : '#FFFFFF';
+              strokeW = 1.6;
+              strokeOpacity = 1.0;
+            } else if (isSelectedReg || isRegActive) {
+              strokeColor = theme === 'dark' ? '#38BDF8' : '#FFFFFF';
               strokeW = 1.2;
-              strokeOpacity = 0.9;
+              strokeOpacity = 1.0;
             } else {
-              strokeColor = theme === 'dark' ? '#1E293B' : '#CBD5E1';
-              strokeW = 0.8;
+              strokeColor = theme === 'dark' ? '#1E293B' : '#E2E8F0';
+              strokeW = 0.7;
               strokeOpacity = 0.35;
             }
 
