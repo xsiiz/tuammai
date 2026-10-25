@@ -13,11 +13,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       99.120667,
       14.4
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 17548.55,
-    "storage_percent": 98.89,
-    "inflow_mcm": 28.88,
-    "outflow_mcm": 35.19,
+    "date": "2026-10-25",
+    "storage_mcm": 17544.39,
+    "storage_percent": 98.87,
+    "inflow_mcm": 31.26,
+    "outflow_mcm": 33.74,
     "water_level_msl": 0,
     "status": "critical",
     "status_color": "#EF4444",
@@ -25,14 +25,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Critical",
     "capacity_mcm": 17745,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 17556.89,
-        "storage_percent": 98.94,
-        "inflow_mcm": 46.92,
-        "outflow_mcm": 24.62,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 17581.91,
@@ -80,6 +72,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 28.88,
         "outflow_mcm": 35.19,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 17544.39,
+        "storage_percent": 98.87,
+        "inflow_mcm": 31.26,
+        "outflow_mcm": 33.74,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 1
@@ -96,10 +96,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       98.971456,
       17.241944
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 9542.12,
-    "storage_percent": 70.88,
-    "inflow_mcm": 13.43,
+    "date": "2026-10-25",
+    "storage_mcm": 9547.3,
+    "storage_percent": 70.92,
+    "inflow_mcm": 10.75,
     "outflow_mcm": 5,
     "water_level_msl": 0,
     "status": "normal",
@@ -108,14 +108,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 13462,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 9477.52,
-        "storage_percent": 70.4,
-        "inflow_mcm": 23.63,
-        "outflow_mcm": 5,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 9490.42,
@@ -163,6 +155,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 13.43,
         "outflow_mcm": 5,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 9547.3,
+        "storage_percent": 70.92,
+        "inflow_mcm": 10.75,
+        "outflow_mcm": 5,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 2
@@ -179,11 +179,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       100.554936,
       17.768056
     ],
-    "date": "2026-10-24",
+    "date": "2026-10-25",
     "storage_mcm": 7767.28,
     "storage_percent": 81.67,
-    "inflow_mcm": 8.41,
-    "outflow_mcm": 9.99,
+    "inflow_mcm": 10.75,
+    "outflow_mcm": 9.98,
     "water_level_msl": 0,
     "status": "warning",
     "status_color": "#F59E0B",
@@ -191,14 +191,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 9510,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 7771.98,
-        "storage_percent": 81.72,
-        "inflow_mcm": 11.13,
-        "outflow_mcm": 8.01,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 7771.98,
@@ -246,6 +238,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 8.41,
         "outflow_mcm": 9.99,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 7767.28,
+        "storage_percent": 81.67,
+        "inflow_mcm": 10.75,
+        "outflow_mcm": 9.98,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 3
@@ -262,11 +262,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       98.60411,
       14.7975
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 8632.93,
-    "storage_percent": 97.44,
-    "inflow_mcm": 13.46,
-    "outflow_mcm": 20.09,
+    "date": "2026-10-25",
+    "storage_mcm": 8621.43,
+    "storage_percent": 97.31,
+    "inflow_mcm": 9.71,
+    "outflow_mcm": 20.17,
     "water_level_msl": 0,
     "status": "critical",
     "status_color": "#EF4444",
@@ -274,14 +274,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Critical",
     "capacity_mcm": 8860,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 8629.1,
-        "storage_percent": 97.39,
-        "inflow_mcm": 34.03,
-        "outflow_mcm": 10,
-        "water_level_msl": 154.4
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 8636.77,
@@ -324,10 +316,18 @@ export const DAMS_DATA: DamTelemetry[] = [
       },
       {
         "date": "2026-10-24",
-        "storage_mcm": 8632.93,
-        "storage_percent": 97.44,
-        "inflow_mcm": 13.46,
-        "outflow_mcm": 20.09,
+        "storage_mcm": 8621.43,
+        "storage_percent": 97.31,
+        "inflow_mcm": 9.71,
+        "outflow_mcm": 20.17,
+        "water_level_msl": 154.38
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 8621.43,
+        "storage_percent": 97.31,
+        "inflow_mcm": 9.71,
+        "outflow_mcm": 20.17,
         "water_level_msl": 0
       }
     ],
@@ -345,11 +345,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       98.670247,
       9.054554
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 4273.29,
-    "storage_percent": 75.78,
-    "inflow_mcm": 7.47,
-    "outflow_mcm": 5.56,
+    "date": "2026-10-25",
+    "storage_mcm": 4276.35,
+    "storage_percent": 75.84,
+    "inflow_mcm": 6.13,
+    "outflow_mcm": 2.69,
     "water_level_msl": 0,
     "status": "normal",
     "status_color": "#10B981",
@@ -357,14 +357,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 5639,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 4258.02,
-        "storage_percent": 75.51,
-        "inflow_mcm": 9.49,
-        "outflow_mcm": 3.01,
-        "water_level_msl": 86.79
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 4261.07,
@@ -407,10 +399,18 @@ export const DAMS_DATA: DamTelemetry[] = [
       },
       {
         "date": "2026-10-24",
-        "storage_mcm": 4273.29,
-        "storage_percent": 75.78,
-        "inflow_mcm": 7.47,
-        "outflow_mcm": 5.56,
+        "storage_mcm": 4276.35,
+        "storage_percent": 75.84,
+        "inflow_mcm": 6.13,
+        "outflow_mcm": 2.69,
+        "water_level_msl": 86.91
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 4276.35,
+        "storage_percent": 75.84,
+        "inflow_mcm": 6.13,
+        "outflow_mcm": 2.69,
         "water_level_msl": 0
       }
     ],
@@ -428,11 +428,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       102.621325,
       16.770278
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 1435.19,
-    "storage_percent": 59.04,
-    "inflow_mcm": 1.08,
-    "outflow_mcm": 5.35,
+    "date": "2026-10-25",
+    "storage_mcm": 1429.56,
+    "storage_percent": 58.81,
+    "inflow_mcm": 0,
+    "outflow_mcm": 3.06,
     "water_level_msl": 0,
     "status": "normal",
     "status_color": "#10B981",
@@ -440,14 +440,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 2431,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 1457.84,
-        "storage_percent": 59.97,
-        "inflow_mcm": 0,
-        "outflow_mcm": 4,
-        "water_level_msl": 179.06
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 1455,
@@ -490,10 +482,18 @@ export const DAMS_DATA: DamTelemetry[] = [
       },
       {
         "date": "2026-10-24",
-        "storage_mcm": 1435.19,
-        "storage_percent": 59.04,
-        "inflow_mcm": 1.08,
-        "outflow_mcm": 5.35,
+        "storage_mcm": 1429.56,
+        "storage_percent": 58.81,
+        "inflow_mcm": 0,
+        "outflow_mcm": 3.06,
+        "water_level_msl": 178.96
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 1429.56,
+        "storage_percent": 58.81,
+        "inflow_mcm": 0,
+        "outflow_mcm": 3.06,
         "water_level_msl": 0
       }
     ],
@@ -511,11 +511,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       103.4385,
       16.60243
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 1156.4,
-    "storage_percent": 58.4,
+    "date": "2026-10-25",
+    "storage_mcm": 1149.93,
+    "storage_percent": 58.08,
     "inflow_mcm": 0,
-    "outflow_mcm": 4.6,
+    "outflow_mcm": 4.59,
     "water_level_msl": 0,
     "status": "normal",
     "status_color": "#10B981",
@@ -523,14 +523,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 1980,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 1186.84,
-        "storage_percent": 59.94,
-        "inflow_mcm": 1.03,
-        "outflow_mcm": 4.42,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 1182.46,
@@ -578,6 +570,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0,
         "outflow_mcm": 4.6,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 1149.93,
+        "storage_percent": 58.08,
+        "inflow_mcm": 0,
+        "outflow_mcm": 4.59,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 7
@@ -594,11 +594,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       105.42089,
       15.202778
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 1856.21,
-    "storage_percent": 94.42,
-    "inflow_mcm": 2.36,
-    "outflow_mcm": 6.99,
+    "date": "2026-10-25",
+    "storage_mcm": 1850.65,
+    "storage_percent": 94.13,
+    "inflow_mcm": 2.43,
+    "outflow_mcm": 7.05,
     "water_level_msl": 0,
     "status": "warning",
     "status_color": "#F59E0B",
@@ -606,14 +606,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 1966,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 1853.43,
-        "storage_percent": 94.27,
-        "inflow_mcm": 3.71,
-        "outflow_mcm": 0,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 1858.99,
@@ -661,6 +653,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 2.36,
         "outflow_mcm": 6.99,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 1850.65,
+        "storage_percent": 94.13,
+        "inflow_mcm": 2.43,
+        "outflow_mcm": 7.05,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 8
@@ -677,11 +677,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       101.273,
       6.15473
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 766.63,
-    "storage_percent": 52.71,
-    "inflow_mcm": 5.8,
-    "outflow_mcm": 4.2,
+    "date": "2026-10-25",
+    "storage_mcm": 770.02,
+    "storage_percent": 52.95,
+    "inflow_mcm": 6.61,
+    "outflow_mcm": 3.12,
     "water_level_msl": 0,
     "status": "normal",
     "status_color": "#10B981",
@@ -689,14 +689,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 1454,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 750.2,
-        "storage_percent": 51.58,
-        "inflow_mcm": 4.1,
-        "outflow_mcm": 4,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 752.8,
@@ -744,6 +736,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 5.8,
         "outflow_mcm": 4.2,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 770.02,
+        "storage_percent": 52.95,
+        "inflow_mcm": 6.61,
+        "outflow_mcm": 3.12,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 9
@@ -760,10 +760,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       101.076111,
       14.856944
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 805.79,
-    "storage_percent": 92.46,
-    "inflow_mcm": 1.33,
+    "date": "2026-10-25",
+    "storage_mcm": 807.31,
+    "storage_percent": 92.63,
+    "inflow_mcm": 2.86,
     "outflow_mcm": 0.87,
     "water_level_msl": 0,
     "status": "warning",
@@ -772,14 +772,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 960,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 792.03,
-        "storage_percent": 90.88,
-        "inflow_mcm": 5.22,
-        "outflow_mcm": 3.02,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 798.14,
@@ -827,6 +819,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 1.33,
         "outflow_mcm": 0.87,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 807.31,
+        "storage_percent": 92.63,
+        "inflow_mcm": 2.86,
+        "outflow_mcm": 0.87,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 10
@@ -843,10 +843,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       100.415556,
       17.182222
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 804.2,
-    "storage_percent": 85.64,
-    "inflow_mcm": 2.27,
+    "date": "2026-10-25",
+    "storage_mcm": 805,
+    "storage_percent": 85.73,
+    "inflow_mcm": 1.87,
     "outflow_mcm": 0.86,
     "water_level_msl": 0,
     "status": "warning",
@@ -855,14 +855,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 939,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 794.6,
-        "storage_percent": 84.62,
-        "inflow_mcm": 3.09,
-        "outflow_mcm": 0.86,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 796.6,
@@ -910,6 +902,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 2.27,
         "outflow_mcm": 0.86,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 805,
+        "storage_percent": 85.73,
+        "inflow_mcm": 1.87,
+        "outflow_mcm": 0.86,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 11
@@ -926,9 +926,9 @@ export const DAMS_DATA: DamTelemetry[] = [
       99.629886,
       12.917017
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 700.91,
-    "storage_percent": 98.72,
+    "date": "2026-10-25",
+    "storage_mcm": 697.27,
+    "storage_percent": 98.21,
     "inflow_mcm": 5.15,
     "outflow_mcm": 8.64,
     "water_level_msl": 0,
@@ -938,14 +938,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Critical",
     "capacity_mcm": 710,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 719.52,
-        "storage_percent": 101.34,
-        "inflow_mcm": 8.08,
-        "outflow_mcm": 3.05,
-        "water_level_msl": 99.21
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 717.26,
@@ -990,6 +982,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "date": "2026-10-24",
         "storage_mcm": 700.91,
         "storage_percent": 98.72,
+        "inflow_mcm": 5.32,
+        "outflow_mcm": 3.06,
+        "water_level_msl": 98.8
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 697.27,
+        "storage_percent": 98.21,
         "inflow_mcm": 5.15,
         "outflow_mcm": 8.64,
         "water_level_msl": 0
@@ -1009,10 +1009,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       103.75,
       17.3
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 304.38,
-    "storage_percent": 58.53,
-    "inflow_mcm": 0.24,
+    "date": "2026-10-25",
+    "storage_mcm": 303.13,
+    "storage_percent": 58.29,
+    "inflow_mcm": 0.22,
     "outflow_mcm": 1.19,
     "water_level_msl": 0,
     "status": "normal",
@@ -1021,14 +1021,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 520,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 313.75,
-        "storage_percent": 60.34,
-        "inflow_mcm": 0.26,
-        "outflow_mcm": 0,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 313.75,
@@ -1076,6 +1068,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.24,
         "outflow_mcm": 1.19,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 303.13,
+        "storage_percent": 58.29,
+        "inflow_mcm": 0.22,
+        "outflow_mcm": 1.19,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 13
@@ -1092,10 +1092,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       101.647778,
       13.431944
     ],
-    "date": "2026-10-24",
+    "date": "2026-10-25",
     "storage_mcm": 369,
     "storage_percent": 87.86,
-    "inflow_mcm": 0.65,
+    "inflow_mcm": 0.15,
     "outflow_mcm": 0.01,
     "water_level_msl": 0,
     "status": "warning",
@@ -1104,14 +1104,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 420,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 364,
-        "storage_percent": 86.67,
-        "inflow_mcm": 1.65,
-        "outflow_mcm": 0.01,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 364.5,
@@ -1159,6 +1151,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.65,
         "outflow_mcm": 0.01,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 369,
+        "storage_percent": 87.86,
+        "inflow_mcm": 0.15,
+        "outflow_mcm": 0.01,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 14
@@ -1175,10 +1175,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       99.816667,
       12.451389
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 319.2,
-    "storage_percent": 81.64,
-    "inflow_mcm": 2.17,
+    "date": "2026-10-25",
+    "storage_mcm": 320.96,
+    "storage_percent": 82.09,
+    "inflow_mcm": 2.47,
     "outflow_mcm": 0.71,
     "water_level_msl": 0,
     "status": "warning",
@@ -1187,14 +1187,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 391,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 313.66,
-        "storage_percent": 80.22,
-        "inflow_mcm": 3.2,
-        "outflow_mcm": 2.91,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 313.37,
@@ -1242,6 +1234,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 2.17,
         "outflow_mcm": 0.71,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 320.96,
+        "storage_percent": 82.09,
+        "inflow_mcm": 2.47,
+        "outflow_mcm": 0.71,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 15
@@ -1258,11 +1258,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       101.561667,
       14.865
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 267.26,
-    "storage_percent": 84.98,
-    "inflow_mcm": 1.09,
-    "outflow_mcm": 0.17,
+    "date": "2026-10-25",
+    "storage_mcm": 266.93,
+    "storage_percent": 84.88,
+    "inflow_mcm": 1.02,
+    "outflow_mcm": 0.28,
     "water_level_msl": 0,
     "status": "warning",
     "status_color": "#F59E0B",
@@ -1270,14 +1270,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 314,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 261.99,
-        "storage_percent": 83.31,
-        "inflow_mcm": 1.84,
-        "outflow_mcm": 0,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 262.32,
@@ -1325,6 +1317,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 1.09,
         "outflow_mcm": 0.17,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 266.93,
+        "storage_percent": 84.88,
+        "inflow_mcm": 1.02,
+        "outflow_mcm": 0.28,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 16
@@ -1341,10 +1341,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       99.661749,
       14.830645
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 233,
-    "storage_percent": 77.93,
-    "inflow_mcm": 5.24,
+    "date": "2026-10-25",
+    "storage_mcm": 237.5,
+    "storage_percent": 79.43,
+    "inflow_mcm": 4.74,
     "outflow_mcm": 0.06,
     "water_level_msl": 0,
     "status": "normal",
@@ -1353,14 +1353,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 299,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 200.8,
-        "storage_percent": 67.16,
-        "inflow_mcm": 5.02,
-        "outflow_mcm": 0.06,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 203.8,
@@ -1408,6 +1400,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 5.24,
         "outflow_mcm": 0.06,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 237.5,
+        "storage_percent": 79.43,
+        "inflow_mcm": 4.74,
+        "outflow_mcm": 0.06,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 17
@@ -1424,10 +1424,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       102.027308,
       14.080838
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 288.4,
-    "storage_percent": 97.85,
-    "inflow_mcm": 0.81,
+    "date": "2026-10-25",
+    "storage_mcm": 289.2,
+    "storage_percent": 98.12,
+    "inflow_mcm": 1.07,
     "outflow_mcm": 0.2,
     "water_level_msl": 0,
     "status": "critical",
@@ -1436,14 +1436,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Critical",
     "capacity_mcm": 295,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 289.72,
-        "storage_percent": 98.3,
-        "inflow_mcm": 0.87,
-        "outflow_mcm": 1.85,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 288.93,
@@ -1491,6 +1483,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.81,
         "outflow_mcm": 0.2,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 289.2,
+        "storage_percent": 98.12,
+        "inflow_mcm": 1.07,
+        "outflow_mcm": 0.2,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 18
@@ -1507,9 +1507,9 @@ export const DAMS_DATA: DamTelemetry[] = [
       101.558297,
       12.977205
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 267.8,
-    "storage_percent": 90.78,
+    "date": "2026-10-25",
+    "storage_mcm": 267.36,
+    "storage_percent": 90.63,
     "inflow_mcm": 0.17,
     "outflow_mcm": 0.44,
     "water_level_msl": 0,
@@ -1519,14 +1519,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 295,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 268.68,
-        "storage_percent": 91.08,
-        "inflow_mcm": 3.09,
-        "outflow_mcm": 0.28,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 268.68,
@@ -1574,6 +1566,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.17,
         "outflow_mcm": 0.44,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 267.36,
+        "storage_percent": 90.63,
+        "inflow_mcm": 0.17,
+        "outflow_mcm": 0.44,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 19
@@ -1590,9 +1590,9 @@ export const DAMS_DATA: DamTelemetry[] = [
       102.2774,
       14.415833
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 174.64,
-    "storage_percent": 63.51,
+    "date": "2026-10-25",
+    "storage_mcm": 173.85,
+    "storage_percent": 63.22,
     "inflow_mcm": 0.57,
     "outflow_mcm": 1.24,
     "water_level_msl": 0,
@@ -1602,14 +1602,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 275,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 177.8,
-        "storage_percent": 64.65,
-        "inflow_mcm": 0.84,
-        "outflow_mcm": 1.24,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 177.27,
@@ -1657,6 +1649,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.57,
         "outflow_mcm": 1.24,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 173.85,
+        "storage_percent": 63.22,
+        "inflow_mcm": 0.57,
+        "outflow_mcm": 1.24,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 20
@@ -1673,10 +1673,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       99.04011,
       19.16138
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 254.89,
-    "storage_percent": 96.29,
-    "inflow_mcm": 0.4,
+    "date": "2026-10-25",
+    "storage_mcm": 255.05,
+    "storage_percent": 96.36,
+    "inflow_mcm": 0.56,
     "outflow_mcm": 0.4,
     "water_level_msl": 0,
     "status": "critical",
@@ -1685,14 +1685,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Critical",
     "capacity_mcm": 265,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 253.39,
-        "storage_percent": 95.62,
-        "inflow_mcm": 0.59,
-        "outflow_mcm": 0,
-        "water_level_msl": 395.82
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 253.56,
@@ -1736,8 +1728,16 @@ export const DAMS_DATA: DamTelemetry[] = [
       {
         "date": "2026-10-24",
         "storage_mcm": 254.89,
-        "storage_percent": 96.29,
+        "storage_percent": 96.18,
         "inflow_mcm": 0.4,
+        "outflow_mcm": 0,
+        "water_level_msl": 395.91
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 255.05,
+        "storage_percent": 96.36,
+        "inflow_mcm": 0.56,
         "outflow_mcm": 0.4,
         "water_level_msl": 0
       }
@@ -1756,11 +1756,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       99.121978,
       18.92348
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 179.66,
-    "storage_percent": 68.31,
-    "inflow_mcm": 0.38,
-    "outflow_mcm": 0.49,
+    "date": "2026-10-25",
+    "storage_mcm": 179.63,
+    "storage_percent": 68.3,
+    "inflow_mcm": 0.45,
+    "outflow_mcm": 0.48,
     "water_level_msl": 0,
     "status": "normal",
     "status_color": "#10B981",
@@ -1768,14 +1768,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 263,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 181.89,
-        "storage_percent": 69.16,
-        "inflow_mcm": 0.43,
-        "outflow_mcm": 1.01,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 181.46,
@@ -1823,6 +1815,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.38,
         "outflow_mcm": 0.49,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 179.63,
+        "storage_percent": 68.3,
+        "inflow_mcm": 0.45,
+        "outflow_mcm": 0.48,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 22
@@ -1839,11 +1839,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       101.321389,
       14.314722
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 216.58,
-    "storage_percent": 96.69,
-    "inflow_mcm": 1.14,
-    "outflow_mcm": 0.69,
+    "date": "2026-10-25",
+    "storage_mcm": 217.86,
+    "storage_percent": 97.26,
+    "inflow_mcm": 1.84,
+    "outflow_mcm": 0.5,
     "water_level_msl": 0,
     "status": "critical",
     "status_color": "#EF4444",
@@ -1851,14 +1851,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Critical",
     "capacity_mcm": 224,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 217.81,
-        "storage_percent": 97.24,
-        "inflow_mcm": 1.08,
-        "outflow_mcm": 0.58,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 217.76,
@@ -1906,6 +1898,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 1.14,
         "outflow_mcm": 0.69,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 217.86,
+        "storage_percent": 97.26,
+        "inflow_mcm": 1.84,
+        "outflow_mcm": 0.5,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 23
@@ -1922,9 +1922,9 @@ export const DAMS_DATA: DamTelemetry[] = [
       99.642272,
       18.809072
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 162.72,
-    "storage_percent": 95.72,
+    "date": "2026-10-25",
+    "storage_mcm": 162.32,
+    "storage_percent": 95.48,
     "inflow_mcm": 0,
     "outflow_mcm": 0.4,
     "water_level_msl": 0,
@@ -1934,14 +1934,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Critical",
     "capacity_mcm": 170,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 165,
-        "storage_percent": 97.06,
-        "inflow_mcm": 0,
-        "outflow_mcm": 0.4,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 164.6,
@@ -1989,6 +1981,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0,
         "outflow_mcm": 0.4,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 162.32,
+        "storage_percent": 95.48,
+        "inflow_mcm": 0,
+        "outflow_mcm": 0.4,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 24
@@ -2005,10 +2005,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       103.938048,
       16.971667
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 87.99,
-    "storage_percent": 53.33,
-    "inflow_mcm": 0.07,
+    "date": "2026-10-25",
+    "storage_mcm": 88.13,
+    "storage_percent": 53.41,
+    "inflow_mcm": 0.22,
     "outflow_mcm": 0,
     "water_level_msl": 0,
     "status": "normal",
@@ -2017,14 +2017,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 165,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 86.98,
-        "storage_percent": 52.72,
-        "inflow_mcm": 0.07,
-        "outflow_mcm": 0,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 87.12,
@@ -2072,6 +2064,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.07,
         "outflow_mcm": 0,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 88.13,
+        "storage_percent": 53.41,
+        "inflow_mcm": 0.22,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 25
@@ -2088,11 +2088,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       101.654593,
       16.533333
     ],
-    "date": "2026-10-24",
+    "date": "2026-10-25",
     "storage_mcm": 137.62,
     "storage_percent": 83.91,
-    "inflow_mcm": 0.36,
-    "outflow_mcm": 0.14,
+    "inflow_mcm": 0.03,
+    "outflow_mcm": 0,
     "water_level_msl": 0,
     "status": "warning",
     "status_color": "#F59E0B",
@@ -2100,14 +2100,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 164,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 135.98,
-        "storage_percent": 82.91,
-        "inflow_mcm": 0.31,
-        "outflow_mcm": 0,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 136.27,
@@ -2155,6 +2147,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.36,
         "outflow_mcm": 0.14,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 137.62,
+        "storage_percent": 83.91,
+        "inflow_mcm": 0.03,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 26
@@ -2171,11 +2171,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       101.297011,
       12.934647
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 180.46,
-    "storage_percent": 110.2,
-    "inflow_mcm": 3.34,
-    "outflow_mcm": 2.14,
+    "date": "2026-10-25",
+    "storage_mcm": 181.18,
+    "storage_percent": 110.64,
+    "inflow_mcm": 2.51,
+    "outflow_mcm": 1.79,
     "water_level_msl": 0,
     "status": "critical",
     "status_color": "#EF4444",
@@ -2183,14 +2183,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Critical",
     "capacity_mcm": 164,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 184.52,
-        "storage_percent": 112.68,
-        "inflow_mcm": 5.2,
-        "outflow_mcm": 3.05,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 184.04,
@@ -2238,6 +2230,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 3.34,
         "outflow_mcm": 2.14,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 181.18,
+        "storage_percent": 110.64,
+        "inflow_mcm": 2.51,
+        "outflow_mcm": 1.79,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 27
@@ -2254,11 +2254,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       99.450405,
       15.534533
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 156.72,
-    "storage_percent": 97.95,
-    "inflow_mcm": 0.79,
-    "outflow_mcm": 0.6,
+    "date": "2026-10-25",
+    "storage_mcm": 157.32,
+    "storage_percent": 98.33,
+    "inflow_mcm": 0.67,
+    "outflow_mcm": 0.09,
     "water_level_msl": 0,
     "status": "critical",
     "status_color": "#EF4444",
@@ -2266,14 +2266,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Critical",
     "capacity_mcm": 160,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 150.8,
-        "storage_percent": 94.25,
-        "inflow_mcm": 3.81,
-        "outflow_mcm": 0.45,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 152.58,
@@ -2321,6 +2313,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.79,
         "outflow_mcm": 0.6,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 157.32,
+        "storage_percent": 98.33,
+        "inflow_mcm": 0.67,
+        "outflow_mcm": 0.09,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 28
@@ -2337,10 +2337,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       101.839596,
       14.594286
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 126.56,
-    "storage_percent": 81.65,
-    "inflow_mcm": 0.46,
+    "date": "2026-10-25",
+    "storage_mcm": 126.35,
+    "storage_percent": 81.51,
+    "inflow_mcm": 0.35,
     "outflow_mcm": 0.5,
     "water_level_msl": 0,
     "status": "warning",
@@ -2349,14 +2349,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 155,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 127.1,
-        "storage_percent": 82,
-        "inflow_mcm": 0.57,
-        "outflow_mcm": 0.5,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 127.1,
@@ -2404,6 +2396,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.46,
         "outflow_mcm": 0.5,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 126.35,
+        "storage_percent": 81.51,
+        "inflow_mcm": 0.35,
+        "outflow_mcm": 0.5,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 29
@@ -2420,10 +2420,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       102.147056,
       14.484167
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 89.6,
-    "storage_percent": 63.54,
-    "inflow_mcm": 0.49,
+    "date": "2026-10-25",
+    "storage_mcm": 89.08,
+    "storage_percent": 63.17,
+    "inflow_mcm": 0.23,
     "outflow_mcm": 0.69,
     "water_level_msl": 0,
     "status": "normal",
@@ -2432,14 +2432,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 141,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 90.64,
-        "storage_percent": 64.28,
-        "inflow_mcm": 0.27,
-        "outflow_mcm": 0.6,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 90.9,
@@ -2487,6 +2479,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.49,
         "outflow_mcm": 0.69,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 89.08,
+        "storage_percent": 63.17,
+        "inflow_mcm": 0.23,
+        "outflow_mcm": 0.69,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 30
@@ -2503,9 +2503,9 @@ export const DAMS_DATA: DamTelemetry[] = [
       102.5724,
       17.3604
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 77.84,
-    "storage_percent": 57.42,
+    "date": "2026-10-25",
+    "storage_mcm": 76.78,
+    "storage_percent": 56.63,
     "inflow_mcm": 0,
     "outflow_mcm": 0.64,
     "water_level_msl": 0,
@@ -2515,14 +2515,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 135,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 82.86,
-        "storage_percent": 61.12,
-        "inflow_mcm": 0,
-        "outflow_mcm": 0.68,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 82.01,
@@ -2570,6 +2562,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0,
         "outflow_mcm": 0.64,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 76.78,
+        "storage_percent": 56.63,
+        "inflow_mcm": 0,
+        "outflow_mcm": 0.64,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 31
@@ -2586,10 +2586,10 @@ export const DAMS_DATA: DamTelemetry[] = [
       102.759722,
       14.299444
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 63.89,
-    "storage_percent": 52.63,
-    "inflow_mcm": 0.33,
+    "date": "2026-10-25",
+    "storage_mcm": 64.03,
+    "storage_percent": 52.74,
+    "inflow_mcm": 0.19,
     "outflow_mcm": 0,
     "water_level_msl": 0,
     "status": "normal",
@@ -2598,14 +2598,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Normal",
     "capacity_mcm": 121,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 61.93,
-        "storage_percent": 51.01,
-        "inflow_mcm": 0.24,
-        "outflow_mcm": 0.05,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 62.07,
@@ -2653,6 +2645,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.33,
         "outflow_mcm": 0,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 64.03,
+        "storage_percent": 52.74,
+        "inflow_mcm": 0.19,
+        "outflow_mcm": 0,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 32
@@ -2669,11 +2669,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       100.966202,
       13.221432
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 109.33,
-    "storage_percent": 93.45,
-    "inflow_mcm": 0.57,
-    "outflow_mcm": 0.35,
+    "date": "2026-10-25",
+    "storage_mcm": 110,
+    "storage_percent": 94.02,
+    "inflow_mcm": 0.72,
+    "outflow_mcm": 0.36,
     "water_level_msl": 0,
     "status": "warning",
     "status_color": "#F59E0B",
@@ -2681,14 +2681,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 117,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 104.78,
-        "storage_percent": 89.56,
-        "inflow_mcm": 1.51,
-        "outflow_mcm": 0.32,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 105.49,
@@ -2736,6 +2728,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.57,
         "outflow_mcm": 0.35,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 110,
+        "storage_percent": 94.02,
+        "inflow_mcm": 0.72,
+        "outflow_mcm": 0.36,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 33
@@ -2752,11 +2752,11 @@ export const DAMS_DATA: DamTelemetry[] = [
       99.4518,
       17.3201
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 97.82,
-    "storage_percent": 88.93,
-    "inflow_mcm": 0.03,
-    "outflow_mcm": 0.1,
+    "date": "2026-10-25",
+    "storage_mcm": 97.05,
+    "storage_percent": 88.23,
+    "inflow_mcm": 0.02,
+    "outflow_mcm": 0.79,
     "water_level_msl": 0,
     "status": "warning",
     "status_color": "#F59E0B",
@@ -2764,14 +2764,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 110,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 98.24,
-        "storage_percent": 89.31,
-        "inflow_mcm": 0.12,
-        "outflow_mcm": 0.12,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 98.17,
@@ -2819,6 +2811,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "inflow_mcm": 0.03,
         "outflow_mcm": 0.1,
         "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 97.05,
+        "storage_percent": 88.23,
+        "inflow_mcm": 0.02,
+        "outflow_mcm": 0.79,
+        "water_level_msl": 0
       }
     ],
     "national_rank": 34
@@ -2835,9 +2835,9 @@ export const DAMS_DATA: DamTelemetry[] = [
       99.624806,
       18.523833
     ],
-    "date": "2026-10-24",
-    "storage_mcm": 94.68,
-    "storage_percent": 89.13,
+    "date": "2026-10-25",
+    "storage_mcm": 94.21,
+    "storage_percent": 88.69,
     "inflow_mcm": 1.29,
     "outflow_mcm": 1.76,
     "water_level_msl": 0,
@@ -2847,14 +2847,6 @@ export const DAMS_DATA: DamTelemetry[] = [
     "status_label_en": "Warning",
     "capacity_mcm": 106,
     "history7Days": [
-      {
-        "date": "2026-10-18",
-        "storage_mcm": 98.58,
-        "storage_percent": 92.8,
-        "inflow_mcm": 1.55,
-        "outflow_mcm": 1.7,
-        "water_level_msl": 0
-      },
       {
         "date": "2026-10-19",
         "storage_mcm": 98.11,
@@ -2899,6 +2891,14 @@ export const DAMS_DATA: DamTelemetry[] = [
         "date": "2026-10-24",
         "storage_mcm": 94.68,
         "storage_percent": 89.13,
+        "inflow_mcm": 1.29,
+        "outflow_mcm": 1.76,
+        "water_level_msl": 0
+      },
+      {
+        "date": "2026-10-25",
+        "storage_mcm": 94.21,
+        "storage_percent": 88.69,
         "inflow_mcm": 1.29,
         "outflow_mcm": 1.76,
         "water_level_msl": 0
