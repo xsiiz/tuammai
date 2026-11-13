@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-12T07:57:19.838Z",
-  "date": "2026-11-12",
+  "updated_at": "2026-11-13T07:35:37.806Z",
+  "date": "2026-11-13",
   "count": 35,
   "dams": [
     {
@@ -15,11 +15,11 @@
         99.120667,
         14.4
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 17398.94,
-      "storage_percent": 98.05,
-      "inflow_mcm": 16.68,
-      "outflow_mcm": 19.99,
+      "date": "2026-11-13",
+      "storage_mcm": 17394.79,
+      "storage_percent": 98.03,
+      "inflow_mcm": 15.57,
+      "outflow_mcm": 18.67,
       "water_level_msl": 0,
       "status": "critical",
       "status_color": "#EF4444",
@@ -27,14 +27,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 17745,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 17394.79,
-          "storage_percent": 98.03,
-          "inflow_mcm": 15.53,
-          "outflow_mcm": 20.06,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 17386.51,
@@ -82,6 +74,14 @@
           "inflow_mcm": 16.68,
           "outflow_mcm": 19.99,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 17394.79,
+          "storage_percent": 98.03,
+          "inflow_mcm": 15.57,
+          "outflow_mcm": 18.67,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 1
@@ -98,10 +98,10 @@
         98.971456,
         17.241944
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 9669.71,
-      "storage_percent": 71.83,
-      "inflow_mcm": 16.19,
+      "date": "2026-11-13",
+      "storage_mcm": 9677.56,
+      "storage_percent": 71.89,
+      "inflow_mcm": 13.54,
       "outflow_mcm": 5,
       "water_level_msl": 0,
       "status": "normal",
@@ -110,14 +110,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 13462,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 9607.05,
-          "storage_percent": 71.36,
-          "inflow_mcm": 8.12,
-          "outflow_mcm": 10.02,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 9612.26,
@@ -165,6 +157,14 @@
           "inflow_mcm": 16.19,
           "outflow_mcm": 5,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 9677.56,
+          "storage_percent": 71.89,
+          "inflow_mcm": 13.54,
+          "outflow_mcm": 5,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 2
@@ -181,11 +181,11 @@
         100.554936,
         17.768056
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 7524.88,
-      "storage_percent": 79.13,
-      "inflow_mcm": 3.28,
-      "outflow_mcm": 21,
+      "date": "2026-11-13",
+      "storage_mcm": 7511.01,
+      "storage_percent": 78.98,
+      "inflow_mcm": 4.92,
+      "outflow_mcm": 18,
       "water_level_msl": 0,
       "status": "normal",
       "status_color": "#10B981",
@@ -193,14 +193,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 9510,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 7608.39,
-          "storage_percent": 80,
-          "inflow_mcm": 0,
-          "outflow_mcm": 29.91,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 7601.41,
@@ -248,6 +240,14 @@
           "inflow_mcm": 3.28,
           "outflow_mcm": 21,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 7511.01,
+          "storage_percent": 78.98,
+          "inflow_mcm": 4.92,
+          "outflow_mcm": 18,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 3
@@ -264,11 +264,11 @@
         98.60411,
         14.7975
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 8532.1,
-      "storage_percent": 96.3,
-      "inflow_mcm": 0,
-      "outflow_mcm": 12,
+      "date": "2026-11-13",
+      "storage_mcm": 8522.14,
+      "storage_percent": 96.19,
+      "inflow_mcm": 2.97,
+      "outflow_mcm": 12.03,
       "water_level_msl": 0,
       "status": "critical",
       "status_color": "#EF4444",
@@ -276,14 +276,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 8860,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 8556.44,
-          "storage_percent": 96.57,
-          "inflow_mcm": 24.4,
-          "outflow_mcm": 12.07,
-          "water_level_msl": 154.21
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 8560.25,
@@ -326,10 +318,18 @@
         },
         {
           "date": "2026-11-12",
-          "storage_mcm": 8532.1,
-          "storage_percent": 96.3,
-          "inflow_mcm": 0,
-          "outflow_mcm": 12,
+          "storage_mcm": 8522.14,
+          "storage_percent": 96.19,
+          "inflow_mcm": 2.97,
+          "outflow_mcm": 12.03,
+          "water_level_msl": 154.12
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 8522.14,
+          "storage_percent": 96.19,
+          "inflow_mcm": 2.97,
+          "outflow_mcm": 12.03,
           "water_level_msl": 0
         }
       ],
@@ -347,11 +347,11 @@
         98.670247,
         9.054554
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 4227.58,
-      "storage_percent": 74.97,
-      "inflow_mcm": 2.71,
-      "outflow_mcm": 5.4,
+      "date": "2026-11-13",
+      "storage_mcm": 4224.54,
+      "storage_percent": 74.92,
+      "inflow_mcm": 2.33,
+      "outflow_mcm": 5.02,
       "water_level_msl": 0,
       "status": "normal",
       "status_color": "#10B981",
@@ -359,14 +359,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 5639,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 4239.74,
-          "storage_percent": 75.19,
-          "inflow_mcm": 4.2,
-          "outflow_mcm": 9.94,
-          "water_level_msl": 86.67
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 4235.18,
@@ -409,10 +401,18 @@
         },
         {
           "date": "2026-11-12",
-          "storage_mcm": 4227.58,
-          "storage_percent": 74.97,
-          "inflow_mcm": 2.71,
-          "outflow_mcm": 5.4,
+          "storage_mcm": 4224.54,
+          "storage_percent": 74.92,
+          "inflow_mcm": 2.33,
+          "outflow_mcm": 5.03,
+          "water_level_msl": 86.57
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 4224.54,
+          "storage_percent": 74.92,
+          "inflow_mcm": 2.33,
+          "outflow_mcm": 5.02,
           "water_level_msl": 0
         }
       ],
@@ -430,11 +430,11 @@
         102.621325,
         16.770278
       ],
-      "date": "2026-11-12",
+      "date": "2026-11-13",
       "storage_mcm": 1382.29,
       "storage_percent": 56.86,
-      "inflow_mcm": 2.87,
-      "outflow_mcm": 1.5,
+      "inflow_mcm": 2.89,
+      "outflow_mcm": 1.52,
       "water_level_msl": 0,
       "status": "normal",
       "status_color": "#10B981",
@@ -442,14 +442,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 2431,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 1393.32,
-          "storage_percent": 57.31,
-          "inflow_mcm": 0.63,
-          "outflow_mcm": 2.03,
-          "water_level_msl": 178.83
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 1393.32,
@@ -494,8 +486,16 @@
           "date": "2026-11-12",
           "storage_mcm": 1382.29,
           "storage_percent": 56.86,
-          "inflow_mcm": 2.87,
-          "outflow_mcm": 1.5,
+          "inflow_mcm": 2.89,
+          "outflow_mcm": 1.52,
+          "water_level_msl": 178.79
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 1382.29,
+          "storage_percent": 56.86,
+          "inflow_mcm": 2.89,
+          "outflow_mcm": 1.52,
           "water_level_msl": 0
         }
       ],
@@ -513,9 +513,9 @@
         103.4385,
         16.60243
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 1105.14,
-      "storage_percent": 55.82,
+      "date": "2026-11-13",
+      "storage_mcm": 1103.02,
+      "storage_percent": 55.71,
       "inflow_mcm": 0,
       "outflow_mcm": 0.38,
       "water_level_msl": 0,
@@ -525,14 +525,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 1980,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 1111.48,
-          "storage_percent": 56.14,
-          "inflow_mcm": 0,
-          "outflow_mcm": 0.77,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 1111.48,
@@ -580,6 +572,14 @@
           "inflow_mcm": 0,
           "outflow_mcm": 0.38,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 1103.02,
+          "storage_percent": 55.71,
+          "inflow_mcm": 0,
+          "outflow_mcm": 0.38,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 7
@@ -596,11 +596,11 @@
         105.42089,
         15.202778
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 1722.88,
-      "storage_percent": 87.63,
-      "inflow_mcm": 1.19,
-      "outflow_mcm": 2.98,
+      "date": "2026-11-13",
+      "storage_mcm": 1720.22,
+      "storage_percent": 87.5,
+      "inflow_mcm": 1.2,
+      "outflow_mcm": 2.99,
       "water_level_msl": 0,
       "status": "warning",
       "status_color": "#F59E0B",
@@ -608,14 +608,6 @@
       "status_label_en": "Warning",
       "capacity_mcm": 1966,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 1773.89,
-          "storage_percent": 90.23,
-          "inflow_mcm": 0,
-          "outflow_mcm": 7.01,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 1768.39,
@@ -663,6 +655,14 @@
           "inflow_mcm": 1.19,
           "outflow_mcm": 2.98,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 1720.22,
+          "storage_percent": 87.5,
+          "inflow_mcm": 1.2,
+          "outflow_mcm": 2.99,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 8
@@ -679,11 +679,11 @@
         101.273,
         6.15473
       ],
-      "date": "2026-11-12",
+      "date": "2026-11-13",
       "storage_mcm": 772.66,
       "storage_percent": 53.13,
-      "inflow_mcm": 3.34,
-      "outflow_mcm": 4.01,
+      "inflow_mcm": 3.56,
+      "outflow_mcm": 3.48,
       "water_level_msl": 0,
       "status": "normal",
       "status_color": "#10B981",
@@ -691,14 +691,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 1454,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 773.41,
-          "storage_percent": 53.18,
-          "inflow_mcm": 6.38,
-          "outflow_mcm": 4.05,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 773.41,
@@ -746,6 +738,14 @@
           "inflow_mcm": 3.34,
           "outflow_mcm": 4.01,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 772.66,
+          "storage_percent": 53.13,
+          "inflow_mcm": 3.56,
+          "outflow_mcm": 3.48,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 9
@@ -762,11 +762,11 @@
         101.076111,
         14.856944
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 868.45,
-      "storage_percent": 99.65,
-      "inflow_mcm": 13.19,
-      "outflow_mcm": 0.44,
+      "date": "2026-11-13",
+      "storage_mcm": 883.03,
+      "storage_percent": 101.32,
+      "inflow_mcm": 15.54,
+      "outflow_mcm": 0.43,
       "water_level_msl": 0,
       "status": "critical",
       "status_color": "#EF4444",
@@ -774,14 +774,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 960,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 821.07,
-          "storage_percent": 94.21,
-          "inflow_mcm": 2.48,
-          "outflow_mcm": 0.44,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 824.13,
@@ -829,6 +821,14 @@
           "inflow_mcm": 13.19,
           "outflow_mcm": 0.44,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 883.03,
+          "storage_percent": 101.32,
+          "inflow_mcm": 15.54,
+          "outflow_mcm": 0.43,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 10
@@ -845,10 +845,10 @@
         100.415556,
         17.182222
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 860.41,
-      "storage_percent": 91.63,
-      "inflow_mcm": 6.77,
+      "date": "2026-11-13",
+      "storage_mcm": 863.97,
+      "storage_percent": 92.01,
+      "inflow_mcm": 4.58,
       "outflow_mcm": 0.86,
       "water_level_msl": 0,
       "status": "warning",
@@ -857,14 +857,6 @@
       "status_label_en": "Warning",
       "capacity_mcm": 939,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 818.18,
-          "storage_percent": 87.13,
-          "inflow_mcm": 1.71,
-          "outflow_mcm": 0.86,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 823.28,
@@ -912,6 +904,14 @@
           "inflow_mcm": 6.77,
           "outflow_mcm": 0.86,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 863.97,
+          "storage_percent": 92.01,
+          "inflow_mcm": 4.58,
+          "outflow_mcm": 0.86,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 11
@@ -928,10 +928,10 @@
         99.629886,
         12.917017
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 678.11,
-      "storage_percent": 95.51,
-      "inflow_mcm": 1.35,
+      "date": "2026-11-13",
+      "storage_mcm": 676.74,
+      "storage_percent": 95.32,
+      "inflow_mcm": 1.81,
       "outflow_mcm": 3.02,
       "water_level_msl": 0,
       "status": "critical",
@@ -940,14 +940,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 710,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 680.39,
-          "storage_percent": 95.83,
-          "inflow_mcm": 4.08,
-          "outflow_mcm": 3.03,
-          "water_level_msl": 98.35
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 681.3,
@@ -992,7 +984,15 @@
           "date": "2026-11-12",
           "storage_mcm": 678.11,
           "storage_percent": 95.51,
-          "inflow_mcm": 1.35,
+          "inflow_mcm": 1.34,
+          "outflow_mcm": 3.03,
+          "water_level_msl": 98.3
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 676.74,
+          "storage_percent": 95.32,
+          "inflow_mcm": 1.81,
           "outflow_mcm": 3.02,
           "water_level_msl": 0
         }
@@ -1011,9 +1011,9 @@
         103.75,
         17.3
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 292.65,
-      "storage_percent": 56.28,
+      "date": "2026-11-13",
+      "storage_mcm": 292.09,
+      "storage_percent": 56.17,
       "inflow_mcm": 0,
       "outflow_mcm": 0,
       "water_level_msl": 0,
@@ -1023,14 +1023,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 520,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 293.22,
-          "storage_percent": 56.39,
-          "inflow_mcm": 0.17,
-          "outflow_mcm": 0,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 293.22,
@@ -1078,6 +1070,14 @@
           "inflow_mcm": 0,
           "outflow_mcm": 0,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 292.09,
+          "storage_percent": 56.17,
+          "inflow_mcm": 0,
+          "outflow_mcm": 0,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 13
@@ -1094,9 +1094,9 @@
         101.647778,
         13.431944
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 383.2,
-      "storage_percent": 91.24,
+      "date": "2026-11-13",
+      "storage_mcm": 383.05,
+      "storage_percent": 91.2,
       "inflow_mcm": 0,
       "outflow_mcm": 0.01,
       "water_level_msl": 0,
@@ -1106,14 +1106,6 @@
       "status_label_en": "Warning",
       "capacity_mcm": 420,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 378.5,
-          "storage_percent": 90.12,
-          "inflow_mcm": 2.15,
-          "outflow_mcm": 0.01,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 380,
@@ -1161,6 +1153,14 @@
           "inflow_mcm": 0,
           "outflow_mcm": 0.01,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 383.05,
+          "storage_percent": 91.2,
+          "inflow_mcm": 0,
+          "outflow_mcm": 0.01,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 14
@@ -1177,10 +1177,10 @@
         99.816667,
         12.451389
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 333.52,
-      "storage_percent": 85.3,
-      "inflow_mcm": 0.69,
+      "date": "2026-11-13",
+      "storage_mcm": 333.22,
+      "storage_percent": 85.22,
+      "inflow_mcm": 1.3,
       "outflow_mcm": 1.6,
       "water_level_msl": 0,
       "status": "warning",
@@ -1189,14 +1189,6 @@
       "status_label_en": "Warning",
       "capacity_mcm": 391,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 331.69,
-          "storage_percent": 84.83,
-          "inflow_mcm": 2.96,
-          "outflow_mcm": 2.05,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 331.99,
@@ -1244,6 +1236,14 @@
           "inflow_mcm": 0.69,
           "outflow_mcm": 1.6,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 333.22,
+          "storage_percent": 85.22,
+          "inflow_mcm": 1.3,
+          "outflow_mcm": 1.6,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 15
@@ -1260,10 +1260,10 @@
         101.561667,
         14.865
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 277.12,
-      "storage_percent": 88.12,
-      "inflow_mcm": 0.71,
+      "date": "2026-11-13",
+      "storage_mcm": 275.48,
+      "storage_percent": 87.6,
+      "inflow_mcm": 0.51,
       "outflow_mcm": 0.09,
       "water_level_msl": 0,
       "status": "warning",
@@ -1272,14 +1272,6 @@
       "status_label_en": "Warning",
       "capacity_mcm": 314,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 273.83,
-          "storage_percent": 87.07,
-          "inflow_mcm": 0.65,
-          "outflow_mcm": 0.26,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 274.49,
@@ -1327,6 +1319,14 @@
           "inflow_mcm": 0.71,
           "outflow_mcm": 0.09,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 275.48,
+          "storage_percent": 87.6,
+          "inflow_mcm": 0.51,
+          "outflow_mcm": 0.09,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 16
@@ -1343,10 +1343,10 @@
         99.661749,
         14.830645
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 252.32,
-      "storage_percent": 84.39,
-      "inflow_mcm": 0.88,
+      "date": "2026-11-13",
+      "storage_mcm": 252.81,
+      "storage_percent": 84.55,
+      "inflow_mcm": 0.74,
       "outflow_mcm": 0.06,
       "water_level_msl": 0,
       "status": "warning",
@@ -1355,14 +1355,6 @@
       "status_label_en": "Warning",
       "capacity_mcm": 299,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 244.83,
-          "storage_percent": 81.88,
-          "inflow_mcm": 0.42,
-          "outflow_mcm": 1.36,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 245.95,
@@ -1410,6 +1402,14 @@
           "inflow_mcm": 0.88,
           "outflow_mcm": 0.06,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 252.81,
+          "storage_percent": 84.55,
+          "inflow_mcm": 0.74,
+          "outflow_mcm": 0.06,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 17
@@ -1426,10 +1426,10 @@
         102.027308,
         14.080838
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 294.74,
-      "storage_percent": 100,
-      "inflow_mcm": 0.09,
+      "date": "2026-11-13",
+      "storage_mcm": 293.95,
+      "storage_percent": 99.73,
+      "inflow_mcm": 0.89,
       "outflow_mcm": 1.6,
       "water_level_msl": 0,
       "status": "critical",
@@ -1438,14 +1438,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 295,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 297.13,
-          "storage_percent": 100.81,
-          "inflow_mcm": 2.99,
-          "outflow_mcm": 1.05,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 298.73,
@@ -1493,6 +1485,14 @@
           "inflow_mcm": 0.09,
           "outflow_mcm": 1.6,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 293.95,
+          "storage_percent": 99.73,
+          "inflow_mcm": 0.89,
+          "outflow_mcm": 1.6,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 18
@@ -1509,9 +1509,9 @@
         101.558297,
         12.977205
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 287.34,
-      "storage_percent": 97.4,
+      "date": "2026-11-13",
+      "storage_mcm": 286.32,
+      "storage_percent": 97.06,
       "inflow_mcm": 0.04,
       "outflow_mcm": 0.79,
       "water_level_msl": 0,
@@ -1521,14 +1521,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 295,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 278.67,
-          "storage_percent": 94.46,
-          "inflow_mcm": 6.3,
-          "outflow_mcm": 0.44,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 285.81,
@@ -1576,6 +1568,14 @@
           "inflow_mcm": 0.04,
           "outflow_mcm": 0.79,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 286.32,
+          "storage_percent": 97.06,
+          "inflow_mcm": 0.04,
+          "outflow_mcm": 0.79,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 19
@@ -1592,11 +1592,11 @@
         102.2774,
         14.415833
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 168.86,
-      "storage_percent": 61.4,
-      "inflow_mcm": 0.34,
-      "outflow_mcm": 0.22,
+      "date": "2026-11-13",
+      "storage_mcm": 169.38,
+      "storage_percent": 61.59,
+      "inflow_mcm": 0.93,
+      "outflow_mcm": 0.28,
       "water_level_msl": 0,
       "status": "normal",
       "status_color": "#10B981",
@@ -1604,14 +1604,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 275,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 169.12,
-          "storage_percent": 61.5,
-          "inflow_mcm": 0.53,
-          "outflow_mcm": 0.81,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 168.59,
@@ -1659,6 +1651,14 @@
           "inflow_mcm": 0.34,
           "outflow_mcm": 0.22,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 169.38,
+          "storage_percent": 61.59,
+          "inflow_mcm": 0.93,
+          "outflow_mcm": 0.28,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 20
@@ -1675,11 +1675,11 @@
         99.04011,
         19.16138
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 264.2,
-      "storage_percent": 99.81,
-      "inflow_mcm": 0.86,
-      "outflow_mcm": 0.03,
+      "date": "2026-11-13",
+      "storage_mcm": 265.03,
+      "storage_percent": 100.13,
+      "inflow_mcm": 0.91,
+      "outflow_mcm": 0.08,
       "water_level_msl": 0,
       "status": "critical",
       "status_color": "#EF4444",
@@ -1687,14 +1687,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 265,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 260.21,
-          "storage_percent": 98.19,
-          "inflow_mcm": 0.35,
-          "outflow_mcm": 0,
-          "water_level_msl": 396.23
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 260.54,
@@ -1738,9 +1730,17 @@
         {
           "date": "2026-11-12",
           "storage_mcm": 264.2,
-          "storage_percent": 99.81,
+          "storage_percent": 99.7,
           "inflow_mcm": 0.86,
-          "outflow_mcm": 0.03,
+          "outflow_mcm": 0,
+          "water_level_msl": 396.47
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 265.03,
+          "storage_percent": 100.13,
+          "inflow_mcm": 0.91,
+          "outflow_mcm": 0.08,
           "water_level_msl": 0
         }
       ],
@@ -1758,9 +1758,9 @@
         99.121978,
         18.92348
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 178.16,
-      "storage_percent": 67.74,
+      "date": "2026-11-13",
+      "storage_mcm": 178.25,
+      "storage_percent": 67.77,
       "inflow_mcm": 0.36,
       "outflow_mcm": 0.28,
       "water_level_msl": 0,
@@ -1770,14 +1770,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 263,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 177.66,
-          "storage_percent": 67.55,
-          "inflow_mcm": 0.44,
-          "outflow_mcm": 0.47,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 177.69,
@@ -1825,6 +1817,14 @@
           "inflow_mcm": 0.36,
           "outflow_mcm": 0.28,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 178.25,
+          "storage_percent": 67.77,
+          "inflow_mcm": 0.36,
+          "outflow_mcm": 0.28,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 22
@@ -1841,10 +1841,10 @@
         101.321389,
         14.314722
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 219.75,
-      "storage_percent": 98.1,
-      "inflow_mcm": 0.57,
+      "date": "2026-11-13",
+      "storage_mcm": 219.9,
+      "storage_percent": 98.17,
+      "inflow_mcm": 0.62,
       "outflow_mcm": 0.41,
       "water_level_msl": 0,
       "status": "critical",
@@ -1853,14 +1853,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 224,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 215.98,
-          "storage_percent": 96.42,
-          "inflow_mcm": 1.6,
-          "outflow_mcm": 0.55,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 217.57,
@@ -1908,6 +1900,14 @@
           "inflow_mcm": 0.57,
           "outflow_mcm": 0.41,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 219.9,
+          "storage_percent": 98.17,
+          "inflow_mcm": 0.62,
+          "outflow_mcm": 0.41,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 23
@@ -1924,26 +1924,18 @@
         99.642272,
         18.809072
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 161.38,
-      "storage_percent": 94.93,
-      "inflow_mcm": 0.89,
+      "date": "2026-11-13",
+      "storage_mcm": 162.05,
+      "storage_percent": 95.32,
+      "inflow_mcm": 0.76,
       "outflow_mcm": 0.09,
       "water_level_msl": 0,
-      "status": "warning",
-      "status_color": "#F59E0B",
-      "status_label_th": "เฝ้าระวัง",
-      "status_label_en": "Warning",
+      "status": "critical",
+      "status_color": "#EF4444",
+      "status_label_th": "วิกฤต",
+      "status_label_en": "Critical",
       "capacity_mcm": 170,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 160.04,
-          "storage_percent": 94.14,
-          "inflow_mcm": 0.06,
-          "outflow_mcm": 0.19,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 159.9,
@@ -1991,6 +1983,14 @@
           "inflow_mcm": 0.89,
           "outflow_mcm": 0.09,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 162.05,
+          "storage_percent": 95.32,
+          "inflow_mcm": 0.76,
+          "outflow_mcm": 0.09,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 24
@@ -2007,7 +2007,7 @@
         103.938048,
         16.971667
       ],
-      "date": "2026-11-12",
+      "date": "2026-11-13",
       "storage_mcm": 87.99,
       "storage_percent": 53.33,
       "inflow_mcm": 0.08,
@@ -2019,14 +2019,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 165,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 87.99,
-          "storage_percent": 53.33,
-          "inflow_mcm": 0.47,
-          "outflow_mcm": 0.1,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 88.13,
@@ -2074,6 +2066,14 @@
           "inflow_mcm": 0.08,
           "outflow_mcm": 0,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 87.99,
+          "storage_percent": 53.33,
+          "inflow_mcm": 0.08,
+          "outflow_mcm": 0,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 25
@@ -2090,10 +2090,10 @@
         101.654593,
         16.533333
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 143.15,
-      "storage_percent": 87.29,
-      "inflow_mcm": 0.33,
+      "date": "2026-11-13",
+      "storage_mcm": 143.26,
+      "storage_percent": 87.35,
+      "inflow_mcm": 0.13,
       "outflow_mcm": 0,
       "water_level_msl": 0,
       "status": "warning",
@@ -2102,14 +2102,6 @@
       "status_label_en": "Warning",
       "capacity_mcm": 164,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 139.78,
-          "storage_percent": 85.23,
-          "inflow_mcm": 0.22,
-          "outflow_mcm": 0,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 140.27,
@@ -2157,6 +2149,14 @@
           "inflow_mcm": 0.33,
           "outflow_mcm": 0,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 143.26,
+          "storage_percent": 87.35,
+          "inflow_mcm": 0.13,
+          "outflow_mcm": 0,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 26
@@ -2173,11 +2173,11 @@
         101.297011,
         12.934647
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 178.07,
-      "storage_percent": 108.75,
-      "inflow_mcm": 1.32,
-      "outflow_mcm": 0.61,
+      "date": "2026-11-13",
+      "storage_mcm": 178.31,
+      "storage_percent": 108.89,
+      "inflow_mcm": 0.84,
+      "outflow_mcm": 0.6,
       "water_level_msl": 0,
       "status": "critical",
       "status_color": "#EF4444",
@@ -2185,14 +2185,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 164,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 180.22,
-          "storage_percent": 110.06,
-          "inflow_mcm": 2.44,
-          "outflow_mcm": 3.16,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 180.46,
@@ -2240,6 +2232,14 @@
           "inflow_mcm": 1.32,
           "outflow_mcm": 0.61,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 178.31,
+          "storage_percent": 108.89,
+          "inflow_mcm": 0.84,
+          "outflow_mcm": 0.6,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 27
@@ -2256,11 +2256,11 @@
         99.450405,
         15.534533
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 163.8,
-      "storage_percent": 102.38,
-      "inflow_mcm": 0.98,
-      "outflow_mcm": 1.47,
+      "date": "2026-11-13",
+      "storage_mcm": 163.3,
+      "storage_percent": 102.06,
+      "inflow_mcm": 0.78,
+      "outflow_mcm": 1.28,
       "water_level_msl": 0,
       "status": "critical",
       "status_color": "#EF4444",
@@ -2268,14 +2268,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 160,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 164.13,
-          "storage_percent": 102.58,
-          "inflow_mcm": 2.06,
-          "outflow_mcm": 1.89,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 167.26,
@@ -2323,6 +2315,14 @@
           "inflow_mcm": 0.98,
           "outflow_mcm": 1.47,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 163.3,
+          "storage_percent": 102.06,
+          "inflow_mcm": 0.78,
+          "outflow_mcm": 1.28,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 28
@@ -2339,10 +2339,10 @@
         101.839596,
         14.594286
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 129.37,
-      "storage_percent": 83.46,
-      "inflow_mcm": 0.6,
+      "date": "2026-11-13",
+      "storage_mcm": 129.58,
+      "storage_percent": 83.6,
+      "inflow_mcm": 0.28,
       "outflow_mcm": 0,
       "water_level_msl": 0,
       "status": "warning",
@@ -2351,14 +2351,6 @@
       "status_label_en": "Warning",
       "capacity_mcm": 155,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 124.41,
-          "storage_percent": 80.26,
-          "inflow_mcm": 0.39,
-          "outflow_mcm": 0,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 124.84,
@@ -2406,6 +2398,14 @@
           "inflow_mcm": 0.6,
           "outflow_mcm": 0,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 129.58,
+          "storage_percent": 83.6,
+          "inflow_mcm": 0.28,
+          "outflow_mcm": 0,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 29
@@ -2422,10 +2422,10 @@
         102.147056,
         14.484167
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 89.6,
-      "storage_percent": 63.54,
-      "inflow_mcm": 0.36,
+      "date": "2026-11-13",
+      "storage_mcm": 89.73,
+      "storage_percent": 63.64,
+      "inflow_mcm": 0.23,
       "outflow_mcm": 0.04,
       "water_level_msl": 0,
       "status": "normal",
@@ -2434,14 +2434,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 141,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 87.39,
-          "storage_percent": 61.98,
-          "inflow_mcm": 0.22,
-          "outflow_mcm": 0.04,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 87.78,
@@ -2489,6 +2481,14 @@
           "inflow_mcm": 0.36,
           "outflow_mcm": 0.04,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 89.73,
+          "storage_percent": 63.64,
+          "inflow_mcm": 0.23,
+          "outflow_mcm": 0.04,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 30
@@ -2505,9 +2505,9 @@
         102.5724,
         17.3604
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 73.06,
-      "storage_percent": 53.89,
+      "date": "2026-11-13",
+      "storage_mcm": 72.81,
+      "storage_percent": 53.71,
       "inflow_mcm": 0,
       "outflow_mcm": 0.08,
       "water_level_msl": 0,
@@ -2517,14 +2517,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 135,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 74.04,
-          "storage_percent": 54.61,
-          "inflow_mcm": 0.44,
-          "outflow_mcm": 0.08,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 73.92,
@@ -2572,6 +2564,14 @@
           "inflow_mcm": 0,
           "outflow_mcm": 0.08,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 72.81,
+          "storage_percent": 53.71,
+          "inflow_mcm": 0,
+          "outflow_mcm": 0.08,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 31
@@ -2588,7 +2588,7 @@
         102.759722,
         14.299444
       ],
-      "date": "2026-11-12",
+      "date": "2026-11-13",
       "storage_mcm": 66.7,
       "storage_percent": 54.94,
       "inflow_mcm": 0.05,
@@ -2600,14 +2600,6 @@
       "status_label_en": "Normal",
       "capacity_mcm": 121,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 66.14,
-          "storage_percent": 54.47,
-          "inflow_mcm": 1.15,
-          "outflow_mcm": 0,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 66.56,
@@ -2655,6 +2647,14 @@
           "inflow_mcm": 0.05,
           "outflow_mcm": 0,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 66.7,
+          "storage_percent": 54.94,
+          "inflow_mcm": 0.05,
+          "outflow_mcm": 0,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 32
@@ -2671,11 +2671,11 @@
         100.966202,
         13.221432
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 118.5,
-      "storage_percent": 101.28,
-      "inflow_mcm": 0,
-      "outflow_mcm": 0.72,
+      "date": "2026-11-13",
+      "storage_mcm": 118.33,
+      "storage_percent": 101.14,
+      "inflow_mcm": 0.03,
+      "outflow_mcm": 0.65,
       "water_level_msl": 0,
       "status": "critical",
       "status_color": "#EF4444",
@@ -2683,14 +2683,6 @@
       "status_label_en": "Critical",
       "capacity_mcm": 117,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 117.67,
-          "storage_percent": 100.57,
-          "inflow_mcm": 0.84,
-          "outflow_mcm": 0.65,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 117.83,
@@ -2738,6 +2730,14 @@
           "inflow_mcm": 0,
           "outflow_mcm": 0.72,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 118.33,
+          "storage_percent": 101.14,
+          "inflow_mcm": 0.03,
+          "outflow_mcm": 0.65,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 33
@@ -2754,11 +2754,11 @@
         99.4518,
         17.3201
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 99.78,
-      "storage_percent": 90.71,
-      "inflow_mcm": 0.15,
-      "outflow_mcm": 0.01,
+      "date": "2026-11-13",
+      "storage_mcm": 99.83,
+      "storage_percent": 90.75,
+      "inflow_mcm": 0.07,
+      "outflow_mcm": 0.02,
       "water_level_msl": 0,
       "status": "warning",
       "status_color": "#F59E0B",
@@ -2766,14 +2766,6 @@
       "status_label_en": "Warning",
       "capacity_mcm": 110,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 97.4,
-          "storage_percent": 88.55,
-          "inflow_mcm": 0.06,
-          "outflow_mcm": 0.06,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 97.54,
@@ -2821,6 +2813,14 @@
           "inflow_mcm": 0.15,
           "outflow_mcm": 0.01,
           "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 99.83,
+          "storage_percent": 90.75,
+          "inflow_mcm": 0.07,
+          "outflow_mcm": 0.02,
+          "water_level_msl": 0
         }
       ],
       "national_rank": 34
@@ -2837,9 +2837,9 @@
         99.624806,
         18.523833
       ],
-      "date": "2026-11-12",
-      "storage_mcm": 97.8,
-      "storage_percent": 92.07,
+      "date": "2026-11-13",
+      "storage_mcm": 98.42,
+      "storage_percent": 92.66,
       "inflow_mcm": 1.13,
       "outflow_mcm": 0.5,
       "water_level_msl": 0,
@@ -2849,14 +2849,6 @@
       "status_label_en": "Warning",
       "capacity_mcm": 106,
       "history7Days": [
-        {
-          "date": "2026-11-06",
-          "storage_mcm": 92.96,
-          "storage_percent": 87.52,
-          "inflow_mcm": 1.3,
-          "outflow_mcm": 1.3,
-          "water_level_msl": 0
-        },
         {
           "date": "2026-11-07",
           "storage_mcm": 93.43,
@@ -2901,6 +2893,14 @@
           "date": "2026-11-12",
           "storage_mcm": 97.8,
           "storage_percent": 92.07,
+          "inflow_mcm": 1.13,
+          "outflow_mcm": 0.5,
+          "water_level_msl": 0
+        },
+        {
+          "date": "2026-11-13",
+          "storage_mcm": 98.42,
+          "storage_percent": 92.66,
           "inflow_mcm": 1.13,
           "outflow_mcm": 0.5,
           "water_level_msl": 0
